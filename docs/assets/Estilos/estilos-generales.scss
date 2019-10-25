@@ -1,0 +1,20 @@
+// Colores -------------
+    $color01: #283593;
+    $color02: #1A237E;
+    $color03: #C5CAE9;
+    $color04: #6C5B7B;
+    $color05: #355C7D;
+    $color06: black;
+    $color07: #013964;
+//----------------------
+ 
+$font-family: 'ZCOOL XiaoWei', serif;
+
+@mixin AplicarFondoAzul(){     
+    background-color: $color05;
+    //background-image: url("https://www.transparenttextures.com/patterns/soft-wallpaper.png");
+    background-color: #013964;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */  
+}
+  
