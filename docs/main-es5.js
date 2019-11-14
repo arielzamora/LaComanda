@@ -74,7 +74,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid\">\n  <div class=\"row principal justify-content-center align-items-center\">\n    <div class=\"col-12\">\n      <div class=\"row justify-content-center align-items-center\">\n        <div class=\"col-11 col-md-10 descripcion\">\n          <div class=\"row\">\n            <div class=\"col-6\">\n              <h1>La Comanda</h1>\n              \n              <h3>Nuestra aplicación</h3>\n              <p>\n                Todo nuestro servicio funciona a través de esta aplicación web.\n              </p>\n              <p>\n                Si usted es cliente, seleccione la opción correspondiente en los botones que se encuentran debajo.\n                Luego, inserte el código que le ha proporcionado el mozo al hacer su pedido.\n              </p>\n              <p>\n                En ella podrá ver los detalles de su pedido, el estado del mismo y el costo a pagar. Al finalizar, se\n                habilitará una breve encuesta de satifacción que usted podrá completar.\n              </p>\n              <div class=\"row justify-content-end align-items-center\">\n                  <button class=\"btn btn-info btn-sm\" type=\"button\" data-toggle=\"modal\" data-target=\"#mapa\"><i class=\"fas fa-map-marker-alt\"></i> Mapa</button>\n              </div>\n            </div>\n            <div class=\"d-none d-lg-block col-6\">\n              <div class=\"row\">\n            \n                <div class=\"row text-center text-lg-left\">\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/aceitunas.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/enbutidos.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/ensaladas.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/parrillada.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/pescados.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/tragos.png\" alt=\"\">\n                        </a>\n                  </div>                                           \n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"row justify-content-center align-items-center\">\n        <div class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n          <span class=\"mas\">Cliente</span>\n          <button type=\"button\" name=\"Hover\" data-toggle=\"modal\" data-target=\"#clienteModal\">Cliente</button>\n        </div>\n        <div *ngIf=\"isCliente == false; else noAdmin\" class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n          <span class=\"mas\">EMPLEADO</span>\n          <button type=\"button\" name=\"Hover\" [routerLink]=\"['/Empleados']\">Empleado</button>\n        </div>                  \n        <ng-template #noAdmin>          \n          <div class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n            <span class=\"mas\">Salir</span>\n            <button type=\"button\" name=\"Hover\" (click)=\"logout()\">Salir</button>\n          </div>    \n        </ng-template> \n      </div>\n    </div>\n  </div>\n</div>\n\n<div class=\"modal fade\" id=\"clienteModal\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\">Mesa</h5>\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"mesaGroup\" (keyup.enter)=\"ValidarMesa()\">\n          <div class=\"form-group\">\n            <label for=\"mesa\">Ingrese su código de mesa: </label>\n            <input type=\"text\" class=\"form-control form-control-lg\" formControlName=\"mesa\" placeholder=\"MES##\"\n              maxlength=\"5\" [value]=\"mesaGroup.get('mesa').value | uppercase\" [ngClass]=\"{'is-invalid' : (mesaGroup.get('mesa').touched && mesaGroup.get('mesa').invalid) || respuestaInvalida }\">\n            <div *ngIf=\"mesaGroup.get('mesa').hasError('required')\" class=\"invalid-feedback\">\n              Ingrese un código.\n            </div>\n            <div *ngIf=\"mesaGroup.get('mesa').hasError('pattern')\" class=\"invalid-feedback\">\n              Ingrese un código con formato válido.\n            </div>\n          </div>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"ValidarMesa()\">Ingresar</button>\n        <button #btnClose type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cerrar</button>\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"respuestaInvalida\" class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n    <button type=\"button\" class=\"close\" (click)=\"respuestaInvalida = false\">&times;</button>\n    La mesa ingresada no existe o no se encuentra activa.\n  </div>\n</div>\n\n<div class=\"modal fade\" id=\"mapa\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mapaLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog modal-dialog-centered modal-lg\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"mapaLabel\">Mapa</h5>\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body justify-content-center align-content-center\">\n        <div class=\"row justify-content-center\">\n            <iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d290.0640846494225!2d-58.364673728448665!3d-34.66226596396957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a3334e1e773297%3A0x38b223e10c24ff93!2sUniversidad+Tecnol%C3%B3gica+Nacional%3A+Facultad+Regional+Avellaneda!5e0!3m2!1ses-419!2sar!4v1542162085097\"\n            width=\"700\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>\n        </div>        \n      </div>\n    </div>\n  </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid\">\n  <div class=\"row principal justify-content-center align-items-center\">\n    <div class=\"col-12\">\n      <div class=\"row justify-content-center align-items-center\">\n        <div class=\"col-11 col-md-10 descripcion\">\n          <div class=\"row\">\n            <div class=\"col-6\">\n              <h1>La Comanda</h1>\n              \n              <h3>Nuestra aplicación</h3>\n              <p>\n                Todo nuestro servicio funciona a través de esta aplicación web.\n              </p>\n              <p>\n                Si usted es cliente, seleccione la opción correspondiente en los botones que se encuentran debajo.\n                Luego, inserte el código que le ha proporcionado el mozo al hacer su pedido.\n              </p>\n              <p>\n                En ella podrá ver los detalles de su pedido, el estado del mismo y el costo a pagar. Al finalizar, se\n                habilitará una breve encuesta de satifacción que usted podrá completar.\n              </p>\n              <div class=\"row justify-content-end align-items-center\">\n                  <button class=\"btn btn-info btn-sm\" type=\"button\" data-toggle=\"modal\" data-target=\"#mapa\"><i class=\"fas fa-map-marker-alt\"></i> Mapa</button>\n              </div>\n            </div>\n            <div class=\"d-none d-lg-block col-6\">\n              <div class=\"row\">\n            \n                <div class=\"row text-center text-lg-left\">\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/aceitunas.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/enbutidos.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/ensaladas.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/parrillada.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/pescados.png\" alt=\"\">\n                        </a>\n                  </div>\n                  <div class=\"col-4\">\n                    <a href=\"#\" class=\"d-block mb-4 h-100\">\n                          <img class=\"img-fluid img-thumbnail\" src=\"../../../assets/Imagenes/tragos.png\" alt=\"\">\n                        </a>\n                  </div>                                           \n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"row justify-content-center align-items-center\">\n        <div class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n          <span class=\"mas\">Cliente</span>\n          <button type=\"button\" name=\"Hover\" data-toggle=\"modal\" data-target=\"#clienteModal\">Cliente</button>\n        </div>\n        <div *ngIf=\"isCliente == false; else noAdmin\" class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n          <span class=\"mas\">Empleado</span>\n          <button type=\"button\" name=\"Hover\" [routerLink]=\"['/Empleados']\">Empleado</button>\n        </div>                  \n        <ng-template #noAdmin>          \n          <div class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n            <span class=\"mas\">Salir</span>\n            <button type=\"button\" name=\"Hover\" (click)=\"logout()\">Salir</button>\n          </div>    \n        </ng-template> \n      </div>\n    </div>\n  </div>\n</div>\n\n<div class=\"modal fade\" id=\"clienteModal\" tabindex=\"-1\" role=\"dialog\">\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\">Mesa</h5>\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"mesaGroup\" (keyup.enter)=\"ValidarMesa()\">\n          <div class=\"form-group\">\n            <label for=\"mesa\">Ingrese su código de mesa: </label>\n            <input type=\"text\" class=\"form-control form-control-lg\" formControlName=\"mesa\" placeholder=\"MES##\"\n              maxlength=\"5\" [value]=\"mesaGroup.get('mesa').value | uppercase\" [ngClass]=\"{'is-invalid' : (mesaGroup.get('mesa').touched && mesaGroup.get('mesa').invalid) || respuestaInvalida }\">\n            <div *ngIf=\"mesaGroup.get('mesa').hasError('required')\" class=\"invalid-feedback\">\n              Ingrese un código.\n            </div>\n            <div *ngIf=\"mesaGroup.get('mesa').hasError('pattern')\" class=\"invalid-feedback\">\n              Ingrese un código con formato válido.\n            </div>\n          </div>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"ValidarMesa()\">Ingresar</button>\n        <button #btnClose type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cerrar</button>\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"respuestaInvalida\" class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n    <button type=\"button\" class=\"close\" (click)=\"respuestaInvalida = false\">&times;</button>\n    La mesa ingresada no existe o no se encuentra activa.\n  </div>\n</div>\n\n<div class=\"modal fade\" id=\"mapa\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mapaLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog modal-dialog-centered modal-lg\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"mapaLabel\">Mapa</h5>\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body justify-content-center align-content-center\">\n        <div class=\"row justify-content-center\">\n            <iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d290.0640846494225!2d-58.364673728448665!3d-34.66226596396957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a3334e1e773297%3A0x38b223e10c24ff93!2sUniversidad+Tecnol%C3%B3gica+Nacional%3A+Facultad+Regional+Avellaneda!5e0!3m2!1ses-419!2sar!4v1542162085097\"\n            width=\"700\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>\n        </div>        \n      </div>\n    </div>\n  </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/clientes/clientes.component.html": 
@@ -129,7 +129,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<section class=\"row mt-5\">\n  <div class=\"col\">\n <button class=\"btn btn-primary float-right mb-3\" data-toggle=\"modal\" data-target=\"#modalEmpleadoRegistro\">Nuevo</button>\n      Admin: <p>{{isAdmin}}</p>\n<table appPanel class=\"table table-sm table-hover table-light table-striped\">\n  <thead>\n    <tr>\n      <th class=\"text-center\" colspan=\"8\"><b>Lista de Empleados</b><app-csv class=\"float-right csv\" [data]=\"data\" [filename]=\"generarNombreCsv()\" [options]=\"options\"></app-csv></th>\n    </tr>\n    <tr>      \n      <th>Nombre</th>\n      <th>Tipo</th>\n      <th>Usuario</th>\n      <th>Fecha de Registro</th>\n      <th>Último Login</th>\n      <th>Estado</th>\n      <th>N° de Operaciones</th>\n      <th>Acciones</th> \n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let empleado of listaEmpleados | Ordenar: 'nombre' : false\">\n      <td>{{empleado.nombre}}</td>\n      <td>{{empleado.tipo}}</td>\n      <td>{{empleado.usuario}}</td>\n      <td>{{empleado.fechaRegistro | date: 'dd/MM/yyyy'}}</td>\n      <td>{{empleado.ultimoLogin | date: 'dd/MM/yyyy'}}</td> \n      <td>{{empleado.estado | Estado}}</td> \n      <td>{{empleado.cantidad_operaciones}}</td>\n      <td>\n        <a data-toggle=\"tooltip\" title=\"Editar\" (click)=\"showModifyModal(empleado)\">| <i class=\"fas fa-user-edit\"></i> | </a>\n        <a *ngIf=\"empleado.estado === 'S' || empleado.estado === 'B'\" (click)=\"activar(empleado.id)\" data-toggle=\"tooltip\" title=\"Activar\"><i class=\"fas fa-user-plus\"></i> | </a>\n        <a *ngIf=\"empleado.estado === 'A'\" (click)=\"suspender(empleado.id)\" data-toggle=\"tooltip\" title=\"Suspender\"><i class=\"fas fa-user-minus\"></i> | </a> \n        <a *ngIf=\"empleado.estado === 'A' || empleado.estado === 'S'\" (click)=\"mostrarCaptcha()\" data-toggle=\"tooltip\" title=\"Baja\"><i class=\"fas fa-user-times\"></i> |</a>  \n        <app-captcha #captcha (success)=\"darDeBaja(empleado.id)\"></app-captcha>\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n<app-empleados-modify #modalModify [showModal]=\"showModal\" (closeModal)=\"showModal = false\" (modificadoCorrectamente)=\"cargarLista()\"></app-empleados-modify>\n</div>\n</section>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<section class=\"row mt-5\">\n  <div class=\"col-10\">\n<table class=\"table table-hover table-light table-striped\">\n  <thead class=\"thead-dark\">\n    <tr>\n      <th class=\"text-center\" colspan=\"8\"><b>Lista de Empleados</b>\n        <button class=\"float-right  btn btn-outline-primary btn-sm\" type=\"button\" (click)=\"showRegistroModal()\"><i class=\"fas fa-user-plus\"></i>Nuevo</button>\n        <app-csv class=\"float-right csv\" [data]=\"data\" [filename]=\"generarNombreCsv()\" [options]=\"options\"></app-csv>\n      </th>\n    </tr>\n    <tr>      \n      <th>Nombre</th>\n      <th>Tipo</th>\n      <th>Usuario</th>\n      <th>Fecha de Registro</th>\n      <th>Último Login</th>\n      <th>Estado</th>\n      <th>N° de Operaciones</th>\n      <th>Acciones</th> \n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let empleado of listaEmpleados | Ordenar: 'nombre' : false\">\n      <td>{{empleado.nombre}}</td>\n      <td>{{empleado.tipo}}</td>\n      <td>{{empleado.usuario}}</td>\n      <td>{{empleado.fechaRegistro.toDate() | DateFireFormat }}</td>\n      <td>{{empleado.ultimoLogin.toDate() | DateFireFormat }}</td> \n      <td>{{empleado.estado | Estado}}</td> \n      <td>{{empleado.cantidad_operaciones}}</td>\n      <td>\n        <a data-toggle=\"tooltip\" title=\"Editar\" (click)=\"showModifyModal(empleado)\">| <i class=\"fas fa-user-edit\"></i> | </a>\n        <a *ngIf=\"empleado.estado === 'S' || empleado.estado === 'B'\" (click)=\"activar(empleado)\" data-toggle=\"tooltip\" title=\"Activar\"><i class=\"fas fa-user-plus\"></i> | </a>\n        <a *ngIf=\"empleado.estado === 'A'\" (click)=\"suspender(empleado)\" data-toggle=\"tooltip\" title=\"Suspender\"><i class=\"fas fa-user-minus\"></i> | </a> \n        <a *ngIf=\"empleado.estado === 'A' || empleado.estado === 'S'\" (click)=\"darDeBaja(empleado)\" data-toggle=\"tooltip\" title=\"Baja\"><i class=\"fas fa-user-times\"></i> |</a>  \n        <!--<app-captcha #captcha (success)=\"darDeBaja(empleado)\"></app-captcha>-->\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n<app-empleados-modify #modalModify [showModal]=\"showModal\" (closeModal)=\"showModal = false\" (modificadoCorrectamente)=\"cargarLista()\"></app-empleados-modify>\n<app-empleados-registro #modalRegistro [showModalRegistro]=\"showModalRegistro\" (closeModal)=\"showModalRegistro = false\" (registradoCorrectamente)=\"cargarLista()\"></app-empleados-registro>\n\n\n</div>\n</section>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados-board/empleados-modify/empleados-modify.component.html": 
@@ -140,7 +140,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"modal\" [ngStyle]=\"{'display': showModal ? 'block' : 'none'}\">\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"exampleModalLongTitle\">Modificación de Empleado</h5>\n        <button type=\"button\" class=\"close\" (click)=\"cerrar()\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"form\" (keyup.enter)=\"Submit()\">\n          <div class=\"form-group\">\n            <label for=\"usuario\">Usuario: </label>\n            <input type=\"text\" id=\"musuario\" formControlName=\"usuario\" class=\"form-control\" placeholder=\"Usuario\"\n              [ngClass]=\"{ 'is-invalid': form.controls['usuario'].touched && form.controls['usuario'].invalid }\">\n            <div *ngIf=\"form.controls['usuario'].touched && form.controls['usuario'].invalid\" class=\"invalid-feedback\"\n              autocomplete=\"username\">\n              <div *ngIf=\"form.controls['usuario'].errors.required\">Debe ingresar un usuario.</div>\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"name\">Nombre: </label>\n            <input type=\"text\" id=\"mname\" formControlName=\"name\" class=\"form-control\" placeholder=\"Nombre\" [ngClass]=\"{ 'is-invalid': form.controls['name'].touched && form.controls['name'].invalid }\">\n            <div *ngIf=\"form.controls['name'].touched && form.controls['name'].invalid\" class=\"invalid-feedback\">\n              <div *ngIf=\"form.controls['name'].errors.required\">Debe ingresar un nombre.</div>\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"tipo\">Tipo de Empleado: </label>\n            <select id=\"mtipo\" formControlName=\"tipo\" class=\"form-control\">\n              <option value=\"Socio\">Socio</option>\n              <option value=\"Cocinero\">Cocinero</option>\n              <option value=\"Mozo\">Mozo</option>\n              <option value=\"Bartender\">Bartender</option>\n              <option value=\"Cervecero\">Cervecero</option>\n            </select>\n          </div>\n          <small *ngIf=\"error\" class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}}\n          </small>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-info\" (click)=\"Restablecer()\">Restablecer</button>\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"cerrar()\">Cerrar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"Submit()\">Guardar Cambios</button>\n      </div>\n    </div>\n  </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"modal\" [ngStyle]=\"{'display': showModal ? 'block' : 'none'}\">\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"exampleModalLongTitle\">Modificación de Empleado</h5>\n        <button type=\"button\" class=\"close\" (click)=\"cerrar()\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"form\" (keyup.enter)=\"Submit()\">\n          <div class=\"form-group\">\n            <label for=\"usuario\">usuario: </label>\n            <input type=\"text\" id=\"usuario\" formControlName=\"usuario\" class=\"form-control\" placeholder=\"usuario\"\n              [ngClass]=\"{ 'is-invalid': form.controls['usuario'].touched && form.controls['usuario'].invalid }\">\n            <div *ngIf=\"form.controls['usuario'].touched && form.controls['usuario'].invalid\" class=\"invalid-feedback\"\n              autocomplete=\"username\">\n              <div *ngIf=\"form.controls['usuario'].errors.required\">Debe ingresar un usuario.</div>\n            </div>\n          </div>\n<!--           <div class=\"form-group\">\n            <label for=\"password\">Password: </label>\n            <input type=\"text\" id=\"password\" formControlName=\"password\" class=\"form-control\" placeholder=\"password\" [ngClass]=\"{ 'is-invalid': form.controls['password'].touched && form.controls['password'].invalid }\">\n            <div *ngIf=\"form.controls['password'].touched && form.controls['password'].invalid\" class=\"invalid-feedback\">\n              <div *ngIf=\"form.controls['password'].errors.required\">Debe ingresar un nombre.</div>\n            </div>\n          </div> -->\n          <div class=\"form-group\">\n            <label for=\"nombre\">Nombre: </label>\n            <input type=\"text\" id=\"nombre\" formControlName=\"nombre\" class=\"form-control\" placeholder=\"Nombre\" [ngClass]=\"{ 'is-invalid': form.controls['nombre'].touched && form.controls['nombre'].invalid }\">\n            <div *ngIf=\"form.controls['nombre'].touched && form.controls['nombre'].invalid\" class=\"invalid-feedback\">\n              <div *ngIf=\"form.controls['nombre'].errors.required\">Debe ingresar un nombre.</div>\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"tipo\">Tipo de Empleado: </label>\n            <select id=\"mtipo\" formControlName=\"tipo\" class=\"form-control\">\n              <option value=\"Socio\">Socio</option>\n              <option value=\"Cocinero\">Cocinero</option>\n              <option value=\"Mozo\">Mozo</option>\n              <option value=\"Bartender\">Bartender</option>\n              <option value=\"Cervecero\">Cervecero</option>\n            </select>\n          </div>\n          <small *ngIf=\"error\" class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}}\n          </small>\n        </form>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"cerrar()\">Cerrar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"Submit()\">Guardar Cambios</button>\n      </div>\n    </div>\n  </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados-board/empleados-registro/empleados-registro.component.html": 
@@ -151,7 +151,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container h-100\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <h1>La Comanda</h1>\n      <hr>\n    </div>\n  </div>\n  <div appPanel class=\"row rowLogin justify-content-center align-items-center \">\n    <div class=\"col-6\">\n      <div class=\"card\" [ngClass]=\"{'border-danger': error}\">\n        <div class=\"card-body\">\n          <h5 class=\"card-title\">Registro Empleados</h5>\n              <form [formGroup]=\"form\" (keyup.enter)=\"onAddUser()\" (ngSubmit)=\"onAddUser()\">\n                <div class=\"form-group\">\n                  <label for=\"usuario\">Usuario: </label>\n                  <input type=\"text\" id=\"usuario\" formControlName=\"usuario\" class=\"form-control\" placeholder=\"Usuario\" [ngClass]=\"{ 'is-invalid': form.controls['usuario'].touched && form.controls['usuario'].invalid }\">\n                  <div *ngIf=\"form.controls['usuario'].touched && form.controls['usuario'].invalid\" class=\"invalid-feedback\" autocomplete=\"username\"> \n                    <div *ngIf=\"form.controls['usuario'].errors.required\">Debe ingresar un usuario.</div>\n                  </div>\n                </div>\n                <div class=\"form-group\">\n                  <label for=\"password\">Contraseña: </label>\n                  <input type=\"password\" id=\"password\" formControlName=\"password\" class=\"form-control\" placeholder=\"Contraseña\"\n                    [ngClass]=\"{ 'is-invalid': form.controls['password'].touched && form.controls['password'].invalid }\" autocomplete=\"current-password\">\n                  <div *ngIf=\"form.controls['password'].touched && form.controls['password'].invalid\" class=\"invalid-feedback\">\n                    <div *ngIf=\"form.controls['password'].errors.required\">Debe ingresar una contraseña.</div>\n                  </div>\n                </div>\n                <div class=\"form-group\">\n                  <label for=\"name\">Nombre: </label>\n                  <input type=\"text\" id=\"name\" formControlName=\"name\" class=\"form-control\" placeholder=\"Nombre\" [ngClass]=\"{ 'is-invalid': form.controls['name'].touched && form.controls['name'].invalid }\">\n                  <div *ngIf=\"form.controls['name'].touched && form.controls['name'].invalid\" class=\"invalid-feedback\">\n                    <div *ngIf=\"form.controls['name'].errors.required\">Debe ingresar un nombre.</div>\n                  </div>\n                </div>\n                <div class=\"form-group\">\n                  <label for=\"tipo\">Tipo de Empleado: </label>\n                  <select id=\"tipo\" formControlName=\"tipo\" class=\"form-control\">\n                    <option value=\"Socio\">Socio</option>\n                    <option value=\"Cocinero\">Cocinero</option>\n                    <option value=\"Mozo\">Mozo</option>\n                    <option value=\"Bartender\">Bartender</option>\n                    <option value=\"Cervecero\">Cervecero</option>\n                  </select>\n                </div>\n                <br>\n                <div class=\"form-group\">\n                  <h5>Seleccionar image:</h5>\n                  <input type=\"file\" accept=\".png, .jpg\" (change)=\"onUpload($event)\">\n                </div>  \n                <div class=\"progress\">\n                  <div class=\"progress-bar progress-bar-striped bg-sucess\" role=\"progressbar\" [style.width]=\"(uploadPercent | async) +'%'\" >\n                  </div>\n                </div>\n                <input #imageUser type=\"hidden\" [value]=\"urlImage | async\">                   \n                <br>\n                <div class=\"form-group\">\n                  <ngx-recaptcha2 #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\" formControlName=\"recaptcha\">\n                  </ngx-recaptcha2>   \n                  </div> \n                  <br>\n                <div class=\"form-group\">\n                  <button *ngIf=\"urlImage | async; else btnDisabled\" type=\"submit\" class=\"btn btn-lg btn-success btn-block\" (click)=\"Submit()\">Registrar</button>\n                  <ng-template #btnDisabled>\n                    <button type=\"submit\" disabled=true class=\"btn btn-lg btn-success btn-block\">Register</button>                                    \n                  </ng-template>                                   \n                    <button type=\"button\" class=\"btn btn-block btn-secondary\" [routerLink]=\"[ '/' ]\">Volver</button>\n                  </div>\n              </form>\n              </div>\n              <div *ngIf=\"error\" class=\"card-footer\">\n                <small class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}} </small>\n                <small *ngIf=\"success\" class=\"text-success font-weight-bold\"><i class=\"fas fa-check\"></i> Empleado registrado correctamente. </small>\n              </div>             \n              <hr>\n          </div>\n        </div>\n      </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"modal\" [ngStyle]=\"{'display': showModalRegistro ? 'block' : 'none'} \" >\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <p class=\"modal-title\" id=\"exampleModalAlta\">Alta de Empleado</p>\n        <button type=\"button\" class=\"close\" (click)=\"cerrar()\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n              <form [formGroup]=\"form\">\n                <div class=\"form-group\">\n                    <input type=\"text\"  [(ngModel)]=\"usuario\" [formControl]=\"form.controls['usuario']\" class=\"form-control\" placeholder=\"usuario\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.usuario.errors }\">\n                  <div *ngIf=\"submitted && f.usuario.errors\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.usuario.errors.required\">Debe ingresar un usuario.</div>\n                  </div>                \n              </div>\n                <div class=\"form-group\">\n                    <input type=\"text\"  [(ngModel)]=\"password\" [formControl]=\"form.controls['password']\" class=\"form-control\" placeholder=\"password\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\">\n                  <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.password.errors.required\">Debe ingresar un password.</div>\n                  </div>                \n                </div>\n                <div class=\"form-group\">\n                    <input type=\"text\"  [(ngModel)]=\"nombre\" [formControl]=\"form.controls['nombre']\" class=\"form-control\" placeholder=\"nombre\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.nombre.errors }\">\n                  <div *ngIf=\"submitted && f.nombre.errors\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.nombre.errors.required\">Debe ingresar un nombre.</div>\n                  </div>             \n              </div>\n                <div class=\"form-group\">\n                  <label for=\"tipo\">Tipo de Empleado: </label>\n                  <select  [(ngModel)]=\"tipo\" [formControl]=\"form.controls['tipo']\" class=\"form-control\"\n                  [ngClass]=\"{ 'is-invalid': submitted && f.tipo.errors }\">\n                    <option value=\"Socio\">Socio</option>\n                    <option value=\"Cocinero\">Cocinero</option>\n                    <option value=\"Mozo\">Mozo</option>\n                    <option value=\"Bartender\">Bartender</option>\n                    <option value=\"Cervecero\">Cervecero</option>\n                  </select>\n                  <div *ngIf=\"submitted && f.tipo.errors\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.tipo.errors.required\">Debe ingresar un Tipo.</div>\n                  </div>   \n                </div>\n                <div class=\"form-group\">\n                  <input #imageInput type=\"file\" accept=\".png, .jpg\" (change)=\"onUpload($event)\">\n                </div>\n                <div class=\"form-group\">\n                  <div class=\"progress\">\n                    <div class=\"progress-bar progress-bar-striped bg-sucess\" role=\"progressbar\" [style.width]=\"(uploadPercent | async) +'%'\" >\n                    </div>\n                  </div>\n               </div>\n                <input #imageUser type=\"hidden\" [value]=\"urlImage | async\">                   \n                <div class=\"form-group\">\n                  <ngx-recaptcha2 #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\" [formControl]=\"form.controls['recaptcha']\">\n                  </ngx-recaptcha2>   \n                  </div>                            \n              <div class=\"form-group\">\n              <button *ngIf=\"urlImage | async; else btnDisabled\" type=\"submit\" class=\"col-6 btn btn-lg btn-success\" (click)=\"onAddUser()\">Registrar</button>\n              <ng-template #btnDisabled>\n                <button type=\"submit\" disabled=true class=\"col-6 btn btn-lg btn-success \" >Registrar</button>                                    \n              </ng-template>                                   \n              <button type=\"button\" class=\"col-6 btn btn-lg btn-secondary \" (click)=\"cerrar()\">Cerrar</button>             \n            </div>\n          </form>\n            </div>\n    </div>\n  </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados-login/empleados-login.component.html": 
@@ -162,7 +162,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container h-100\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <h1>La Comanda</h1>\n      <hr>\n    </div>\n  </div>\n  <div appPanel class=\"row justify-content-center align-items-center\">\n    <div class=\"col-6\">\n      <div class=\"card\" [ngClass]=\"{'border-danger': error}\">\n        <div class=\"card-body\">\n            <span><i class=\"fas fa-fast-forward\"></i><b class=\"ar\">Acceso Rápido:</b></span>       \n            <button type=\"button\" class=\"btn btn-outline-info btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Socio\" (click)=\"CargarDefault('S')\"><i class=\"far fa-handshake\"></i></button>          \n            <button type=\"button\" class=\"btn btn-outline-success btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Bartender\" (click)=\"CargarDefault('B')\"><i class=\"fas fa-cocktail\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-warning btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cervecero\" (click)=\"CargarDefault('CE')\"><i class=\"fas fa-beer\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-danger btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cocinero\" (click)=\"CargarDefault('CO')\"><i class=\"fas fa-utensils\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-primary btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Mozo\" (click)=\"CargarDefault('M')\"><i class=\"fas fa-user-tie\"></i></button>\n          <h5 class=\"card-title\">Ingreso Empleados</h5>\n          <form [formGroup]=\"form\" (keyup.enter)=\"Submit()\">\n            <div class=\"form-group\">\n              <label for=\"user\">Usuario: </label>\n              <input type=\"text\" id=\"user\" formControlName=\"user\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': form.controls['user'].touched && form.controls['user'].invalid }\">\n              <div *ngIf=\"form.controls['user'].touched && form.controls['user'].invalid\" class=\"invalid-feedback\">\n                <div *ngIf=\"form.controls['user'].errors.required\">Debe ingresar un usuario.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label for=\"pass\">Contraseña: </label>\n              <input type=\"password\" id=\"pass\" class=\"form-control\" formControlName=\"pass\" [ngClass]=\"{ 'is-invalid': form.controls['pass'].touched && form.controls['pass'].invalid }\">\n              <div *ngIf=\"form.controls['pass'].touched && form.controls['pass'].invalid\" class=\"invalid-feedback\">\n                <div *ngIf=\"form.controls['pass'].errors.required\">Debe ingresar la contraseña.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n            <ngx-recaptcha2 (resolved)=\"resolved($event)\" #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\" formControlName=\"recaptcha\">\n            </ngx-recaptcha2>  \n          </div>   \n          <button type=\"submit\" class=\"btn btn-lg btn-block btn-success\" (click)=\"Submit()\">Ingresar</button>       \n          <button class=\"btn btn-lg btn-block btn-social btn-danger\" (click)=\"onLoginGoogle()\">\n            <i class=\"fa fa-google\" aria-hidden=\"true\"></i>\n            Google\n          </button>\n          <button class=\"btn btn-lg btn-block btn-social btn-facebook btn-primary\" (click)=\"onLoginFacebook()\">\n            <span class=\"fa fa-facebook\"></span>\n            Facebook\n          </button>    \n          </form>\n        </div>\n        <div *ngIf=\"error\" class=\"card-footer\">\n          <small class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}} </small>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container h-100\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <h1>La Comanda</h1>\n      <hr>\n    </div>\n  </div>\n  <div appPanel class=\"row justify-content-center align-items-center\">\n    <div class=\"col-6\">\n      <div class=\"card\" [ngClass]=\"{'border-danger': error}\">\n        <div class=\"card-body\">\n            <span><i class=\"fas fa-fast-forward\"></i><b class=\"ar\">Acceso Rápido:</b></span>       \n            <button type=\"button\" class=\"btn btn-outline-info btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Socio\" (click)=\"CargarDefault('S')\"><i class=\"far fa-handshake\"></i></button>          \n            <button type=\"button\" class=\"btn btn-outline-success btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Bartender\" (click)=\"CargarDefault('B')\"><i class=\"fas fa-cocktail\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-warning btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cervecero\" (click)=\"CargarDefault('CE')\"><i class=\"fas fa-beer\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-danger btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cocinero\" (click)=\"CargarDefault('CO')\"><i class=\"fas fa-utensils\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-primary btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Mozo\" (click)=\"CargarDefault('M')\"><i class=\"fas fa-user-tie\"></i></button>\n          <h5 class=\"card-title\">Ingreso Empleados</h5>\n          <form [formGroup]=\"form\" (keyup.enter)=\"Submit()\">\n            <div class=\"form-group\">\n              <label for=\"user\">Usuario: </label>\n              <input type=\"text\" id=\"user\" formControlName=\"user\" [ngModel]=\"user\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': form.controls['user'].touched && form.controls['user'].invalid }\">\n              <div *ngIf=\"form.controls['user'].touched && form.controls['user'].invalid\" class=\"invalid-feedback\">\n                <div *ngIf=\"form.controls['user'].errors.required\">Debe ingresar un usuario.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label for=\"pass\">Contraseña: </label>\n              <input type=\"password\" id=\"pass\" class=\"form-control\" [ngModel]=\"pass\" formControlName=\"pass\" [ngClass]=\"{ 'is-invalid': form.controls['pass'].touched && form.controls['pass'].invalid }\">\n              <div *ngIf=\"form.controls['pass'].touched && form.controls['pass'].invalid\" class=\"invalid-feedback\">\n                <div *ngIf=\"form.controls['pass'].errors.required\">Debe ingresar la contraseña.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n            <ngx-recaptcha2 (resolved)=\"resolved($event)\" #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\" formControlName=\"recaptcha\">\n            </ngx-recaptcha2>  \n          </div>   \n          <button type=\"submit\" class=\"btn btn-lg btn-block btn-success\" (click)=\"Submit()\">Ingresar</button>       \n          <button class=\"btn btn-lg btn-block btn-social btn-danger\" (click)=\"onLoginGoogle()\">\n            <i class=\"fa fa-google\" aria-hidden=\"true\"></i>\n            Google\n          </button>\n          <button class=\"btn btn-lg btn-block btn-social btn-facebook btn-primary\" (click)=\"onLoginFacebook()\">\n            <span class=\"fa fa-facebook\"></span>\n            Facebook\n          </button>    \n          </form>\n        </div>\n        <div *ngIf=\"error\" class=\"card-footer\">\n          <small class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}} </small>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados/empleados.component.html": 
@@ -195,7 +195,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-deck justify-content-center align-content-center\">\n  <div *ngFor=\"let mesa of mesasList\" class=\"card\" appPanel>\n    <img class=\"card-img-top\" [src]=\"domSanitizer.bypassSecurityTrustUrl('data:'+mesa.tipoFoto+';base64,' + mesa.foto)\"\n      alt=\"Card image cap\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{mesa.codigo}}</h5>\n      <p class=\"card-text\">{{mesa.estado}}</p>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button id=\"btnEstado\" class=\"btn btn-info btn-sm btn-block dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n        aria-expanded=\"false\">Estado</button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"btnEstado\">\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(1, mesa.codigo)\">Esperando Pedido</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(2, mesa.codigo)\">Comiendo</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(3, mesa.codigo)\">Pagando</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(4, mesa.codigo)\">Cerrada</a>\n      </div>\n      <button *appValidarRoles=\"['Socio']\" class=\"btn btn-warning btn-sm\" (click)=\"cobrar(mesa.codigo)\">Cobrar</button>\n      <button *appValidarRoles=\"['Socio']\" class=\"btn btn-danger btn-sm\" (click)=\"eliminar(mesa.codigo)\">Eliminar</button>\n    </div>\n  </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<button *appValidarRoles=\"['Socio']\" class=\"float-right  btn btn-outline-primary btn-sm\" type=\"button\" (click)=\"showRegistroMesa()\"><i class=\"fas fa-user-plus\"></i>Nuevo</button>\n<div class=\"card-deck justify-content-center align-content-center\">   \n  <div *ngFor=\"let mesa of mesasList\" class=\"card\" appPanel>\n    <img class=\"card-img-top\" [src]=\"domSanitizer.bypassSecurityTrustUrl('data:'+mesa.tipoFoto+';base64,' + mesa.foto)\"\n      alt=\"Card image cap\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{mesa.codigo}}</h5>\n      <p class=\"card-text\">{{mesa.estado}}</p>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button id=\"btnEstado\" class=\"btn btn-info btn-sm btn-block dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n        aria-expanded=\"false\">Estado</button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"btnEstado\">\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(1, mesa)\">Esperando Pedido</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(2, mesa)\">Comiendo</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(3, mesa)\">Pagando</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(4, mesa)\">Cerrada</a>\n      </div>\n      <button *appValidarRoles=\"['Socio']\" class=\"btn btn-warning btn-sm\" (click)=\"cobrar(mesa)\">Cobrar</button>\n      <button *appValidarRoles=\"['Socio']\" class=\"btn btn-danger btn-sm\" (click)=\"eliminar(mesa)\">Eliminar</button>\n    </div>\n  </div>\n</div>\n<app-mesa-registro #modalRegistro [showModalRegistro]=\"showModalRegistro\" (closeModal)=\"showModalRegistro = false\" (registradoCorrectamente)=\"cargarLista()\"></app-mesa-registro>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/mesa-board/mesa-registro/mesa-registro.component.html": 
@@ -206,7 +206,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div appPanel>\n  <h4>Registro de Mesas</h4>\n  <hr>\n  <form [formGroup]=\"form\" (keyup.enter)=\"Submit()\">\n    <div class=\"form-group\">\n      <label for=\"codigo\">Código: </label>\n      <input type=\"text\" id=\"codigo\" formControlName=\"codigo\" class=\"form-control\" placeholder=\"Código\" [ngClass]=\"{ 'is-invalid': form.controls['codigo'].touched && form.controls['codigo'].invalid }\">\n      <div *ngIf=\"form.controls['codigo'].touched && form.controls['codigo'].invalid\" class=\"invalid-feedback\"\n        autocomplete=\"username\">\n        <div *ngIf=\"form.controls['codigo'].errors.required\">Debe ingresar un codigo.</div>\n      </div>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"foto\">Foto: </label>\n      <input type=\"file\" id=\"foto\" formControlName=\"foto\" class=\"form-control-file\" (change)=\"onFileChange($event)\" #fileInput>\n    </div>\n    <ngx-recaptcha2 #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\"\n      formControlName=\"recaptcha\">\n    </ngx-recaptcha2>\n    <small *ngIf=\"error\" class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}} </small>\n    <small *ngIf=\"success\" class=\"text-success font-weight-bold\"><i class=\"fas fa-check\"></i> Mesa registrada\n      correctamente. </small>\n    <hr>\n    <button type=\"submit\" class=\"btn btn-primary\" (click)=\"Submit()\">Registrar</button><br>\n  </form>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"modal\" [ngStyle]=\"{'display': showModalRegistro ? 'block' : 'none'} \" >\n    <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <p class=\"modal-title\" id=\"exampleModalAlta\">Alta de Mesa</p>\n          <button type=\"button\" class=\"close\" (click)=\"cerrar()\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n            <form [formGroup]=\"form\" (keyup.enter)=\"Submit()\">\n              <div class=\"form-group\">\n                <label for=\"codigo\">Código: </label>\n                <input type=\"text\" id=\"codigo\" formControlName=\"codigo\" class=\"form-control\" placeholder=\"Código\" [ngClass]=\"{ 'is-invalid': form.controls['codigo'].touched && form.controls['codigo'].invalid }\">\n                <div *ngIf=\"form.controls['codigo'].touched && form.controls['codigo'].invalid\" class=\"invalid-feedback\"\n                  autocomplete=\"username\">\n                  <div *ngIf=\"form.controls['codigo'].errors.required\">Debe ingresar un codigo.</div>\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"foto\">Foto: </label>\n                <input type=\"file\" id=\"foto\" formControlName=\"foto\" class=\"form-control-file\" (change)=\"onFileChange($event)\" #fileInput>\n              </div>\n              <ngx-recaptcha2 #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\"\n                formControlName=\"recaptcha\">\n              </ngx-recaptcha2>\n              <small *ngIf=\"error\" class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}} </small>\n              <small *ngIf=\"success\" class=\"text-success font-weight-bold\"><i class=\"fas fa-check\"></i> Mesa registrada\n                correctamente. </small>\n              <hr>\n              <button type=\"submit\" class=\"btn btn-primary\" (click)=\"Submit()\">Registrar</button><br>\n            </form>\n          </div>\n        </div>\n      </div>\n    </div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/navegacion/navegacion.component.html": 
@@ -867,6 +867,36 @@ var __extends = (this && this.__extends) || (function () {
             ], SectorPipe);
             /***/ 
         }),
+        /***/ "./src/app/Pipes/dateFire.pipe.ts": 
+        /*!****************************************!*\
+          !*** ./src/app/Pipes/dateFire.pipe.ts ***!
+          \****************************************/
+        /*! exports provided: DateFirePipe */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DateFirePipe", function () { return DateFirePipe; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+            var DateFirePipe = /** @class */ (function (_super) {
+                __extends(DateFirePipe, _super);
+                function DateFirePipe() {
+                    return _super !== null && _super.apply(this, arguments) || this;
+                }
+                DateFirePipe.prototype.transform = function (value, args) {
+                    ///MMM/dd/yyyy 
+                    return _super.prototype.transform.call(this, value, "medium");
+                };
+                return DateFirePipe;
+            }(_angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]));
+            DateFirePipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({
+                    name: 'DateFireFormat'
+                })
+            ], DateFirePipe);
+            /***/ 
+        }),
         /***/ "./src/app/Pipes/estado-pedidos.pipe.ts": 
         /*!**********************************************!*\
           !*** ./src/app/Pipes/estado-pedidos.pipe.ts ***!
@@ -1028,7 +1058,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = (".activo {\n  position: fixed !important;\n  top: 0 !important;\n  left: 0 !important;\n  width: 100% !important;\n  height: 100% !important;\n  z-index: 99999 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSwwQkFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EseUJBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hY3Rpdm97XG4gICAgcG9zaXRpb246IGZpeGVkICFpbXBvcnRhbnQ7ICAgIFxuICAgIHRvcDogMCAhaW1wb3J0YW50O1xuICAgIGxlZnQ6IDAgIWltcG9ydGFudDtcbiAgICB3aWR0aDogMTAwJSAhaW1wb3J0YW50O1xuICAgIGhlaWdodDogMTAwJSAhaW1wb3J0YW50O1xuICAgIHotaW5kZXg6IDk5OTk5IWltcG9ydGFudDtcbn0iLCIuYWN0aXZvIHtcbiAgcG9zaXRpb246IGZpeGVkICFpbXBvcnRhbnQ7XG4gIHRvcDogMCAhaW1wb3J0YW50O1xuICBsZWZ0OiAwICFpbXBvcnRhbnQ7XG4gIHdpZHRoOiAxMDAlICFpbXBvcnRhbnQ7XG4gIGhlaWdodDogMTAwJSAhaW1wb3J0YW50O1xuICB6LWluZGV4OiA5OTk5OSAhaW1wb3J0YW50O1xufSJdfQ== */");
+            /* harmony default export */ __webpack_exports__["default"] = (".activo {\n  position: fixed !important;\n  top: 0 !important;\n  left: 0 !important;\n  width: 100% !important;\n  height: 100% !important;\n  z-index: 99999 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSwwQkFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxzQkFBQTtFQUNBLHVCQUFBO0VBQ0EseUJBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hY3Rpdm97XG4gICAgcG9zaXRpb246IGZpeGVkICFpbXBvcnRhbnQ7ICAgIFxuICAgIHRvcDogMCAhaW1wb3J0YW50O1xuICAgIGxlZnQ6IDAgIWltcG9ydGFudDtcbiAgICB3aWR0aDogMTAwJSAhaW1wb3J0YW50O1xuICAgIGhlaWdodDogMTAwJSAhaW1wb3J0YW50O1xuICAgIHotaW5kZXg6IDk5OTk5IWltcG9ydGFudDtcbn1cblxuIiwiLmFjdGl2byB7XG4gIHBvc2l0aW9uOiBmaXhlZCAhaW1wb3J0YW50O1xuICB0b3A6IDAgIWltcG9ydGFudDtcbiAgbGVmdDogMCAhaW1wb3J0YW50O1xuICB3aWR0aDogMTAwJSAhaW1wb3J0YW50O1xuICBoZWlnaHQ6IDEwMCUgIWltcG9ydGFudDtcbiAgei1pbmRleDogOTk5OTkgIWltcG9ydGFudDtcbn0iXX0= */");
             /***/ 
         }),
         /***/ "./src/app/app.component.ts": 
@@ -1119,24 +1149,25 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var _Pipes_ordenar_pipe__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./Pipes/ordenar.pipe */ "./src/app/Pipes/ordenar.pipe.ts");
             /* harmony import */ var _Pipes_Estado_pipe__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./Pipes/Estado.pipe */ "./src/app/Pipes/Estado.pipe.ts");
             /* harmony import */ var _Pipes_Sector_pipe__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./Pipes/Sector.pipe */ "./src/app/Pipes/Sector.pipe.ts");
-            /* harmony import */ var _Directives_panel_directive__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./Directives/panel.directive */ "./src/app/Directives/panel.directive.ts");
-            /* harmony import */ var _Directives_estado_pedido_directive__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./Directives/estado-pedido.directive */ "./src/app/Directives/estado-pedido.directive.ts");
-            /* harmony import */ var _Directives_accion_pedido_directive__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./Directives/accion-pedido.directive */ "./src/app/Directives/accion-pedido.directive.ts");
-            /* harmony import */ var _componentes_mesa_board_mesa_board_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./componentes/mesa-board/mesa-board.component */ "./src/app/componentes/mesa-board/mesa-board.component.ts");
-            /* harmony import */ var _componentes_mesa_board_mesa_list_mesa_list_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./componentes/mesa-board/mesa-list/mesa-list.component */ "./src/app/componentes/mesa-board/mesa-list/mesa-list.component.ts");
-            /* harmony import */ var _componentes_mesa_board_mesa_registro_mesa_registro_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./componentes/mesa-board/mesa-registro/mesa-registro.component */ "./src/app/componentes/mesa-board/mesa-registro/mesa-registro.component.ts");
-            /* harmony import */ var _componentes_pedidos_board_pedidos_board_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./componentes/pedidos-board/pedidos-board.component */ "./src/app/componentes/pedidos-board/pedidos-board.component.ts");
-            /* harmony import */ var _componentes_pedidos_board_pedidos_registro_pedidos_registro_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./componentes/pedidos-board/pedidos-registro/pedidos-registro.component */ "./src/app/componentes/pedidos-board/pedidos-registro/pedidos-registro.component.ts");
-            /* harmony import */ var _componentes_Common_captcha_captcha_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./componentes/Common/captcha/captcha.component */ "./src/app/componentes/Common/captcha/captcha.component.ts");
-            /* harmony import */ var _Directives_validar_roles_directive__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./Directives/validar-roles.directive */ "./src/app/Directives/validar-roles.directive.ts");
-            /* harmony import */ var _servicios_menu_service__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./servicios/menu.service */ "./src/app/servicios/menu.service.ts");
-            /* harmony import */ var _Pipes_estado_pedidos_pipe__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./Pipes/estado-pedidos.pipe */ "./src/app/Pipes/estado-pedidos.pipe.ts");
-            /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/es2015/index.js");
-            /* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @angular/fire/auth */ "./node_modules/@angular/fire/auth/es2015/index.js");
-            /* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/es2015/index.js");
-            /* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/database/es2015/index.js");
-            /* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/storage/es2015/index.js");
-            /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+            /* harmony import */ var _Pipes_dateFire_pipe__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./Pipes/dateFire.pipe */ "./src/app/Pipes/dateFire.pipe.ts");
+            /* harmony import */ var _Directives_panel_directive__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./Directives/panel.directive */ "./src/app/Directives/panel.directive.ts");
+            /* harmony import */ var _Directives_estado_pedido_directive__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./Directives/estado-pedido.directive */ "./src/app/Directives/estado-pedido.directive.ts");
+            /* harmony import */ var _Directives_accion_pedido_directive__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./Directives/accion-pedido.directive */ "./src/app/Directives/accion-pedido.directive.ts");
+            /* harmony import */ var _componentes_mesa_board_mesa_board_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./componentes/mesa-board/mesa-board.component */ "./src/app/componentes/mesa-board/mesa-board.component.ts");
+            /* harmony import */ var _componentes_mesa_board_mesa_list_mesa_list_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./componentes/mesa-board/mesa-list/mesa-list.component */ "./src/app/componentes/mesa-board/mesa-list/mesa-list.component.ts");
+            /* harmony import */ var _componentes_mesa_board_mesa_registro_mesa_registro_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./componentes/mesa-board/mesa-registro/mesa-registro.component */ "./src/app/componentes/mesa-board/mesa-registro/mesa-registro.component.ts");
+            /* harmony import */ var _componentes_pedidos_board_pedidos_board_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./componentes/pedidos-board/pedidos-board.component */ "./src/app/componentes/pedidos-board/pedidos-board.component.ts");
+            /* harmony import */ var _componentes_pedidos_board_pedidos_registro_pedidos_registro_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./componentes/pedidos-board/pedidos-registro/pedidos-registro.component */ "./src/app/componentes/pedidos-board/pedidos-registro/pedidos-registro.component.ts");
+            /* harmony import */ var _componentes_Common_captcha_captcha_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./componentes/Common/captcha/captcha.component */ "./src/app/componentes/Common/captcha/captcha.component.ts");
+            /* harmony import */ var _Directives_validar_roles_directive__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./Directives/validar-roles.directive */ "./src/app/Directives/validar-roles.directive.ts");
+            /* harmony import */ var _servicios_menu_service__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./servicios/menu.service */ "./src/app/servicios/menu.service.ts");
+            /* harmony import */ var _Pipes_estado_pedidos_pipe__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./Pipes/estado-pedidos.pipe */ "./src/app/Pipes/estado-pedidos.pipe.ts");
+            /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/es2015/index.js");
+            /* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @angular/fire/auth */ "./node_modules/@angular/fire/auth/es2015/index.js");
+            /* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! @angular/fire */ "./node_modules/@angular/fire/es2015/index.js");
+            /* harmony import */ var _angular_fire_database__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @angular/fire/database */ "./node_modules/@angular/fire/database/es2015/index.js");
+            /* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/storage/es2015/index.js");
+            /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
             //angular fire 
             //import { AngularFireModule } from '@angular/fire';
             //import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -1174,27 +1205,28 @@ var __extends = (this && this.__extends) || (function () {
                         _Pipes_ordenar_pipe__WEBPACK_IMPORTED_MODULE_34__["OrdenarPipe"],
                         _Pipes_Estado_pipe__WEBPACK_IMPORTED_MODULE_35__["EstadoPipe"],
                         _Pipes_Sector_pipe__WEBPACK_IMPORTED_MODULE_36__["SectorPipe"],
-                        _Directives_panel_directive__WEBPACK_IMPORTED_MODULE_37__["PanelDirective"],
-                        _Directives_estado_pedido_directive__WEBPACK_IMPORTED_MODULE_38__["EstadoPedidoDirective"],
-                        _Directives_accion_pedido_directive__WEBPACK_IMPORTED_MODULE_39__["AccionPedidoDirective"],
-                        _componentes_mesa_board_mesa_board_component__WEBPACK_IMPORTED_MODULE_40__["MesaBoardComponent"],
-                        _componentes_mesa_board_mesa_list_mesa_list_component__WEBPACK_IMPORTED_MODULE_41__["MesaListComponent"],
-                        _componentes_mesa_board_mesa_registro_mesa_registro_component__WEBPACK_IMPORTED_MODULE_42__["MesaRegistroComponent"],
-                        _componentes_pedidos_board_pedidos_board_component__WEBPACK_IMPORTED_MODULE_43__["PedidosBoardComponent"],
-                        _componentes_pedidos_board_pedidos_registro_pedidos_registro_component__WEBPACK_IMPORTED_MODULE_44__["PedidosRegistroComponent"],
-                        _componentes_Common_captcha_captcha_component__WEBPACK_IMPORTED_MODULE_45__["CaptchaComponent"],
-                        _Directives_validar_roles_directive__WEBPACK_IMPORTED_MODULE_46__["ValidarRolesDirective"],
-                        _Pipes_estado_pedidos_pipe__WEBPACK_IMPORTED_MODULE_48__["EstadoPedidosPipe"]
+                        _Pipes_dateFire_pipe__WEBPACK_IMPORTED_MODULE_37__["DateFirePipe"],
+                        _Directives_panel_directive__WEBPACK_IMPORTED_MODULE_38__["PanelDirective"],
+                        _Directives_estado_pedido_directive__WEBPACK_IMPORTED_MODULE_39__["EstadoPedidoDirective"],
+                        _Directives_accion_pedido_directive__WEBPACK_IMPORTED_MODULE_40__["AccionPedidoDirective"],
+                        _componentes_mesa_board_mesa_board_component__WEBPACK_IMPORTED_MODULE_41__["MesaBoardComponent"],
+                        _componentes_mesa_board_mesa_list_mesa_list_component__WEBPACK_IMPORTED_MODULE_42__["MesaListComponent"],
+                        _componentes_mesa_board_mesa_registro_mesa_registro_component__WEBPACK_IMPORTED_MODULE_43__["MesaRegistroComponent"],
+                        _componentes_pedidos_board_pedidos_board_component__WEBPACK_IMPORTED_MODULE_44__["PedidosBoardComponent"],
+                        _componentes_pedidos_board_pedidos_registro_pedidos_registro_component__WEBPACK_IMPORTED_MODULE_45__["PedidosRegistroComponent"],
+                        _componentes_Common_captcha_captcha_component__WEBPACK_IMPORTED_MODULE_46__["CaptchaComponent"],
+                        _Directives_validar_roles_directive__WEBPACK_IMPORTED_MODULE_47__["ValidarRolesDirective"],
+                        _Pipes_estado_pedidos_pipe__WEBPACK_IMPORTED_MODULE_49__["EstadoPedidosPipe"]
                     ],
                     imports: [
                         _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["BrowserModule"],
                         _Routes_app_routing_module__WEBPACK_IMPORTED_MODULE_11__["AppRoutingModule"],
                         _angular_forms__WEBPACK_IMPORTED_MODULE_17__["FormsModule"],
-                        _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_49__["AngularFirestoreModule"],
-                        _angular_fire_storage__WEBPACK_IMPORTED_MODULE_53__["AngularFireStorageModule"],
-                        _angular_fire_auth__WEBPACK_IMPORTED_MODULE_50__["AngularFireAuthModule"],
-                        _angular_fire_database__WEBPACK_IMPORTED_MODULE_52__["AngularFireDatabaseModule"],
-                        _angular_fire__WEBPACK_IMPORTED_MODULE_51__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_54__["firebaseConfig"]),
+                        _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_50__["AngularFirestoreModule"],
+                        _angular_fire_storage__WEBPACK_IMPORTED_MODULE_54__["AngularFireStorageModule"],
+                        _angular_fire_auth__WEBPACK_IMPORTED_MODULE_51__["AngularFireAuthModule"],
+                        _angular_fire_database__WEBPACK_IMPORTED_MODULE_53__["AngularFireDatabaseModule"],
+                        _angular_fire__WEBPACK_IMPORTED_MODULE_52__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_55__["firebaseConfig"]),
                         _angular_material__WEBPACK_IMPORTED_MODULE_15__["MatSidenavModule"],
                         _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["NoopAnimationsModule"],
                         ngx_spinner__WEBPACK_IMPORTED_MODULE_25__["NgxSpinnerModule"],
@@ -1241,9 +1273,9 @@ var __extends = (this && this.__extends) || (function () {
                         _servicios_empleado_service__WEBPACK_IMPORTED_MODULE_3__["EmpleadoService"],
                         ngx_spinner__WEBPACK_IMPORTED_MODULE_25__["NgxSpinnerService"],
                         _servicios_captcha_service__WEBPACK_IMPORTED_MODULE_1__["CaptchaService"],
-                        _servicios_menu_service__WEBPACK_IMPORTED_MODULE_47__["MenuService"],
-                        _angular_fire_auth__WEBPACK_IMPORTED_MODULE_50__["AngularFireAuth"],
-                        _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_49__["AngularFirestore"] //
+                        _servicios_menu_service__WEBPACK_IMPORTED_MODULE_48__["MenuService"],
+                        _angular_fire_auth__WEBPACK_IMPORTED_MODULE_51__["AngularFireAuth"],
+                        _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_50__["AngularFirestore"] //
                     ],
                     bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
                 })
@@ -1466,7 +1498,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = (".container-fluid {\n  width: 100%;\n  height: 100%;\n  padding: 30px;\n}\n@media (min-width: 768px) {\n  .container-fluid {\n    display: flex;\n    align-items: center;\n  }\n}\n.container-fluid .principal .descripcion {\n  /* Small devices (landscape phones, 544px and up) */\n  /* Medium devices (tablets, 768px and up) */\n  /* Large devices (desktops, 992px and up) */\n  /* Extra large devices (large desktops, 1200px and up) */\n  /* Extra large devices (large desktops, 1200px and up) */\n  border: 2px solid black;\n  padding: 30px;\n  color: #Fff;\n  font-family: \"Lato\", sans-serif;\n}\n@media (min-width: 544px) {\n  .container-fluid .principal .descripcion {\n    font-size: 12px;\n  }\n}\n@media (min-width: 768px) {\n  .container-fluid .principal .descripcion {\n    font-size: 12px;\n  }\n}\n@media (min-width: 992px) {\n  .container-fluid .principal .descripcion {\n    font-size: 12px;\n  }\n}\n@media (min-width: 1200px) {\n  .container-fluid .principal .descripcion {\n    font-size: 12px;\n  }\n}\n@media (min-width: 1800px) {\n  .container-fluid .principal .descripcion {\n    font-size: 18px;\n  }\n}\n.container-fluid .principal .descripcion h1 {\n  font-family: \"ZCOOL XiaoWei\", serif;\n}\n.container-fluid .principal .descripcion h3 {\n  margin-top: 20px;\n}\n.container-fluid .principal .descripcion p {\n  margin-top: 5px;\n}\n.container-fluid .principal .contenedor-boton {\n  position: relative;\n  width: 100px;\n  height: 50px;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 3vh;\n  overflow: hidden;\n  border: 2px solid #1A237E;\n  font-family: \"Lato\", sans-serif;\n  font-weight: bold;\n  transition: 0.5s;\n  letter-spacing: 1px;\n  padding: 0;\n  box-sizing: border-box;\n  background-color: #6C5B7B;\n}\n.container-fluid .principal .contenedor-boton button {\n  width: 101%;\n  height: 100%;\n  font-family: \"Lato\", sans-serif;\n  font-size: 20px;\n  letter-spacing: 1px;\n  text-align: center;\n  background: #1A237E;\n  -webkit-mask: url(\"https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png\");\n  mask: url(\"https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png\");\n  -webkit-mask-size: 3000% 100%;\n  mask-size: 3000% 100%;\n  border: none;\n  color: #fff;\n  cursor: pointer;\n  -webkit-animation: ani2 0.8s steps(29) forwards;\n  animation: ani2 0.8s steps(29) forwards;\n}\n.container-fluid .principal .contenedor-boton button:hover {\n  -webkit-animation: ani 0.8s steps(29) forwards;\n  animation: ani 0.8s steps(29) forwards;\n}\n.container-fluid .principal .mas {\n  width: 101%;\n  height: 100%;\n  color: #1A237E;\n  text-align: center;\n  width: 101%;\n  font-family: \"Lato\", sans-serif;\n  font-weight: bold;\n  position: absolute;\n  font-size: 20px;\n  overflow: hidden;\n  margin-top: 9px;\n}\n@-webkit-keyframes ani {\n  from {\n    -webkit-mask-position: 0 0;\n    mask-position: 0 0;\n  }\n  to {\n    -webkit-mask-position: 100% 0;\n    mask-position: 100% 0;\n  }\n}\n@keyframes ani {\n  from {\n    -webkit-mask-position: 0 0;\n    mask-position: 0 0;\n  }\n  to {\n    -webkit-mask-position: 100% 0;\n    mask-position: 100% 0;\n  }\n}\n@-webkit-keyframes ani2 {\n  from {\n    -webkit-mask-position: 100% 0;\n    mask-position: 100% 0;\n  }\n  to {\n    -webkit-mask-position: 0 0;\n    mask-position: 0 0;\n  }\n}\n@keyframes ani2 {\n  from {\n    -webkit-mask-position: 100% 0;\n    mask-position: 100% 0;\n  }\n  to {\n    -webkit-mask-position: 0 0;\n    mask-position: 0 0;\n  }\n}\n.btn-primary {\n  background-color: #1A237E;\n  border-color: #1A237E;\n}\n.alert {\n  width: 50%;\n  position: absolute;\n  bottom: 20%;\n  left: 25%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvYmllbnZlbmlkYS9iaWVudmVuaWRhLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRlcy9iaWVudmVuaWRhL2JpZW52ZW5pZGEuY29tcG9uZW50LnNjc3MiLCIvaG9tZS9hcmllbC9MYWJvcmF0b3JpbyA0L0NvbWFuZGFXZWItbGFiNC9zcmMvYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFpQkE7RUFDSSxXQUFBO0VBQ0EsWUFBQTtFQUNBLGFBQUE7QUNoQko7QURpQkk7RUFKSjtJQUtRLGFBQUE7SUFDQSxtQkFBQTtFQ2ROO0FBQ0Y7QURrQlE7RUFDSSxtREFBQTtFQUtBLDJDQUFBO0VBS0EsMkNBQUE7RUFLQSx3REFBQTtFQUtBLHdEQUFBO0VBS0EsdUJBQUE7RUFDQSxhQUFBO0VBQ0EsV0FBQTtFQUNBLCtCQUFBO0FDcENaO0FEU1k7RUFGSjtJQUdRLGVBQUE7RUNOZDtBQUNGO0FEU1k7RUFQSjtJQVFRLGVBQUE7RUNOZDtBQUNGO0FEU1k7RUFaSjtJQWFRLGVBQUE7RUNOZDtBQUNGO0FEU1k7RUFqQko7SUFrQlEsZUFBQTtFQ05kO0FBQ0Y7QURTWTtFQXRCSjtJQXVCUSxlQUFBO0VDTmQ7QUFDRjtBRFlZO0VBQ0ksbUNFakRGO0FEdUNkO0FEYVk7RUFDSSxnQkFBQTtBQ1hoQjtBRGNZO0VBQ0ksZUFBQTtBQ1poQjtBRGdCUTtFQUNJLGtCQUFBO0VBQ0EsWUFBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0EseUJBQUE7RUFDQSwrQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxtQkFBQTtFQUNBLFVBQUE7RUFDQSxzQkFBQTtFQUNBLHlCRWxGRTtBRG9FZDtBRGdCWTtFQUNJLFdBQUE7RUFDQSxZQUFBO0VBQ0EsK0JBQUE7RUFDQSxlQUFBO0VBQ0EsbUJBQUE7RUFDQSxrQkFBQTtFQXRGZixtQkVOYTtFRk9iLGlIQUFBO0VBQ0EseUdBQUE7RUFDQSw2QkFBQTtFQUNBLHFCQUFBO0VBQ0EsWUF1RmU7RUF0RmYsV0F1RmU7RUFDQSxlQUFBO0VBQ0EsK0NBQUE7RUFDQSx1Q0FBQTtBQ2RoQjtBRGdCZ0I7RUFDQSw4Q0FBQTtFQUNBLHNDQUFBO0FDZGhCO0FEb0JZO0VBQ0ksV0FBQTtFQUNBLFlBQUE7RUFDQSxjRW5IRjtFRm9IRSxrQkFBQTtFQUNBLFdBQUE7RUFDQSwrQkFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxlQUFBO0FDbEJoQjtBRHFCWTtFQUNBO0lBQ0ksMEJBQUE7SUFDQSxrQkFBQTtFQ25CZDtFRHNCVTtJQUNJLDZCQUFBO0lBQ0EscUJBQUE7RUNwQmQ7QUFDRjtBRHVCWTtFQUNBO0lBQ0ksMEJBQUE7SUFDQSxrQkFBQTtFQ3JCZDtFRHdCVTtJQUNJLDZCQUFBO0lBQ0EscUJBQUE7RUN0QmQ7QUFDRjtBRHlCWTtFQUNBO0lBQ0ksNkJBQUE7SUFDQSxxQkFBQTtFQ3ZCZDtFRDBCVTtJQUNJLDBCQUFBO0lBQ0Esa0JBQUE7RUN4QmQ7QUFDRjtBRDJCWTtFQUNBO0lBQ0ksNkJBQUE7SUFDQSxxQkFBQTtFQ3pCZDtFRDRCVTtJQUNJLDBCQUFBO0lBQ0Esa0JBQUE7RUMxQmQ7QUFDRjtBRCtCQTtFQUNJLHlCRWpMVTtFRmtMVixxQkVsTFU7QURzSmQ7QUQrQkE7RUFDSSxVQUFBO0VBQ0Esa0JBQUE7RUFDQSxXQUFBO0VBQ0EsU0FBQTtBQzVCSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2JpZW52ZW5pZGEvYmllbnZlbmlkYS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzXCI7XG5cbkBtaXhpbiBidXR0b24oJGJjb2xvcixcbiR1cmwsXG4keDEsXG4keTEsXG4kYm9yLFxuJGNvbCkge1xuIGJhY2tncm91bmQ6ICRiY29sb3I7XG4gLXdlYmtpdC1tYXNrOiB1cmwoJHVybCk7XG4gbWFzazogdXJsKCR1cmwpO1xuIC13ZWJraXQtbWFzay1zaXplOiAkeDEgJHkxO1xuIG1hc2stc2l6ZTogJHgxICR5MTtcbiBib3JkZXI6ICRib3I7XG4gY29sb3I6ICRjb2w7XG59XG5cbi5jb250YWluZXItZmx1aWR7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIHBhZGRpbmc6IDMwcHg7XG4gICAgQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgfSAgICBcbiAgICBcblxuICAgIC5wcmluY2lwYWx7XG4gICAgICAgIC5kZXNjcmlwY2lvbntcbiAgICAgICAgICAgIC8qIFNtYWxsIGRldmljZXMgKGxhbmRzY2FwZSBwaG9uZXMsIDU0NHB4IGFuZCB1cCkgKi9cbiAgICAgICAgICAgIEBtZWRpYSAobWluLXdpZHRoOiA1NDRweCkgeyAgXG4gICAgICAgICAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICAvKiBNZWRpdW0gZGV2aWNlcyAodGFibGV0cywgNzY4cHggYW5kIHVwKSAqL1xuICAgICAgICAgICAgQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7ICBcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDEycHg7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIC8qIExhcmdlIGRldmljZXMgKGRlc2t0b3BzLCA5OTJweCBhbmQgdXApICovXG4gICAgICAgICAgICBAbWVkaWEgKG1pbi13aWR0aDogOTkycHgpIHsgXG4gICAgICAgICAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICAvKiBFeHRyYSBsYXJnZSBkZXZpY2VzIChsYXJnZSBkZXNrdG9wcywgMTIwMHB4IGFuZCB1cCkgKi9cbiAgICAgICAgICAgIEBtZWRpYSAobWluLXdpZHRoOiAxMjAwcHgpIHsgIFxuICAgICAgICAgICAgICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgLyogRXh0cmEgbGFyZ2UgZGV2aWNlcyAobGFyZ2UgZGVza3RvcHMsIDEyMDBweCBhbmQgdXApICovXG4gICAgICAgICAgICBAbWVkaWEgKG1pbi13aWR0aDogMTgwMHB4KSB7ICBcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDE4cHg7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIGJvcmRlcjogMnB4IHNvbGlkICRjb2xvcjA2O1xuICAgICAgICAgICAgcGFkZGluZzogMzBweDtcbiAgICAgICAgICAgIGNvbG9yOiAjRmZmO1xuICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdMYXRvJywgc2Fucy1zZXJpZjtcbiAgICAgICAgICAgIGgxe1xuICAgICAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAkZm9udC1mYW1pbHk7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIGgze1xuICAgICAgICAgICAgICAgIG1hcmdpbi10b3A6IDIwcHg7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIHB7XG4gICAgICAgICAgICAgICAgbWFyZ2luLXRvcDogNXB4O1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG5cbiAgICAgICAgLmNvbnRlbmVkb3ItYm90b24ge1xuICAgICAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgICAgICAgd2lkdGg6IDEwMHB4O1xuICAgICAgICAgICAgaGVpZ2h0OiA1MHB4O1xuICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gICAgICAgICAgICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gICAgICAgICAgICBtYXJnaW4tdG9wOiAzdmg7XG4gICAgICAgICAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgICAgICAgICAgYm9yZGVyOiAycHggc29saWQgJGNvbG9yMDI7XG4gICAgICAgICAgICBmb250LWZhbWlseTogJ0xhdG8nLCBzYW5zLXNlcmlmO1xuICAgICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgICAgICB0cmFuc2l0aW9uOiAwLjVzO1xuICAgICAgICAgICAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgICAgICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgICAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjokY29sb3IwNDtcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgYnV0dG9uIHtcbiAgICAgICAgICAgICAgICB3aWR0aDogMTAxJTtcbiAgICAgICAgICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdMYXRvJywgc2Fucy1zZXJpZjtcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgICAgICAgICAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgICAgICAgICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBAaW5jbHVkZSBidXR0b24oJGNvbG9yMDIsXG4gICAgICAgICAgICAgICAgXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vcm9iaW4tZGVsYS9jc3MtbWFzay1hbmltYXRpb24vbWFzdGVyL2ltZy9uYXR1cmUtc3ByaXRlLnBuZ1wiLFxuICAgICAgICAgICAgICAgIDMwMDAlLFxuICAgICAgICAgICAgICAgIDEwMCUsXG4gICAgICAgICAgICAgICAgbm9uZSxcbiAgICAgICAgICAgICAgICAjZmZmKTtcbiAgICAgICAgICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgICAgICAgICAgLXdlYmtpdC1hbmltYXRpb246IGFuaTIgMC44cyBzdGVwcygyOSkgZm9yd2FyZHM7XG4gICAgICAgICAgICAgICAgYW5pbWF0aW9uOiBhbmkyIDAuOHMgc3RlcHMoMjkpIGZvcndhcmRzO1xuICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgICAgICAgLXdlYmtpdC1hbmltYXRpb246IGFuaSAwLjhzIHN0ZXBzKDI5KSBmb3J3YXJkcztcbiAgICAgICAgICAgICAgICBhbmltYXRpb246IGFuaSAwLjhzIHN0ZXBzKDI5KSBmb3J3YXJkcztcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICB9ICAgICAgICAgICBcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgXG4gICAgICAgICAgICAubWFzIHtcbiAgICAgICAgICAgICAgICB3aWR0aDogMTAxJTtcbiAgICAgICAgICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgICAgICAgICAgY29sb3I6ICRjb2xvcjAyO1xuICAgICAgICAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgICAgICAgICAgICB3aWR0aDogMTAxJTtcbiAgICAgICAgICAgICAgICBmb250LWZhbWlseTogJ0xhdG8nLCBzYW5zLXNlcmlmO1xuICAgICAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgICAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgICAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICAgICAgICAgICAgICBtYXJnaW4tdG9wOiA5cHg7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIEAtd2Via2l0LWtleWZyYW1lcyBhbmkge1xuICAgICAgICAgICAgZnJvbSB7XG4gICAgICAgICAgICAgICAgLXdlYmtpdC1tYXNrLXBvc2l0aW9uOiAwIDA7XG4gICAgICAgICAgICAgICAgbWFzay1wb3NpdGlvbjogMCAwO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgICAgICB0byB7XG4gICAgICAgICAgICAgICAgLXdlYmtpdC1tYXNrLXBvc2l0aW9uOiAxMDAlIDA7XG4gICAgICAgICAgICAgICAgbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgICAgICBAa2V5ZnJhbWVzIGFuaSB7XG4gICAgICAgICAgICBmcm9tIHtcbiAgICAgICAgICAgICAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDAgMDtcbiAgICAgICAgICAgICAgICBtYXNrLXBvc2l0aW9uOiAwIDA7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIHRvIHtcbiAgICAgICAgICAgICAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgICAgICAgICAgICAgICBtYXNrLXBvc2l0aW9uOiAxMDAlIDA7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIEAtd2Via2l0LWtleWZyYW1lcyBhbmkyIHtcbiAgICAgICAgICAgIGZyb20ge1xuICAgICAgICAgICAgICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgICAgICAgICAgICAgIG1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgdG8ge1xuICAgICAgICAgICAgICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMCAwO1xuICAgICAgICAgICAgICAgIG1hc2stcG9zaXRpb246IDAgMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgQGtleWZyYW1lcyBhbmkyIHtcbiAgICAgICAgICAgIGZyb20ge1xuICAgICAgICAgICAgICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgICAgICAgICAgICAgIG1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgdG8ge1xuICAgICAgICAgICAgICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMCAwO1xuICAgICAgICAgICAgICAgIG1hc2stcG9zaXRpb246IDAgMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cbiAgICB9XG59XG5cbi5idG4tcHJpbWFyeXtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwMjtcbiAgICBib3JkZXItY29sb3I6ICRjb2xvcjAyO1xufVxuXG4uYWxlcnR7XG4gICAgd2lkdGg6IDUwJTtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgYm90dG9tOiAyMCU7XG4gICAgbGVmdDogMjUlO1xufSIsIi5jb250YWluZXItZmx1aWQge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBwYWRkaW5nOiAzMHB4O1xufVxuQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7XG4gIC5jb250YWluZXItZmx1aWQge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgfVxufVxuLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5kZXNjcmlwY2lvbiB7XG4gIC8qIFNtYWxsIGRldmljZXMgKGxhbmRzY2FwZSBwaG9uZXMsIDU0NHB4IGFuZCB1cCkgKi9cbiAgLyogTWVkaXVtIGRldmljZXMgKHRhYmxldHMsIDc2OHB4IGFuZCB1cCkgKi9cbiAgLyogTGFyZ2UgZGV2aWNlcyAoZGVza3RvcHMsIDk5MnB4IGFuZCB1cCkgKi9cbiAgLyogRXh0cmEgbGFyZ2UgZGV2aWNlcyAobGFyZ2UgZGVza3RvcHMsIDEyMDBweCBhbmQgdXApICovXG4gIC8qIEV4dHJhIGxhcmdlIGRldmljZXMgKGxhcmdlIGRlc2t0b3BzLCAxMjAwcHggYW5kIHVwKSAqL1xuICBib3JkZXI6IDJweCBzb2xpZCBibGFjaztcbiAgcGFkZGluZzogMzBweDtcbiAgY29sb3I6ICNGZmY7XG4gIGZvbnQtZmFtaWx5OiBcIkxhdG9cIiwgc2Fucy1zZXJpZjtcbn1cbkBtZWRpYSAobWluLXdpZHRoOiA1NDRweCkge1xuICAuY29udGFpbmVyLWZsdWlkIC5wcmluY2lwYWwgLmRlc2NyaXBjaW9uIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gIH1cbn1cbkBtZWRpYSAobWluLXdpZHRoOiA3NjhweCkge1xuICAuY29udGFpbmVyLWZsdWlkIC5wcmluY2lwYWwgLmRlc2NyaXBjaW9uIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gIH1cbn1cbkBtZWRpYSAobWluLXdpZHRoOiA5OTJweCkge1xuICAuY29udGFpbmVyLWZsdWlkIC5wcmluY2lwYWwgLmRlc2NyaXBjaW9uIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gIH1cbn1cbkBtZWRpYSAobWluLXdpZHRoOiAxMjAwcHgpIHtcbiAgLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5kZXNjcmlwY2lvbiB7XG4gICAgZm9udC1zaXplOiAxMnB4O1xuICB9XG59XG5AbWVkaWEgKG1pbi13aWR0aDogMTgwMHB4KSB7XG4gIC5jb250YWluZXItZmx1aWQgLnByaW5jaXBhbCAuZGVzY3JpcGNpb24ge1xuICAgIGZvbnQtc2l6ZTogMThweDtcbiAgfVxufVxuLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5kZXNjcmlwY2lvbiBoMSB7XG4gIGZvbnQtZmFtaWx5OiBcIlpDT09MIFhpYW9XZWlcIiwgc2VyaWY7XG59XG4uY29udGFpbmVyLWZsdWlkIC5wcmluY2lwYWwgLmRlc2NyaXBjaW9uIGgzIHtcbiAgbWFyZ2luLXRvcDogMjBweDtcbn1cbi5jb250YWluZXItZmx1aWQgLnByaW5jaXBhbCAuZGVzY3JpcGNpb24gcCB7XG4gIG1hcmdpbi10b3A6IDVweDtcbn1cbi5jb250YWluZXItZmx1aWQgLnByaW5jaXBhbCAuY29udGVuZWRvci1ib3RvbiB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgd2lkdGg6IDEwMHB4O1xuICBoZWlnaHQ6IDUwcHg7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1hcmdpbi10b3A6IDN2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgYm9yZGVyOiAycHggc29saWQgIzFBMjM3RTtcbiAgZm9udC1mYW1pbHk6IFwiTGF0b1wiLCBzYW5zLXNlcmlmO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgdHJhbnNpdGlvbjogMC41cztcbiAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgcGFkZGluZzogMDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzZDNUI3Qjtcbn1cbi5jb250YWluZXItZmx1aWQgLnByaW5jaXBhbCAuY29udGVuZWRvci1ib3RvbiBidXR0b24ge1xuICB3aWR0aDogMTAxJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBmb250LWZhbWlseTogXCJMYXRvXCIsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogMjBweDtcbiAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBiYWNrZ3JvdW5kOiAjMUEyMzdFO1xuICAtd2Via2l0LW1hc2s6IHVybChcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9yb2Jpbi1kZWxhL2Nzcy1tYXNrLWFuaW1hdGlvbi9tYXN0ZXIvaW1nL25hdHVyZS1zcHJpdGUucG5nXCIpO1xuICBtYXNrOiB1cmwoXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vcm9iaW4tZGVsYS9jc3MtbWFzay1hbmltYXRpb24vbWFzdGVyL2ltZy9uYXR1cmUtc3ByaXRlLnBuZ1wiKTtcbiAgLXdlYmtpdC1tYXNrLXNpemU6IDMwMDAlIDEwMCU7XG4gIG1hc2stc2l6ZTogMzAwMCUgMTAwJTtcbiAgYm9yZGVyOiBub25lO1xuICBjb2xvcjogI2ZmZjtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICAtd2Via2l0LWFuaW1hdGlvbjogYW5pMiAwLjhzIHN0ZXBzKDI5KSBmb3J3YXJkcztcbiAgYW5pbWF0aW9uOiBhbmkyIDAuOHMgc3RlcHMoMjkpIGZvcndhcmRzO1xufVxuLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5jb250ZW5lZG9yLWJvdG9uIGJ1dHRvbjpob3ZlciB7XG4gIC13ZWJraXQtYW5pbWF0aW9uOiBhbmkgMC44cyBzdGVwcygyOSkgZm9yd2FyZHM7XG4gIGFuaW1hdGlvbjogYW5pIDAuOHMgc3RlcHMoMjkpIGZvcndhcmRzO1xufVxuLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5tYXMge1xuICB3aWR0aDogMTAxJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBjb2xvcjogIzFBMjM3RTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB3aWR0aDogMTAxJTtcbiAgZm9udC1mYW1pbHk6IFwiTGF0b1wiLCBzYW5zLXNlcmlmO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBmb250LXNpemU6IDIwcHg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIG1hcmdpbi10b3A6IDlweDtcbn1cbkAtd2Via2l0LWtleWZyYW1lcyBhbmkge1xuICBmcm9tIHtcbiAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDAgMDtcbiAgICBtYXNrLXBvc2l0aW9uOiAwIDA7XG4gIH1cbiAgdG8ge1xuICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgIG1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgfVxufVxuQGtleWZyYW1lcyBhbmkge1xuICBmcm9tIHtcbiAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDAgMDtcbiAgICBtYXNrLXBvc2l0aW9uOiAwIDA7XG4gIH1cbiAgdG8ge1xuICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgIG1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgfVxufVxuQC13ZWJraXQta2V5ZnJhbWVzIGFuaTIge1xuICBmcm9tIHtcbiAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgICBtYXNrLXBvc2l0aW9uOiAxMDAlIDA7XG4gIH1cbiAgdG8ge1xuICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMCAwO1xuICAgIG1hc2stcG9zaXRpb246IDAgMDtcbiAgfVxufVxuQGtleWZyYW1lcyBhbmkyIHtcbiAgZnJvbSB7XG4gICAgLXdlYmtpdC1tYXNrLXBvc2l0aW9uOiAxMDAlIDA7XG4gICAgbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICB9XG4gIHRvIHtcbiAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDAgMDtcbiAgICBtYXNrLXBvc2l0aW9uOiAwIDA7XG4gIH1cbn1cblxuLmJ0bi1wcmltYXJ5IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzFBMjM3RTtcbiAgYm9yZGVyLWNvbG9yOiAjMUEyMzdFO1xufVxuXG4uYWxlcnQge1xuICB3aWR0aDogNTAlO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogMjAlO1xuICBsZWZ0OiAyNSU7XG59IiwiLy8gQ29sb3JlcyAtLS0tLS0tLS0tLS0tXG4gICAgJGNvbG9yMDE6ICMyODM1OTM7XG4gICAgJGNvbG9yMDI6ICMxQTIzN0U7XG4gICAgJGNvbG9yMDM6ICNDNUNBRTk7XG4gICAgJGNvbG9yMDQ6ICM2QzVCN0I7XG4gICAgJGNvbG9yMDU6ICMzNTVDN0Q7XG4gICAgJGNvbG9yMDY6IGJsYWNrO1xuICAgICRjb2xvcjA3OiAjMDEzOTY0O1xuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gXG4kZm9udC1mYW1pbHk6ICdaQ09PTCBYaWFvV2VpJywgc2VyaWY7XG5cbkBtaXhpbiBBcGxpY2FyRm9uZG9BenVsKCl7ICAgICBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwNTtcbiAgICAvL2JhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL3NvZnQtd2FsbHBhcGVyLnBuZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDEzOTY0O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL2N1YmVzLnBuZ1wiKTtcbi8qIFRoaXMgaXMgbW9zdGx5IGludGVuZGVkIGZvciBwcm90b3R5cGluZzsgcGxlYXNlIGRvd25sb2FkIHRoZSBwYXR0ZXJuIGFuZCByZS1ob3N0IGZvciBwcm9kdWN0aW9uIGVudmlyb25tZW50cy4gVGhhbmsgeW91ISAqLyAgXG59XG4gICJdfQ== */");
+            /* harmony default export */ __webpack_exports__["default"] = (".container-fluid {\n  width: 100%;\n  height: 100%;\n  padding: 30px;\n}\n@media (min-width: 768px) {\n  .container-fluid {\n    display: flex;\n    align-items: center;\n  }\n}\n.container-fluid .principal .descripcion {\n  /* Small devices (landscape phones, 544px and up) */\n  /* Medium devices (tablets, 768px and up) */\n  /* Large devices (desktops, 992px and up) */\n  /* Extra large devices (large desktops, 1200px and up) */\n  /* Extra large devices (large desktops, 1200px and up) */\n  border: 2px solid black;\n  padding: 30px;\n  color: #Fff;\n  font-family: \"Lato\", sans-serif;\n}\n@media (min-width: 544px) {\n  .container-fluid .principal .descripcion {\n    font-size: 12px;\n  }\n}\n@media (min-width: 768px) {\n  .container-fluid .principal .descripcion {\n    font-size: 12px;\n  }\n}\n@media (min-width: 992px) {\n  .container-fluid .principal .descripcion {\n    font-size: 12px;\n  }\n}\n@media (min-width: 1200px) {\n  .container-fluid .principal .descripcion {\n    font-size: 12px;\n  }\n}\n@media (min-width: 1800px) {\n  .container-fluid .principal .descripcion {\n    font-size: 18px;\n  }\n}\n.container-fluid .principal .descripcion h1 {\n  font-family: \"ZCOOL XiaoWei\", serif;\n}\n.container-fluid .principal .descripcion h3 {\n  margin-top: 20px;\n}\n.container-fluid .principal .descripcion p {\n  margin-top: 5px;\n}\n.container-fluid .principal .contenedor-boton {\n  position: relative;\n  width: 100px;\n  height: 50px;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 3vh;\n  overflow: hidden;\n  border: 2px solid #1A237E;\n  font-family: \"Lato\", sans-serif;\n  font-weight: bold;\n  transition: 0.5s;\n  letter-spacing: 1px;\n  padding: 0;\n  box-sizing: border-box;\n  background-color: #6C5B7B;\n}\n.container-fluid .principal .contenedor-boton button {\n  width: 101%;\n  height: 100%;\n  font-family: \"Lato\", sans-serif;\n  font-size: 20px;\n  letter-spacing: 1px;\n  text-align: center;\n  background: #1A237E;\n  -webkit-mask: url(\"https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png\");\n  mask: url(\"https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png\");\n  -webkit-mask-size: 3000% 100%;\n  mask-size: 3000% 100%;\n  border: none;\n  color: #fff;\n  cursor: pointer;\n  -webkit-animation: ani2 0.8s steps(29) forwards;\n  animation: ani2 0.8s steps(29) forwards;\n}\n.container-fluid .principal .contenedor-boton button:hover {\n  -webkit-animation: ani 0.8s steps(29) forwards;\n  animation: ani 0.8s steps(29) forwards;\n}\n.container-fluid .principal .mas {\n  width: 101%;\n  height: 100%;\n  color: #1A237E;\n  text-align: center;\n  width: 101%;\n  font-family: \"Lato\", sans-serif;\n  font-weight: bold;\n  position: absolute;\n  font-size: 20px;\n  overflow: hidden;\n  margin-top: 9px;\n}\n@-webkit-keyframes ani {\n  from {\n    -webkit-mask-position: 0 0;\n    mask-position: 0 0;\n  }\n  to {\n    -webkit-mask-position: 100% 0;\n    mask-position: 100% 0;\n  }\n}\n@keyframes ani {\n  from {\n    -webkit-mask-position: 0 0;\n    mask-position: 0 0;\n  }\n  to {\n    -webkit-mask-position: 100% 0;\n    mask-position: 100% 0;\n  }\n}\n@-webkit-keyframes ani2 {\n  from {\n    -webkit-mask-position: 100% 0;\n    mask-position: 100% 0;\n  }\n  to {\n    -webkit-mask-position: 0 0;\n    mask-position: 0 0;\n  }\n}\n@keyframes ani2 {\n  from {\n    -webkit-mask-position: 100% 0;\n    mask-position: 100% 0;\n  }\n  to {\n    -webkit-mask-position: 0 0;\n    mask-position: 0 0;\n  }\n}\n.btn-primary {\n  background-color: #1A237E;\n  border-color: #1A237E;\n}\n.alert {\n  width: 50%;\n  position: absolute;\n  bottom: 20%;\n  left: 25%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvYmllbnZlbmlkYS9iaWVudmVuaWRhLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRlcy9iaWVudmVuaWRhL2JpZW52ZW5pZGEuY29tcG9uZW50LnNjc3MiLCIvaG9tZS9hcmllbC9MYWJvcmF0b3JpbyA0L0NvbWFuZGFXZWItbGFiNC9zcmMvYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFpQkE7RUFDSSxXQUFBO0VBQ0EsWUFBQTtFQUNBLGFBQUE7QUNoQko7QURpQkk7RUFKSjtJQUtRLGFBQUE7SUFDQSxtQkFBQTtFQ2ROO0FBQ0Y7QURrQlE7RUFDSSxtREFBQTtFQUtBLDJDQUFBO0VBS0EsMkNBQUE7RUFLQSx3REFBQTtFQUtBLHdEQUFBO0VBS0EsdUJBQUE7RUFDQSxhQUFBO0VBQ0EsV0FBQTtFQUNBLCtCQUFBO0FDcENaO0FEU1k7RUFGSjtJQUdRLGVBQUE7RUNOZDtBQUNGO0FEU1k7RUFQSjtJQVFRLGVBQUE7RUNOZDtBQUNGO0FEU1k7RUFaSjtJQWFRLGVBQUE7RUNOZDtBQUNGO0FEU1k7RUFqQko7SUFrQlEsZUFBQTtFQ05kO0FBQ0Y7QURTWTtFQXRCSjtJQXVCUSxlQUFBO0VDTmQ7QUFDRjtBRFlZO0VBQ0ksbUNFakRGO0FEdUNkO0FEYVk7RUFDSSxnQkFBQTtBQ1hoQjtBRGNZO0VBQ0ksZUFBQTtBQ1poQjtBRGdCUTtFQUNJLGtCQUFBO0VBQ0EsWUFBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLGdCQUFBO0VBQ0EseUJBQUE7RUFDQSwrQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxtQkFBQTtFQUNBLFVBQUE7RUFDQSxzQkFBQTtFQUNBLHlCRWxGRTtBRG9FZDtBRGdCWTtFQUNJLFdBQUE7RUFDQSxZQUFBO0VBQ0EsK0JBQUE7RUFDQSxlQUFBO0VBQ0EsbUJBQUE7RUFDQSxrQkFBQTtFQXRGZixtQkVOYTtFRk9iLGlIQUFBO0VBQ0EseUdBQUE7RUFDQSw2QkFBQTtFQUNBLHFCQUFBO0VBQ0EsWUF1RmU7RUF0RmYsV0F1RmU7RUFDQSxlQUFBO0VBQ0EsK0NBQUE7RUFDQSx1Q0FBQTtBQ2RoQjtBRGdCZ0I7RUFDQSw4Q0FBQTtFQUNBLHNDQUFBO0FDZGhCO0FEb0JZO0VBQ0ksV0FBQTtFQUNBLFlBQUE7RUFDQSxjRW5IRjtFRm9IRSxrQkFBQTtFQUNBLFdBQUE7RUFDQSwrQkFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxlQUFBO0FDbEJoQjtBRHFCWTtFQUNBO0lBQ0ksMEJBQUE7SUFDQSxrQkFBQTtFQ25CZDtFRHNCVTtJQUNJLDZCQUFBO0lBQ0EscUJBQUE7RUNwQmQ7QUFDRjtBRHVCWTtFQUNBO0lBQ0ksMEJBQUE7SUFDQSxrQkFBQTtFQ3JCZDtFRHdCVTtJQUNJLDZCQUFBO0lBQ0EscUJBQUE7RUN0QmQ7QUFDRjtBRHlCWTtFQUNBO0lBQ0ksNkJBQUE7SUFDQSxxQkFBQTtFQ3ZCZDtFRDBCVTtJQUNJLDBCQUFBO0lBQ0Esa0JBQUE7RUN4QmQ7QUFDRjtBRDJCWTtFQUNBO0lBQ0ksNkJBQUE7SUFDQSxxQkFBQTtFQ3pCZDtFRDRCVTtJQUNJLDBCQUFBO0lBQ0Esa0JBQUE7RUMxQmQ7QUFDRjtBRCtCQTtFQUNJLHlCRWpMVTtFRmtMVixxQkVsTFU7QURzSmQ7QUQrQkE7RUFDSSxVQUFBO0VBQ0Esa0JBQUE7RUFDQSxXQUFBO0VBQ0EsU0FBQTtBQzVCSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2JpZW52ZW5pZGEvYmllbnZlbmlkYS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzXCI7XG5cbkBtaXhpbiBidXR0b24oJGJjb2xvcixcbiR1cmwsXG4keDEsXG4keTEsXG4kYm9yLFxuJGNvbCkge1xuIGJhY2tncm91bmQ6ICRiY29sb3I7XG4gLXdlYmtpdC1tYXNrOiB1cmwoJHVybCk7XG4gbWFzazogdXJsKCR1cmwpO1xuIC13ZWJraXQtbWFzay1zaXplOiAkeDEgJHkxO1xuIG1hc2stc2l6ZTogJHgxICR5MTtcbiBib3JkZXI6ICRib3I7XG4gY29sb3I6ICRjb2w7XG59XG5cbi5jb250YWluZXItZmx1aWR7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIHBhZGRpbmc6IDMwcHg7XG4gICAgQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgfSAgICBcbiAgICBcblxuICAgIC5wcmluY2lwYWx7XG4gICAgICAgIC5kZXNjcmlwY2lvbntcbiAgICAgICAgICAgIC8qIFNtYWxsIGRldmljZXMgKGxhbmRzY2FwZSBwaG9uZXMsIDU0NHB4IGFuZCB1cCkgKi9cbiAgICAgICAgICAgIEBtZWRpYSAobWluLXdpZHRoOiA1NDRweCkgeyAgXG4gICAgICAgICAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICAvKiBNZWRpdW0gZGV2aWNlcyAodGFibGV0cywgNzY4cHggYW5kIHVwKSAqL1xuICAgICAgICAgICAgQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7ICBcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDEycHg7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIC8qIExhcmdlIGRldmljZXMgKGRlc2t0b3BzLCA5OTJweCBhbmQgdXApICovXG4gICAgICAgICAgICBAbWVkaWEgKG1pbi13aWR0aDogOTkycHgpIHsgXG4gICAgICAgICAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICAvKiBFeHRyYSBsYXJnZSBkZXZpY2VzIChsYXJnZSBkZXNrdG9wcywgMTIwMHB4IGFuZCB1cCkgKi9cbiAgICAgICAgICAgIEBtZWRpYSAobWluLXdpZHRoOiAxMjAwcHgpIHsgIFxuICAgICAgICAgICAgICAgIGZvbnQtc2l6ZTogMTJweDtcbiAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgLyogRXh0cmEgbGFyZ2UgZGV2aWNlcyAobGFyZ2UgZGVza3RvcHMsIDEyMDBweCBhbmQgdXApICovXG4gICAgICAgICAgICBAbWVkaWEgKG1pbi13aWR0aDogMTgwMHB4KSB7ICBcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDE4cHg7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIGJvcmRlcjogMnB4IHNvbGlkICRjb2xvcjA2O1xuICAgICAgICAgICAgcGFkZGluZzogMzBweDtcbiAgICAgICAgICAgIGNvbG9yOiAjRmZmO1xuICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdMYXRvJywgc2Fucy1zZXJpZjtcbiAgICAgICAgICAgIGgxe1xuICAgICAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAkZm9udC1mYW1pbHk7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIGgze1xuICAgICAgICAgICAgICAgIG1hcmdpbi10b3A6IDIwcHg7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIHB7XG4gICAgICAgICAgICAgICAgbWFyZ2luLXRvcDogNXB4O1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG5cbiAgICAgICAgLmNvbnRlbmVkb3ItYm90b24ge1xuICAgICAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgICAgICAgd2lkdGg6IDEwMHB4O1xuICAgICAgICAgICAgaGVpZ2h0OiA1MHB4O1xuICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IGF1dG87XG4gICAgICAgICAgICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gICAgICAgICAgICBtYXJnaW4tdG9wOiAzdmg7XG4gICAgICAgICAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgICAgICAgICAgYm9yZGVyOiAycHggc29saWQgJGNvbG9yMDI7XG4gICAgICAgICAgICBmb250LWZhbWlseTogJ0xhdG8nLCBzYW5zLXNlcmlmO1xuICAgICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgICAgICB0cmFuc2l0aW9uOiAwLjVzO1xuICAgICAgICAgICAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgICAgICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgICAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjokY29sb3IwNDtcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgYnV0dG9uIHtcbiAgICAgICAgICAgICAgICB3aWR0aDogMTAxJTtcbiAgICAgICAgICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdMYXRvJywgc2Fucy1zZXJpZjtcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgICAgICAgICAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgICAgICAgICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgICAgICAgICBcbiAgICAgICAgICAgICAgICBAaW5jbHVkZSBidXR0b24oJGNvbG9yMDIsXG4gICAgICAgICAgICAgICAgXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vcm9iaW4tZGVsYS9jc3MtbWFzay1hbmltYXRpb24vbWFzdGVyL2ltZy9uYXR1cmUtc3ByaXRlLnBuZ1wiLFxuICAgICAgICAgICAgICAgIDMwMDAlLFxuICAgICAgICAgICAgICAgIDEwMCUsXG4gICAgICAgICAgICAgICAgbm9uZSxcbiAgICAgICAgICAgICAgICAjZmZmKTtcbiAgICAgICAgICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgICAgICAgICAgLXdlYmtpdC1hbmltYXRpb246IGFuaTIgMC44cyBzdGVwcygyOSkgZm9yd2FyZHM7XG4gICAgICAgICAgICAgICAgYW5pbWF0aW9uOiBhbmkyIDAuOHMgc3RlcHMoMjkpIGZvcndhcmRzO1xuICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgICAgICAgLXdlYmtpdC1hbmltYXRpb246IGFuaSAwLjhzIHN0ZXBzKDI5KSBmb3J3YXJkcztcbiAgICAgICAgICAgICAgICBhbmltYXRpb246IGFuaSAwLjhzIHN0ZXBzKDI5KSBmb3J3YXJkcztcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICB9ICAgICAgICAgICBcbiAgICAgICAgICAgIFxuICAgICAgICAgICAgXG4gICAgICAgICAgICAubWFzIHtcbiAgICAgICAgICAgICAgICB3aWR0aDogMTAxJTtcbiAgICAgICAgICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgICAgICAgICAgY29sb3I6ICRjb2xvcjAyO1xuICAgICAgICAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgICAgICAgICAgICB3aWR0aDogMTAxJTtcbiAgICAgICAgICAgICAgICBmb250LWZhbWlseTogJ0xhdG8nLCBzYW5zLXNlcmlmO1xuICAgICAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgICAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgICAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICAgICAgICAgICAgICBtYXJnaW4tdG9wOiA5cHg7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIEAtd2Via2l0LWtleWZyYW1lcyBhbmkge1xuICAgICAgICAgICAgZnJvbSB7XG4gICAgICAgICAgICAgICAgLXdlYmtpdC1tYXNrLXBvc2l0aW9uOiAwIDA7XG4gICAgICAgICAgICAgICAgbWFzay1wb3NpdGlvbjogMCAwO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgICAgICB0byB7XG4gICAgICAgICAgICAgICAgLXdlYmtpdC1tYXNrLXBvc2l0aW9uOiAxMDAlIDA7XG4gICAgICAgICAgICAgICAgbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgICAgICBAa2V5ZnJhbWVzIGFuaSB7XG4gICAgICAgICAgICBmcm9tIHtcbiAgICAgICAgICAgICAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDAgMDtcbiAgICAgICAgICAgICAgICBtYXNrLXBvc2l0aW9uOiAwIDA7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIHRvIHtcbiAgICAgICAgICAgICAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgICAgICAgICAgICAgICBtYXNrLXBvc2l0aW9uOiAxMDAlIDA7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgICAgIEAtd2Via2l0LWtleWZyYW1lcyBhbmkyIHtcbiAgICAgICAgICAgIGZyb20ge1xuICAgICAgICAgICAgICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgICAgICAgICAgICAgIG1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgdG8ge1xuICAgICAgICAgICAgICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMCAwO1xuICAgICAgICAgICAgICAgIG1hc2stcG9zaXRpb246IDAgMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgQGtleWZyYW1lcyBhbmkyIHtcbiAgICAgICAgICAgIGZyb20ge1xuICAgICAgICAgICAgICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgICAgICAgICAgICAgIG1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgdG8ge1xuICAgICAgICAgICAgICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMCAwO1xuICAgICAgICAgICAgICAgIG1hc2stcG9zaXRpb246IDAgMDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH1cbiAgICB9XG59XG5cbi5idG4tcHJpbWFyeXtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwMjtcbiAgICBib3JkZXItY29sb3I6ICRjb2xvcjAyO1xufVxuXG4uYWxlcnR7XG4gICAgd2lkdGg6IDUwJTtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgYm90dG9tOiAyMCU7XG4gICAgbGVmdDogMjUlO1xufSIsIi5jb250YWluZXItZmx1aWQge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBwYWRkaW5nOiAzMHB4O1xufVxuQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7XG4gIC5jb250YWluZXItZmx1aWQge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgfVxufVxuLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5kZXNjcmlwY2lvbiB7XG4gIC8qIFNtYWxsIGRldmljZXMgKGxhbmRzY2FwZSBwaG9uZXMsIDU0NHB4IGFuZCB1cCkgKi9cbiAgLyogTWVkaXVtIGRldmljZXMgKHRhYmxldHMsIDc2OHB4IGFuZCB1cCkgKi9cbiAgLyogTGFyZ2UgZGV2aWNlcyAoZGVza3RvcHMsIDk5MnB4IGFuZCB1cCkgKi9cbiAgLyogRXh0cmEgbGFyZ2UgZGV2aWNlcyAobGFyZ2UgZGVza3RvcHMsIDEyMDBweCBhbmQgdXApICovXG4gIC8qIEV4dHJhIGxhcmdlIGRldmljZXMgKGxhcmdlIGRlc2t0b3BzLCAxMjAwcHggYW5kIHVwKSAqL1xuICBib3JkZXI6IDJweCBzb2xpZCBibGFjaztcbiAgcGFkZGluZzogMzBweDtcbiAgY29sb3I6ICNGZmY7XG4gIGZvbnQtZmFtaWx5OiBcIkxhdG9cIiwgc2Fucy1zZXJpZjtcbn1cbkBtZWRpYSAobWluLXdpZHRoOiA1NDRweCkge1xuICAuY29udGFpbmVyLWZsdWlkIC5wcmluY2lwYWwgLmRlc2NyaXBjaW9uIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gIH1cbn1cbkBtZWRpYSAobWluLXdpZHRoOiA3NjhweCkge1xuICAuY29udGFpbmVyLWZsdWlkIC5wcmluY2lwYWwgLmRlc2NyaXBjaW9uIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gIH1cbn1cbkBtZWRpYSAobWluLXdpZHRoOiA5OTJweCkge1xuICAuY29udGFpbmVyLWZsdWlkIC5wcmluY2lwYWwgLmRlc2NyaXBjaW9uIHtcbiAgICBmb250LXNpemU6IDEycHg7XG4gIH1cbn1cbkBtZWRpYSAobWluLXdpZHRoOiAxMjAwcHgpIHtcbiAgLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5kZXNjcmlwY2lvbiB7XG4gICAgZm9udC1zaXplOiAxMnB4O1xuICB9XG59XG5AbWVkaWEgKG1pbi13aWR0aDogMTgwMHB4KSB7XG4gIC5jb250YWluZXItZmx1aWQgLnByaW5jaXBhbCAuZGVzY3JpcGNpb24ge1xuICAgIGZvbnQtc2l6ZTogMThweDtcbiAgfVxufVxuLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5kZXNjcmlwY2lvbiBoMSB7XG4gIGZvbnQtZmFtaWx5OiBcIlpDT09MIFhpYW9XZWlcIiwgc2VyaWY7XG59XG4uY29udGFpbmVyLWZsdWlkIC5wcmluY2lwYWwgLmRlc2NyaXBjaW9uIGgzIHtcbiAgbWFyZ2luLXRvcDogMjBweDtcbn1cbi5jb250YWluZXItZmx1aWQgLnByaW5jaXBhbCAuZGVzY3JpcGNpb24gcCB7XG4gIG1hcmdpbi10b3A6IDVweDtcbn1cbi5jb250YWluZXItZmx1aWQgLnByaW5jaXBhbCAuY29udGVuZWRvci1ib3RvbiB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgd2lkdGg6IDEwMHB4O1xuICBoZWlnaHQ6IDUwcHg7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1hcmdpbi10b3A6IDN2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgYm9yZGVyOiAycHggc29saWQgIzFBMjM3RTtcbiAgZm9udC1mYW1pbHk6IFwiTGF0b1wiLCBzYW5zLXNlcmlmO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgdHJhbnNpdGlvbjogMC41cztcbiAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgcGFkZGluZzogMDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzZDNUI3Qjtcbn1cbi5jb250YWluZXItZmx1aWQgLnByaW5jaXBhbCAuY29udGVuZWRvci1ib3RvbiBidXR0b24ge1xuICB3aWR0aDogMTAxJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBmb250LWZhbWlseTogXCJMYXRvXCIsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogMjBweDtcbiAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBiYWNrZ3JvdW5kOiAjMUEyMzdFO1xuICAtd2Via2l0LW1hc2s6IHVybChcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9yb2Jpbi1kZWxhL2Nzcy1tYXNrLWFuaW1hdGlvbi9tYXN0ZXIvaW1nL25hdHVyZS1zcHJpdGUucG5nXCIpO1xuICBtYXNrOiB1cmwoXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vcm9iaW4tZGVsYS9jc3MtbWFzay1hbmltYXRpb24vbWFzdGVyL2ltZy9uYXR1cmUtc3ByaXRlLnBuZ1wiKTtcbiAgLXdlYmtpdC1tYXNrLXNpemU6IDMwMDAlIDEwMCU7XG4gIG1hc2stc2l6ZTogMzAwMCUgMTAwJTtcbiAgYm9yZGVyOiBub25lO1xuICBjb2xvcjogI2ZmZjtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICAtd2Via2l0LWFuaW1hdGlvbjogYW5pMiAwLjhzIHN0ZXBzKDI5KSBmb3J3YXJkcztcbiAgYW5pbWF0aW9uOiBhbmkyIDAuOHMgc3RlcHMoMjkpIGZvcndhcmRzO1xufVxuLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5jb250ZW5lZG9yLWJvdG9uIGJ1dHRvbjpob3ZlciB7XG4gIC13ZWJraXQtYW5pbWF0aW9uOiBhbmkgMC44cyBzdGVwcygyOSkgZm9yd2FyZHM7XG4gIGFuaW1hdGlvbjogYW5pIDAuOHMgc3RlcHMoMjkpIGZvcndhcmRzO1xufVxuLmNvbnRhaW5lci1mbHVpZCAucHJpbmNpcGFsIC5tYXMge1xuICB3aWR0aDogMTAxJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBjb2xvcjogIzFBMjM3RTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB3aWR0aDogMTAxJTtcbiAgZm9udC1mYW1pbHk6IFwiTGF0b1wiLCBzYW5zLXNlcmlmO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBmb250LXNpemU6IDIwcHg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIG1hcmdpbi10b3A6IDlweDtcbn1cbkAtd2Via2l0LWtleWZyYW1lcyBhbmkge1xuICBmcm9tIHtcbiAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDAgMDtcbiAgICBtYXNrLXBvc2l0aW9uOiAwIDA7XG4gIH1cbiAgdG8ge1xuICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgIG1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgfVxufVxuQGtleWZyYW1lcyBhbmkge1xuICBmcm9tIHtcbiAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDAgMDtcbiAgICBtYXNrLXBvc2l0aW9uOiAwIDA7XG4gIH1cbiAgdG8ge1xuICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICAgIG1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgfVxufVxuQC13ZWJraXQta2V5ZnJhbWVzIGFuaTIge1xuICBmcm9tIHtcbiAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDEwMCUgMDtcbiAgICBtYXNrLXBvc2l0aW9uOiAxMDAlIDA7XG4gIH1cbiAgdG8ge1xuICAgIC13ZWJraXQtbWFzay1wb3NpdGlvbjogMCAwO1xuICAgIG1hc2stcG9zaXRpb246IDAgMDtcbiAgfVxufVxuQGtleWZyYW1lcyBhbmkyIHtcbiAgZnJvbSB7XG4gICAgLXdlYmtpdC1tYXNrLXBvc2l0aW9uOiAxMDAlIDA7XG4gICAgbWFzay1wb3NpdGlvbjogMTAwJSAwO1xuICB9XG4gIHRvIHtcbiAgICAtd2Via2l0LW1hc2stcG9zaXRpb246IDAgMDtcbiAgICBtYXNrLXBvc2l0aW9uOiAwIDA7XG4gIH1cbn1cblxuLmJ0bi1wcmltYXJ5IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzFBMjM3RTtcbiAgYm9yZGVyLWNvbG9yOiAjMUEyMzdFO1xufVxuXG4uYWxlcnQge1xuICB3aWR0aDogNTAlO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGJvdHRvbTogMjAlO1xuICBsZWZ0OiAyNSU7XG59IiwiLy8gQ29sb3JlcyAtLS0tLS0tLS0tLS0tXG4gICAgJGNvbG9yMDE6ICMyODM1OTM7XG4gICAgJGNvbG9yMDI6ICMxQTIzN0U7XG4gICAgJGNvbG9yMDM6ICNDNUNBRTk7XG4gICAgJGNvbG9yMDQ6ICM2QzVCN0I7XG4gICAgJGNvbG9yMDU6ICMzNTVDN0Q7XG4gICAgJGNvbG9yMDY6IGJsYWNrO1xuICAgICRjb2xvcjA3OiAjMDEzOTY0O1xuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gXG4kZm9udC1mYW1pbHk6ICdaQ09PTCBYaWFvV2VpJywgc2VyaWY7XG5cbkBtaXhpbiBBcGxpY2FyRm9uZG9BenVsKCl7ICAgICBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwNTtcbiAgICAvL2JhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL3NvZnQtd2FsbHBhcGVyLnBuZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDEzOTY0O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL2N1YmVzLnBuZ1wiKTtcbi8qIFRoaXMgaXMgbW9zdGx5IGludGVuZGVkIGZvciBwcm90b3R5cGluZzsgcGxlYXNlIGRvd25sb2FkIHRoZSBwYXR0ZXJuIGFuZCByZS1ob3N0IGZvciBwcm9kdWN0aW9uIGVudmlyb25tZW50cy4gVGhhbmsgeW91ISAqLyAgXG59XG4iXX0= */");
             /***/ 
         }),
         /***/ "./src/app/componentes/bienvenida/bienvenida.component.ts": 
@@ -1484,12 +1516,14 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var _servicios_pedido_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../servicios/pedido.service */ "./src/app/servicios/pedido.service.ts");
             /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
             /* harmony import */ var src_app_servicios_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/servicios/auth.service */ "./src/app/servicios/auth.service.ts");
+            /* harmony import */ var src_app_servicios_empleado_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/servicios/empleado.service */ "./src/app/servicios/empleado.service.ts");
             var BienvenidaComponent = /** @class */ (function () {
-                function BienvenidaComponent(fb, authService, pedidoService, router) {
+                function BienvenidaComponent(fb, authService, pedidoService, router, empService) {
                     this.fb = fb;
                     this.authService = authService;
                     this.pedidoService = pedidoService;
                     this.router = router;
+                    this.empService = empService;
                     this.isCliente = null;
                     this.userUid = null;
                     this.mesaGroup = this.fb.group({
@@ -1509,28 +1543,44 @@ var __extends = (this && this.__extends) || (function () {
                     this.authService.isAuth().subscribe(function (auth) {
                         if (auth) {
                             _this.userUid = auth.uid;
-                            _this.authService.isUserRole(_this.userUid).subscribe(function (userRole) {
-                                _this.isCliente = Object.assign({}, userRole.roles).hasOwnProperty('cliente');
+                            /*   this.authService.isUserComanda(this.userUid).subscribe(user=>{ */
+                            _this.empService.obtenerEmpleado(_this.userUid).subscribe(function (user) {
+                                if (user) {
+                                    //cargo el rol correspondiente 
+                                    _this.isCliente = false;
+                                    localStorage.setItem("Empleado", JSON.stringify(user));
+                                }
+                                else {
+                                    _this.isCliente = true;
+                                }
                             });
+                            /*   }) */
+                            /*  this.authService.isUserRole(this.userUid).subscribe(userRole=>{
+                               this.isCliente=Object.assign({},userRole.tipo).hasOwnProperty('Cliente');
+                             }); */
                         }
-                    });
+                    }, (function (err) {
+                        _this.isCliente = true;
+                    }));
                     console.log('cliente:' + this.isCliente);
                 };
                 BienvenidaComponent.prototype.ValidarMesa = function () {
-                    /*     if (this.mesaGroup.get('mesa').valid) {
-                          const codigoMesa: string = this.mesaGroup.get('mesa').value;
-                          this.pedidoService.ListarPorMesa(codigoMesa).subscribe(
-                            response => {
-                              if (response.length === 0) {
-                                this.respuestaInvalida = true;
-                              } else {
-                                this.router.navigate(['/Clientes/', codigoMesa]);
-                                //this.btnClose.nativeElement.click();
-                              }
-                            });
-                        } else {
-                          this.mesaGroup.get('mesa').markAsTouched();
-                        } */
+                    var _this = this;
+                    if (this.mesaGroup.get('mesa').valid) {
+                        var codigoMesa_1 = this.mesaGroup.get('mesa').value;
+                        this.pedidoService.ListarPorMesa(codigoMesa_1).subscribe(function (response) {
+                            if (response.length === 0) {
+                                _this.respuestaInvalida = true;
+                            }
+                            else {
+                                _this.router.navigate(['/Clientes/', codigoMesa_1]);
+                                _this.btnClose.nativeElement.click();
+                            }
+                        });
+                    }
+                    else {
+                        this.mesaGroup.get('mesa').markAsTouched();
+                    }
                 };
                 return BienvenidaComponent;
             }());
@@ -1538,7 +1588,8 @@ var __extends = (this && this.__extends) || (function () {
                 { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
                 { type: src_app_servicios_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] },
                 { type: _servicios_pedido_service__WEBPACK_IMPORTED_MODULE_3__["PedidoService"] },
-                { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+                { type: src_app_servicios_empleado_service__WEBPACK_IMPORTED_MODULE_6__["EmpleadoService"] }
             ]; };
             tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('btnClose', { static: false })
@@ -1560,7 +1611,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = (".title {\n  font-family: \"ZCOOL XiaoWei\", serif;\n  font-size: 75px;\n  color: #1A237E;\n  text-align: center;\n}\n\n.title:hover {\n  cursor: pointer;\n}\n\nhr {\n  height: 3px;\n  border: none;\n  color: #1A237E;\n  background-color: #1A237E;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvY2xpZW50ZXMuY29tcG9uZW50LnNjc3MiLCIvaG9tZS9hcmllbC9MYWJvcmF0b3JpbyA0L0NvbWFuZGFXZWItbGFiNC9zcmMvYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvY2xpZW50ZXMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxtQ0NPVTtFRE5WLGVBQUE7RUFDQSxjQ0hVO0VESVYsa0JBQUE7QUVESjs7QUZJQTtFQUNJLGVBQUE7QUVESjs7QUZJQTtFQUFLLFdBQUE7RUFBWSxZQUFBO0VBQWEsY0NYaEI7RURXZ0MseUJDWGhDO0FDY2QiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRlcy9jbGllbnRlcy9jbGllbnRlcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzXCI7XG5cbi50aXRsZXtcbiAgICBmb250LWZhbWlseTogJGZvbnQtZmFtaWx5O1xuICAgIGZvbnQtc2l6ZTogNzVweDtcbiAgICBjb2xvcjogJGNvbG9yMDI7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4udGl0bGU6aG92ZXJ7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG5ociB7IGhlaWdodDozcHg7IGJvcmRlcjpub25lOyBjb2xvcjokY29sb3IwMjsgYmFja2dyb3VuZC1jb2xvcjokY29sb3IwMjsgfSIsIi8vIENvbG9yZXMgLS0tLS0tLS0tLS0tLVxuICAgICRjb2xvcjAxOiAjMjgzNTkzO1xuICAgICRjb2xvcjAyOiAjMUEyMzdFO1xuICAgICRjb2xvcjAzOiAjQzVDQUU5O1xuICAgICRjb2xvcjA0OiAjNkM1QjdCO1xuICAgICRjb2xvcjA1OiAjMzU1QzdEO1xuICAgICRjb2xvcjA2OiBibGFjaztcbiAgICAkY29sb3IwNzogIzAxMzk2NDtcbi8vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuIFxuJGZvbnQtZmFtaWx5OiAnWkNPT0wgWGlhb1dlaScsIHNlcmlmO1xuXG5AbWl4aW4gQXBsaWNhckZvbmRvQXp1bCgpeyAgICAgXG4gICAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMDU7XG4gICAgLy9iYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9zb2Z0LXdhbGxwYXBlci5wbmdcIik7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAxMzk2NDtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9jdWJlcy5wbmdcIik7XG4vKiBUaGlzIGlzIG1vc3RseSBpbnRlbmRlZCBmb3IgcHJvdG90eXBpbmc7IHBsZWFzZSBkb3dubG9hZCB0aGUgcGF0dGVybiBhbmQgcmUtaG9zdCBmb3IgcHJvZHVjdGlvbiBlbnZpcm9ubWVudHMuIFRoYW5rIHlvdSEgKi8gIFxufVxuICAiLCIudGl0bGUge1xuICBmb250LWZhbWlseTogXCJaQ09PTCBYaWFvV2VpXCIsIHNlcmlmO1xuICBmb250LXNpemU6IDc1cHg7XG4gIGNvbG9yOiAjMUEyMzdFO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi50aXRsZTpob3ZlciB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuaHIge1xuICBoZWlnaHQ6IDNweDtcbiAgYm9yZGVyOiBub25lO1xuICBjb2xvcjogIzFBMjM3RTtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzFBMjM3RTtcbn0iXX0= */");
+            /* harmony default export */ __webpack_exports__["default"] = (".title {\n  font-family: \"ZCOOL XiaoWei\", serif;\n  font-size: 75px;\n  color: #1A237E;\n  text-align: center;\n}\n\n.title:hover {\n  cursor: pointer;\n}\n\nhr {\n  height: 3px;\n  border: none;\n  color: #1A237E;\n  background-color: #1A237E;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvY2xpZW50ZXMuY29tcG9uZW50LnNjc3MiLCIvaG9tZS9hcmllbC9MYWJvcmF0b3JpbyA0L0NvbWFuZGFXZWItbGFiNC9zcmMvYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvY2xpZW50ZXMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxtQ0NPVTtFRE5WLGVBQUE7RUFDQSxjQ0hVO0VESVYsa0JBQUE7QUVESjs7QUZJQTtFQUNJLGVBQUE7QUVESjs7QUZJQTtFQUFLLFdBQUE7RUFBWSxZQUFBO0VBQWEsY0NYaEI7RURXZ0MseUJDWGhDO0FDY2QiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRlcy9jbGllbnRlcy9jbGllbnRlcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzXCI7XG5cbi50aXRsZXtcbiAgICBmb250LWZhbWlseTogJGZvbnQtZmFtaWx5O1xuICAgIGZvbnQtc2l6ZTogNzVweDtcbiAgICBjb2xvcjogJGNvbG9yMDI7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4udGl0bGU6aG92ZXJ7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG5ociB7IGhlaWdodDozcHg7IGJvcmRlcjpub25lOyBjb2xvcjokY29sb3IwMjsgYmFja2dyb3VuZC1jb2xvcjokY29sb3IwMjsgfSIsIi8vIENvbG9yZXMgLS0tLS0tLS0tLS0tLVxuICAgICRjb2xvcjAxOiAjMjgzNTkzO1xuICAgICRjb2xvcjAyOiAjMUEyMzdFO1xuICAgICRjb2xvcjAzOiAjQzVDQUU5O1xuICAgICRjb2xvcjA0OiAjNkM1QjdCO1xuICAgICRjb2xvcjA1OiAjMzU1QzdEO1xuICAgICRjb2xvcjA2OiBibGFjaztcbiAgICAkY29sb3IwNzogIzAxMzk2NDtcbi8vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuIFxuJGZvbnQtZmFtaWx5OiAnWkNPT0wgWGlhb1dlaScsIHNlcmlmO1xuXG5AbWl4aW4gQXBsaWNhckZvbmRvQXp1bCgpeyAgICAgXG4gICAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMDU7XG4gICAgLy9iYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9zb2Z0LXdhbGxwYXBlci5wbmdcIik7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAxMzk2NDtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9jdWJlcy5wbmdcIik7XG4vKiBUaGlzIGlzIG1vc3RseSBpbnRlbmRlZCBmb3IgcHJvdG90eXBpbmc7IHBsZWFzZSBkb3dubG9hZCB0aGUgcGF0dGVybiBhbmQgcmUtaG9zdCBmb3IgcHJvZHVjdGlvbiBlbnZpcm9ubWVudHMuIFRoYW5rIHlvdSEgKi8gIFxufVxuIiwiLnRpdGxlIHtcbiAgZm9udC1mYW1pbHk6IFwiWkNPT0wgWGlhb1dlaVwiLCBzZXJpZjtcbiAgZm9udC1zaXplOiA3NXB4O1xuICBjb2xvcjogIzFBMjM3RTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4udGl0bGU6aG92ZXIge1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbmhyIHtcbiAgaGVpZ2h0OiAzcHg7XG4gIGJvcmRlcjogbm9uZTtcbiAgY29sb3I6ICMxQTIzN0U7XG4gIGJhY2tncm91bmQtY29sb3I6ICMxQTIzN0U7XG59Il19 */");
             /***/ 
         }),
         /***/ "./src/app/componentes/clientes/clientes.component.ts": 
@@ -1621,7 +1672,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("a {\n  color: black;\n}\n\na:hover {\n  text-decoration: none;\n  color: #1A237E;\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvcGVkaWRvcy1tZXNhL3BlZGlkb3MtbWVzYS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvcGVkaWRvcy1tZXNhL3BlZGlkb3MtbWVzYS5jb21wb25lbnQuc2NzcyIsIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBQ0ksWUFBQTtBQ0FKOztBREdBO0VBQ0kscUJBQUE7RUFDQSxjRUxVO0VGTVYsZUFBQTtBQ0FKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvcGVkaWRvcy1tZXNhL3BlZGlkb3MtbWVzYS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi8uLi9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzXCI7XG5he1xuICAgIGNvbG9yOiBibGFjaztcbn1cblxuYTpob3ZlcntcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gICAgY29sb3I6ICRjb2xvcjAyO1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn0iLCJhIHtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG5hOmhvdmVyIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBjb2xvcjogIzFBMjM3RTtcbiAgY3Vyc29yOiBwb2ludGVyO1xufSIsIi8vIENvbG9yZXMgLS0tLS0tLS0tLS0tLVxuICAgICRjb2xvcjAxOiAjMjgzNTkzO1xuICAgICRjb2xvcjAyOiAjMUEyMzdFO1xuICAgICRjb2xvcjAzOiAjQzVDQUU5O1xuICAgICRjb2xvcjA0OiAjNkM1QjdCO1xuICAgICRjb2xvcjA1OiAjMzU1QzdEO1xuICAgICRjb2xvcjA2OiBibGFjaztcbiAgICAkY29sb3IwNzogIzAxMzk2NDtcbi8vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuIFxuJGZvbnQtZmFtaWx5OiAnWkNPT0wgWGlhb1dlaScsIHNlcmlmO1xuXG5AbWl4aW4gQXBsaWNhckZvbmRvQXp1bCgpeyAgICAgXG4gICAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMDU7XG4gICAgLy9iYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9zb2Z0LXdhbGxwYXBlci5wbmdcIik7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAxMzk2NDtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9jdWJlcy5wbmdcIik7XG4vKiBUaGlzIGlzIG1vc3RseSBpbnRlbmRlZCBmb3IgcHJvdG90eXBpbmc7IHBsZWFzZSBkb3dubG9hZCB0aGUgcGF0dGVybiBhbmQgcmUtaG9zdCBmb3IgcHJvZHVjdGlvbiBlbnZpcm9ubWVudHMuIFRoYW5rIHlvdSEgKi8gIFxufVxuICAiXX0= */");
+            /* harmony default export */ __webpack_exports__["default"] = ("a {\n  color: black;\n}\n\na:hover {\n  text-decoration: none;\n  color: #1A237E;\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvcGVkaWRvcy1tZXNhL3BlZGlkb3MtbWVzYS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvcGVkaWRvcy1tZXNhL3BlZGlkb3MtbWVzYS5jb21wb25lbnQuc2NzcyIsIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBQ0ksWUFBQTtBQ0FKOztBREdBO0VBQ0kscUJBQUE7RUFDQSxjRUxVO0VGTVYsZUFBQTtBQ0FKIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50ZXMvY2xpZW50ZXMvcGVkaWRvcy1tZXNhL3BlZGlkb3MtbWVzYS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi8uLi9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzXCI7XG5he1xuICAgIGNvbG9yOiBibGFjaztcbn1cblxuYTpob3ZlcntcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gICAgY29sb3I6ICRjb2xvcjAyO1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn0iLCJhIHtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG5hOmhvdmVyIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBjb2xvcjogIzFBMjM3RTtcbiAgY3Vyc29yOiBwb2ludGVyO1xufSIsIi8vIENvbG9yZXMgLS0tLS0tLS0tLS0tLVxuICAgICRjb2xvcjAxOiAjMjgzNTkzO1xuICAgICRjb2xvcjAyOiAjMUEyMzdFO1xuICAgICRjb2xvcjAzOiAjQzVDQUU5O1xuICAgICRjb2xvcjA0OiAjNkM1QjdCO1xuICAgICRjb2xvcjA1OiAjMzU1QzdEO1xuICAgICRjb2xvcjA2OiBibGFjaztcbiAgICAkY29sb3IwNzogIzAxMzk2NDtcbi8vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuIFxuJGZvbnQtZmFtaWx5OiAnWkNPT0wgWGlhb1dlaScsIHNlcmlmO1xuXG5AbWl4aW4gQXBsaWNhckZvbmRvQXp1bCgpeyAgICAgXG4gICAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMDU7XG4gICAgLy9iYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9zb2Z0LXdhbGxwYXBlci5wbmdcIik7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAxMzk2NDtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9jdWJlcy5wbmdcIik7XG4vKiBUaGlzIGlzIG1vc3RseSBpbnRlbmRlZCBmb3IgcHJvdG90eXBpbmc7IHBsZWFzZSBkb3dubG9hZCB0aGUgcGF0dGVybiBhbmQgcmUtaG9zdCBmb3IgcHJvZHVjdGlvbiBlbnZpcm9ubWVudHMuIFRoYW5rIHlvdSEgKi8gIFxufVxuIl19 */");
             /***/ 
         }),
         /***/ "./src/app/componentes/clientes/pedidos-mesa/pedidos-mesa.component.ts": 
@@ -1869,7 +1920,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("a {\n  color: black;\n}\n\na:hover {\n  text-decoration: none;\n  color: #1A237E;\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWJvYXJkL2VtcGxlYWRvcy1saXN0L2VtcGxlYWRvcy1saXN0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRlcy9lbXBsZWFkb3MtYm9hcmQvZW1wbGVhZG9zLWxpc3QvZW1wbGVhZG9zLWxpc3QuY29tcG9uZW50LnNjc3MiLCIvaG9tZS9hcmllbC9MYWJvcmF0b3JpbyA0L0NvbWFuZGFXZWItbGFiNC9zcmMvYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNJLFlBQUE7QUNESjs7QURJQTtFQUNJLHFCQUFBO0VBQ0EsY0VOVTtFRk9WLGVBQUE7QUNESiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2VtcGxlYWRvcy1ib2FyZC9lbXBsZWFkb3MtbGlzdC9lbXBsZWFkb3MtbGlzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi8uLi9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzXCI7XG5cbmF7XG4gICAgY29sb3I6IGJsYWNrO1xufVxuXG5hOmhvdmVye1xuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgICBjb2xvcjogJGNvbG9yMDI7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuIiwiYSB7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuYTpob3ZlciB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgY29sb3I6ICMxQTIzN0U7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn0iLCIvLyBDb2xvcmVzIC0tLS0tLS0tLS0tLS1cbiAgICAkY29sb3IwMTogIzI4MzU5MztcbiAgICAkY29sb3IwMjogIzFBMjM3RTtcbiAgICAkY29sb3IwMzogI0M1Q0FFOTtcbiAgICAkY29sb3IwNDogIzZDNUI3QjtcbiAgICAkY29sb3IwNTogIzM1NUM3RDtcbiAgICAkY29sb3IwNjogYmxhY2s7XG4gICAgJGNvbG9yMDc6ICMwMTM5NjQ7XG4vLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiBcbiRmb250LWZhbWlseTogJ1pDT09MIFhpYW9XZWknLCBzZXJpZjtcblxuQG1peGluIEFwbGljYXJGb25kb0F6dWwoKXsgICAgIFxuICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjA1O1xuICAgIC8vYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiaHR0cHM6Ly93d3cudHJhbnNwYXJlbnR0ZXh0dXJlcy5jb20vcGF0dGVybnMvc29mdC13YWxscGFwZXIucG5nXCIpO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMTM5NjQ7XG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiaHR0cHM6Ly93d3cudHJhbnNwYXJlbnR0ZXh0dXJlcy5jb20vcGF0dGVybnMvY3ViZXMucG5nXCIpO1xuLyogVGhpcyBpcyBtb3N0bHkgaW50ZW5kZWQgZm9yIHByb3RvdHlwaW5nOyBwbGVhc2UgZG93bmxvYWQgdGhlIHBhdHRlcm4gYW5kIHJlLWhvc3QgZm9yIHByb2R1Y3Rpb24gZW52aXJvbm1lbnRzLiBUaGFuayB5b3UhICovICBcbn1cbiAgIl19 */");
+            /* harmony default export */ __webpack_exports__["default"] = ("a {\n  color: black;\n}\n\na:hover {\n  text-decoration: none;\n  color: #1A237E;\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWJvYXJkL2VtcGxlYWRvcy1saXN0L2VtcGxlYWRvcy1saXN0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRlcy9lbXBsZWFkb3MtYm9hcmQvZW1wbGVhZG9zLWxpc3QvZW1wbGVhZG9zLWxpc3QuY29tcG9uZW50LnNjc3MiLCIvaG9tZS9hcmllbC9MYWJvcmF0b3JpbyA0L0NvbWFuZGFXZWItbGFiNC9zcmMvYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNJLFlBQUE7QUNESjs7QURJQTtFQUNJLHFCQUFBO0VBQ0EsY0VOVTtFRk9WLGVBQUE7QUNESiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2VtcGxlYWRvcy1ib2FyZC9lbXBsZWFkb3MtbGlzdC9lbXBsZWFkb3MtbGlzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi8uLi9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzXCI7XG5cbmF7XG4gICAgY29sb3I6IGJsYWNrO1xufVxuXG5hOmhvdmVye1xuICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgICBjb2xvcjogJGNvbG9yMDI7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuIiwiYSB7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuYTpob3ZlciB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgY29sb3I6ICMxQTIzN0U7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn0iLCIvLyBDb2xvcmVzIC0tLS0tLS0tLS0tLS1cbiAgICAkY29sb3IwMTogIzI4MzU5MztcbiAgICAkY29sb3IwMjogIzFBMjM3RTtcbiAgICAkY29sb3IwMzogI0M1Q0FFOTtcbiAgICAkY29sb3IwNDogIzZDNUI3QjtcbiAgICAkY29sb3IwNTogIzM1NUM3RDtcbiAgICAkY29sb3IwNjogYmxhY2s7XG4gICAgJGNvbG9yMDc6ICMwMTM5NjQ7XG4vLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiBcbiRmb250LWZhbWlseTogJ1pDT09MIFhpYW9XZWknLCBzZXJpZjtcblxuQG1peGluIEFwbGljYXJGb25kb0F6dWwoKXsgICAgIFxuICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjA1O1xuICAgIC8vYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiaHR0cHM6Ly93d3cudHJhbnNwYXJlbnR0ZXh0dXJlcy5jb20vcGF0dGVybnMvc29mdC13YWxscGFwZXIucG5nXCIpO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMTM5NjQ7XG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiaHR0cHM6Ly93d3cudHJhbnNwYXJlbnR0ZXh0dXJlcy5jb20vcGF0dGVybnMvY3ViZXMucG5nXCIpO1xuLyogVGhpcyBpcyBtb3N0bHkgaW50ZW5kZWQgZm9yIHByb3RvdHlwaW5nOyBwbGVhc2UgZG93bmxvYWQgdGhlIHBhdHRlcm4gYW5kIHJlLWhvc3QgZm9yIHByb2R1Y3Rpb24gZW52aXJvbm1lbnRzLiBUaGFuayB5b3UhICovICBcbn1cbiJdfQ== */");
             /***/ 
         }),
         /***/ "./src/app/componentes/empleados-board/empleados-list/empleados-list.component.ts": 
@@ -1892,14 +1943,14 @@ var __extends = (this && this.__extends) || (function () {
                         quoteStrings: '"',
                         decimalseparator: '.',
                         showLabels: true,
-                        headers: ['Nombre', 'Tipo', 'Usuario', 'Fecha de Registro', 'Último Login', 'Estado', 'N° de Operaciones'],
+                        headers: ['Nombre', 'Tipo', 'Mail', 'Fecha de Registro', 'Último Login', 'Estado', 'N° de Operaciones'],
                         showTitle: true,
                         title: 'Lista de Empleados',
                         useBom: true,
                         removeNewLines: true,
-                        keys: ['nombre', 'tipo', 'usuario', 'fechaRegistro', 'ultimoLogin', 'estado', 'cantidad_operaciones']
+                        keys: ['nombre', 'tipo', 'mail', 'fechaRegistro', 'ultimoLogin', 'estado', 'cantidad_operaciones']
                     };
-                    //this.cargarLista();
+                    this.cargarLista();
                 }
                 EmpleadosListComponent.prototype.ngOnInit = function () {
                 };
@@ -1913,8 +1964,12 @@ var __extends = (this && this.__extends) || (function () {
                     });
                 };
                 EmpleadosListComponent.prototype.showModifyModal = function (empleado) {
-                    this.modalModify.cargarModal(empleado.id, empleado.usuario, empleado.nombre, empleado.tipo);
+                    this.modalModify.cargarModal(empleado);
                     this.showModal = true;
+                };
+                EmpleadosListComponent.prototype.showRegistroModal = function () {
+                    this.modalRegistro.cargarModal();
+                    this.showModalRegistro = true;
                 };
                 EmpleadosListComponent.prototype.generarNombreCsv = function () {
                     var nombre = 'ListaEmpleados ' + new Date().toDateString();
@@ -1923,25 +1978,26 @@ var __extends = (this && this.__extends) || (function () {
                 EmpleadosListComponent.prototype.mostrarCaptcha = function () {
                     this.captcha.cargarCaptcha();
                 };
-                EmpleadosListComponent.prototype.darDeBaja = function (id) {
+                EmpleadosListComponent.prototype.darDeBaja = function (empleado) {
                     var _this = this;
-                    this.empleadoService.Baja(id).then(function (response) {
+                    this.empleadoService.Baja(empleado).
+                        then(function (response) {
                         _this.cargarLista();
                     }, function (error) {
                         console.error(error);
                     });
                 };
-                EmpleadosListComponent.prototype.suspender = function (id) {
+                EmpleadosListComponent.prototype.suspender = function (empleado) {
                     var _this = this;
-                    this.empleadoService.Suspender(id).then(function (response) {
+                    this.empleadoService.Suspender(empleado).then(function (response) {
                         _this.cargarLista();
                     }, function (error) {
                         console.error(error);
                     });
                 };
-                EmpleadosListComponent.prototype.activar = function (id) {
+                EmpleadosListComponent.prototype.activar = function (empleado) {
                     var _this = this;
-                    this.empleadoService.Activar(id).then(function (response) {
+                    this.empleadoService.Activar(empleado).then(function (response) {
                         _this.cargarLista();
                     }, function (error) {
                         console.error(error);
@@ -1955,6 +2011,9 @@ var __extends = (this && this.__extends) || (function () {
             tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('modalModify', { static: false })
             ], EmpleadosListComponent.prototype, "modalModify", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('modalRegistro', { static: false })
+            ], EmpleadosListComponent.prototype, "modalRegistro", void 0);
             tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('captcha', { static: false })
             ], EmpleadosListComponent.prototype, "captcha", void 0);
@@ -1975,7 +2034,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2VtcGxlYWRvcy1ib2FyZC9lbXBsZWFkb3MtbW9kaWZ5L2VtcGxlYWRvcy1tb2RpZnkuY29tcG9uZW50LnNjc3MifQ== */");
+            /* harmony default export */ __webpack_exports__["default"] = (".modal-dialog {\n  overflow-y: initial !important;\n}\n\n.modal-body {\n  overflow-y: auto;\n}\n\n.modal {\n  background: rgba(0, 0, 0, 0.6);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWJvYXJkL2VtcGxlYWRvcy1tb2RpZnkvZW1wbGVhZG9zLW1vZGlmeS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWJvYXJkL2VtcGxlYWRvcy1tb2RpZnkvZW1wbGVhZG9zLW1vZGlmeS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLDhCQUFBO0FDQ0o7O0FEQ0E7RUFDSSxnQkFBQTtBQ0VKOztBRENBO0VBQ0ksOEJBQUE7QUNFSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2VtcGxlYWRvcy1ib2FyZC9lbXBsZWFkb3MtbW9kaWZ5L2VtcGxlYWRvcy1tb2RpZnkuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubW9kYWwtZGlhbG9ne1xuICAgIG92ZXJmbG93LXk6IGluaXRpYWwgIWltcG9ydGFudFxufVxuLm1vZGFsLWJvZHl7XG4gICAgb3ZlcmZsb3cteTogYXV0bztcbn0gXG5cbi5tb2RhbCB7XG4gICAgYmFja2dyb3VuZDogcmdiYSgwLDAsMCwwLjYpO1xuICB9IiwiLm1vZGFsLWRpYWxvZyB7XG4gIG92ZXJmbG93LXk6IGluaXRpYWwgIWltcG9ydGFudDtcbn1cblxuLm1vZGFsLWJvZHkge1xuICBvdmVyZmxvdy15OiBhdXRvO1xufVxuXG4ubW9kYWwge1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNik7XG59Il19 */");
             /***/ 
         }),
         /***/ "./src/app/componentes/empleados-board/empleados-modify/empleados-modify.component.ts": 
@@ -1997,7 +2056,7 @@ var __extends = (this && this.__extends) || (function () {
                     this.empleadoService = empleadoService;
                     this.form = this.fb.group({
                         usuario: [''],
-                        name: [''],
+                        nombre: [''],
                         tipo: ['']
                     });
                     this.modificadoCorrectamente = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
@@ -2005,17 +2064,18 @@ var __extends = (this && this.__extends) || (function () {
                 }
                 EmpleadosModifyComponent.prototype.ngOnInit = function () {
                 };
-                EmpleadosModifyComponent.prototype.cargarModal = function (id, usuario, nombre, tipo) {
-                    this.id = id;
-                    this.nombre = nombre;
-                    this.usuario = usuario;
-                    this.tipo = tipo;
+                EmpleadosModifyComponent.prototype.cargarModal = function (empleado) {
+                    this.empleado = empleado;
+                    this.id = empleado.id;
+                    this.nombre = empleado.nombre;
+                    this.usuario = empleado.usuario;
+                    this.tipo = empleado.tipo;
                     this.cargarForm();
                 };
                 EmpleadosModifyComponent.prototype.cargarForm = function () {
                     this.form = this.fb.group({
                         usuario: [this.usuario, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-                        name: [this.nombre, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+                        nombre: [this.nombre, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
                         tipo: [this.tipo]
                     });
                 };
@@ -2027,24 +2087,24 @@ var __extends = (this && this.__extends) || (function () {
                     this.errorMessage = '';
                     this.error = false;
                     if (this.form.valid) {
-                        var usuario = this.form.get('usuario').value;
-                        var nombre = this.form.get('name').value;
-                        var tipo = this.form.get('tipo').value;
-                        this.empleadoService.Modificar(usuario, this.id, nombre, tipo)
+                        this.empleado.usuario = this.form.get('usuario').value;
+                        this.empleado.nombre = this.form.get('nombre').value;
+                        this.empleado.tipo = this.form.get('tipo').value;
+                        this.empleadoService.Modificar(this.empleado)
                             .then(function (response) {
                             console.log(response);
-                            if (response['Estado'] === 'OK') {
+                            if (response) {
                                 _this.modificadoCorrectamente.emit();
                                 _this.closeModal.emit();
                             }
                             else {
                                 _this.error = true;
-                                _this.errorMessage = response['Mensaje'];
+                                _this.errorMessage = 'Error al modificar';
                             }
                         })
                             .catch(function (error) {
                             _this.error = true;
-                            _this.errorMessage = error['Mensaje'];
+                            _this.errorMessage = 'Error al modificar';
                             console.error(error);
                         });
                     }
@@ -2088,7 +2148,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("h1 {\n  text-align: center;\n  font-family: \"ZCOOL XiaoWei\", serif;\n  font-size: 60px;\n  color: black;\n}\n\n.rowLogin {\n  /*background-image: url(\"../../../../assets/Imagenes/Inside-Restaurant.jpg\");*/\n  background-position: center;\n  /* Center the image */\n  background-repeat: no-repeat;\n  /* Do not repeat the image */\n  background-size: cover;\n  /* Resize the background image to cover the entire container */\n  border: 2px solid #1A237E;\n  background-color: #3b5998;\n}\n\n.card {\n  border-color: #1A237E;\n  /*background-color: $color04;*/\n  background-color: #3b5998;\n}\n\n.btn-primary {\n  background-color: #1A237E;\n  border-color: #1A237E;\n}\n\n.btn-primary:hover {\n  background-color: #C5CAE9;\n  border-color: #C5CAE9;\n}\n\nhr {\n  height: 3px;\n  border: none;\n  color: #1A237E;\n  background-color: #1A237E;\n}\n\n.buttonDefault {\n  margin: 5px;\n  margin-bottom: 10px;\n}\n\n.ar {\n  margin: 0 10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWJvYXJkL2VtcGxlYWRvcy1yZWdpc3Ryby9lbXBsZWFkb3MtcmVnaXN0cm8uY29tcG9uZW50LnNjc3MiLCIvaG9tZS9hcmllbC9MYWJvcmF0b3JpbyA0L0NvbWFuZGFXZWItbGFiNC9zcmMvYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWJvYXJkL2VtcGxlYWRvcy1yZWdpc3Ryby9lbXBsZWFkb3MtcmVnaXN0cm8uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxrQkFBQTtFQUNBLG1DQ01VO0VETFYsZUFBQTtFQUNBLFlBQUE7QUVESjs7QUZJQTtFQUNJLDhFQUFBO0VBQ0EsMkJBQUE7RUFBNkIscUJBQUE7RUFDN0IsNEJBQUE7RUFBOEIsNEJBQUE7RUFDOUIsc0JBQUE7RUFBd0IsOERBQUE7RUFDeEIseUJBQUE7RUFDQSx5QkFBQTtBRUVKOztBRkNBO0VBQ0kscUJDakJVO0VEa0JWLDhCQUFBO0VBQ0EseUJBQUE7QUVFSjs7QUZDQTtFQUNJLHlCQ3ZCVTtFRHdCVixxQkN4QlU7QUMwQmQ7O0FGQ0E7RUFDSSx5QkMzQlU7RUQ0QlYscUJDNUJVO0FDOEJkOztBRkNBO0VBQUssV0FBQTtFQUFZLFlBQUE7RUFBYSxjQ2hDaEI7RURnQ2dDLHlCQ2hDaEM7QUNzQ2Q7O0FGSkE7RUFDSSxXQUFBO0VBQ0EsbUJBQUE7QUVPSjs7QUZKQTtFQUNJLGNBQUE7QUVPSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2VtcGxlYWRvcy1ib2FyZC9lbXBsZWFkb3MtcmVnaXN0cm8vZW1wbGVhZG9zLXJlZ2lzdHJvLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uLy4uL2Fzc2V0cy9Fc3RpbG9zL2VzdGlsb3MtZ2VuZXJhbGVzLnNjc3NcIjtcblxuaDF7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGZvbnQtZmFtaWx5OiAkZm9udC1mYW1pbHk7XG4gICAgZm9udC1zaXplOiA2MHB4O1xuICAgIGNvbG9yOiAkY29sb3IwNjtcbn1cblxuLnJvd0xvZ2lue1xuICAgIC8qYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL0ltYWdlbmVzL0luc2lkZS1SZXN0YXVyYW50LmpwZ1wiKTsqL1xuICAgIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjsgLyogQ2VudGVyIHRoZSBpbWFnZSAqL1xuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7IC8qIERvIG5vdCByZXBlYXQgdGhlIGltYWdlICovXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjsgLyogUmVzaXplIHRoZSBiYWNrZ3JvdW5kIGltYWdlIHRvIGNvdmVyIHRoZSBlbnRpcmUgY29udGFpbmVyICovXG4gICAgYm9yZGVyOiAycHggc29saWQgJGNvbG9yMDI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzNiNTk5ODtcbn1cblxuLmNhcmR7XG4gICAgYm9yZGVyLWNvbG9yOiAkY29sb3IwMjtcbiAgICAvKmJhY2tncm91bmQtY29sb3I6ICRjb2xvcjA0OyovXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzNiNTk5ODtcbn1cblxuLmJ0bi1wcmltYXJ5e1xuICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjAyO1xuICAgIGJvcmRlci1jb2xvcjogJGNvbG9yMDI7XG59XG5cbi5idG4tcHJpbWFyeTpob3ZlcntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwMztcbiAgICBib3JkZXItY29sb3I6ICRjb2xvcjAzO1xufVxuXG5ociB7IGhlaWdodDozcHg7IGJvcmRlcjpub25lOyBjb2xvcjokY29sb3IwMjsgYmFja2dyb3VuZC1jb2xvcjokY29sb3IwMjsgfVxuXG4uYnV0dG9uRGVmYXVsdHtcbiAgICBtYXJnaW46IDVweDtcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xufVxuXG4uYXJ7XG4gICAgbWFyZ2luOiAwIDEwcHg7XG59XG5cbiIsIi8vIENvbG9yZXMgLS0tLS0tLS0tLS0tLVxuICAgICRjb2xvcjAxOiAjMjgzNTkzO1xuICAgICRjb2xvcjAyOiAjMUEyMzdFO1xuICAgICRjb2xvcjAzOiAjQzVDQUU5O1xuICAgICRjb2xvcjA0OiAjNkM1QjdCO1xuICAgICRjb2xvcjA1OiAjMzU1QzdEO1xuICAgICRjb2xvcjA2OiBibGFjaztcbiAgICAkY29sb3IwNzogIzAxMzk2NDtcbi8vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuIFxuJGZvbnQtZmFtaWx5OiAnWkNPT0wgWGlhb1dlaScsIHNlcmlmO1xuXG5AbWl4aW4gQXBsaWNhckZvbmRvQXp1bCgpeyAgICAgXG4gICAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMDU7XG4gICAgLy9iYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9zb2Z0LXdhbGxwYXBlci5wbmdcIik7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAxMzk2NDtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL3d3dy50cmFuc3BhcmVudHRleHR1cmVzLmNvbS9wYXR0ZXJucy9jdWJlcy5wbmdcIik7XG4vKiBUaGlzIGlzIG1vc3RseSBpbnRlbmRlZCBmb3IgcHJvdG90eXBpbmc7IHBsZWFzZSBkb3dubG9hZCB0aGUgcGF0dGVybiBhbmQgcmUtaG9zdCBmb3IgcHJvZHVjdGlvbiBlbnZpcm9ubWVudHMuIFRoYW5rIHlvdSEgKi8gIFxufVxuICAiLCJoMSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6IFwiWkNPT0wgWGlhb1dlaVwiLCBzZXJpZjtcbiAgZm9udC1zaXplOiA2MHB4O1xuICBjb2xvcjogYmxhY2s7XG59XG5cbi5yb3dMb2dpbiB7XG4gIC8qYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL0ltYWdlbmVzL0luc2lkZS1SZXN0YXVyYW50LmpwZ1wiKTsqL1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XG4gIC8qIENlbnRlciB0aGUgaW1hZ2UgKi9cbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgLyogRG8gbm90IHJlcGVhdCB0aGUgaW1hZ2UgKi9cbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgLyogUmVzaXplIHRoZSBiYWNrZ3JvdW5kIGltYWdlIHRvIGNvdmVyIHRoZSBlbnRpcmUgY29udGFpbmVyICovXG4gIGJvcmRlcjogMnB4IHNvbGlkICMxQTIzN0U7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzYjU5OTg7XG59XG5cbi5jYXJkIHtcbiAgYm9yZGVyLWNvbG9yOiAjMUEyMzdFO1xuICAvKmJhY2tncm91bmQtY29sb3I6ICRjb2xvcjA0OyovXG4gIGJhY2tncm91bmQtY29sb3I6ICMzYjU5OTg7XG59XG5cbi5idG4tcHJpbWFyeSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMxQTIzN0U7XG4gIGJvcmRlci1jb2xvcjogIzFBMjM3RTtcbn1cblxuLmJ0bi1wcmltYXJ5OmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0M1Q0FFOTtcbiAgYm9yZGVyLWNvbG9yOiAjQzVDQUU5O1xufVxuXG5ociB7XG4gIGhlaWdodDogM3B4O1xuICBib3JkZXI6IG5vbmU7XG4gIGNvbG9yOiAjMUEyMzdFO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMUEyMzdFO1xufVxuXG4uYnV0dG9uRGVmYXVsdCB7XG4gIG1hcmdpbjogNXB4O1xuICBtYXJnaW4tYm90dG9tOiAxMHB4O1xufVxuXG4uYXIge1xuICBtYXJnaW46IDAgMTBweDtcbn0iXX0= */");
+            /* harmony default export */ __webpack_exports__["default"] = ("h1 {\n  text-align: center;\n  font-family: \"ZCOOL XiaoWei\", serif;\n  font-size: 60px;\n  color: black;\n}\n\n.rowLogin {\n  /*background-image: url(\"../../../../assets/Imagenes/Inside-Restaurant.jpg\");*/\n  background-position: center;\n  /* Center the image */\n  background-repeat: no-repeat;\n  /* Do not repeat the image */\n  background-size: cover;\n  /* Resize the background image to cover the entire container */\n  border: 2px solid #1A237E;\n  background-color: #3b5998;\n}\n\n.card {\n  border-color: #1A237E;\n  /*background-color: $color04;*/\n  background-color: #3b5998;\n}\n\n.btn-primary {\n  background-color: #1A237E;\n  border-color: #1A237E;\n}\n\n.btn-primary:hover {\n  background-color: #C5CAE9;\n  border-color: #C5CAE9;\n}\n\nhr {\n  height: 3px;\n  border: none;\n  color: #1A237E;\n  background-color: #1A237E;\n}\n\n.buttonDefault {\n  margin: 5px;\n  margin-bottom: 10px;\n}\n\n.ar {\n  margin: 0 10px;\n}\n\n.modal-dialog {\n  overflow-y: initial !important;\n}\n\n.modal-body {\n  overflow-y: auto;\n}\n\n.modal {\n  background: rgba(0, 0, 0, 0.6);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWJvYXJkL2VtcGxlYWRvcy1yZWdpc3Ryby9lbXBsZWFkb3MtcmVnaXN0cm8uY29tcG9uZW50LnNjc3MiLCIvaG9tZS9hcmllbC9MYWJvcmF0b3JpbyA0L0NvbWFuZGFXZWItbGFiNC9zcmMvYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWJvYXJkL2VtcGxlYWRvcy1yZWdpc3Ryby9lbXBsZWFkb3MtcmVnaXN0cm8uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxrQkFBQTtFQUNBLG1DQ01VO0VETFYsZUFBQTtFQUNBLFlBQUE7QUVESjs7QUZJQTtFQUNJLDhFQUFBO0VBQ0EsMkJBQUE7RUFBNkIscUJBQUE7RUFDN0IsNEJBQUE7RUFBOEIsNEJBQUE7RUFDOUIsc0JBQUE7RUFBd0IsOERBQUE7RUFDeEIseUJBQUE7RUFDQSx5QkFBQTtBRUVKOztBRkNBO0VBQ0kscUJDakJVO0VEa0JWLDhCQUFBO0VBQ0EseUJBQUE7QUVFSjs7QUZDQTtFQUNJLHlCQ3ZCVTtFRHdCVixxQkN4QlU7QUMwQmQ7O0FGQ0E7RUFDSSx5QkMzQlU7RUQ0QlYscUJDNUJVO0FDOEJkOztBRkNBO0VBQUssV0FBQTtFQUFZLFlBQUE7RUFBYSxjQ2hDaEI7RURnQ2dDLHlCQ2hDaEM7QUNzQ2Q7O0FGSkE7RUFDSSxXQUFBO0VBQ0EsbUJBQUE7QUVPSjs7QUZKQTtFQUNJLGNBQUE7QUVPSjs7QUZMQTtFQUNJLDhCQUFBO0FFUUo7O0FGTkE7RUFDSSxnQkFBQTtBRVNKOztBRk5BO0VBQ0ksOEJBQUE7QUVTSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2VtcGxlYWRvcy1ib2FyZC9lbXBsZWFkb3MtcmVnaXN0cm8vZW1wbGVhZG9zLXJlZ2lzdHJvLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uLy4uL2Fzc2V0cy9Fc3RpbG9zL2VzdGlsb3MtZ2VuZXJhbGVzLnNjc3NcIjtcblxuaDF7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGZvbnQtZmFtaWx5OiAkZm9udC1mYW1pbHk7XG4gICAgZm9udC1zaXplOiA2MHB4O1xuICAgIGNvbG9yOiAkY29sb3IwNjtcbn1cblxuLnJvd0xvZ2lue1xuICAgIC8qYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL0ltYWdlbmVzL0luc2lkZS1SZXN0YXVyYW50LmpwZ1wiKTsqL1xuICAgIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjsgLyogQ2VudGVyIHRoZSBpbWFnZSAqL1xuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7IC8qIERvIG5vdCByZXBlYXQgdGhlIGltYWdlICovXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjsgLyogUmVzaXplIHRoZSBiYWNrZ3JvdW5kIGltYWdlIHRvIGNvdmVyIHRoZSBlbnRpcmUgY29udGFpbmVyICovXG4gICAgYm9yZGVyOiAycHggc29saWQgJGNvbG9yMDI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzNiNTk5ODtcbn1cblxuLmNhcmR7XG4gICAgYm9yZGVyLWNvbG9yOiAkY29sb3IwMjtcbiAgICAvKmJhY2tncm91bmQtY29sb3I6ICRjb2xvcjA0OyovXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzNiNTk5ODtcbn1cblxuLmJ0bi1wcmltYXJ5e1xuICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjAyO1xuICAgIGJvcmRlci1jb2xvcjogJGNvbG9yMDI7XG59XG5cbi5idG4tcHJpbWFyeTpob3ZlcntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwMztcbiAgICBib3JkZXItY29sb3I6ICRjb2xvcjAzO1xufVxuXG5ociB7IGhlaWdodDozcHg7IGJvcmRlcjpub25lOyBjb2xvcjokY29sb3IwMjsgYmFja2dyb3VuZC1jb2xvcjokY29sb3IwMjsgfVxuXG4uYnV0dG9uRGVmYXVsdHtcbiAgICBtYXJnaW46IDVweDtcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xufVxuXG4uYXJ7XG4gICAgbWFyZ2luOiAwIDEwcHg7XG59XG4ubW9kYWwtZGlhbG9ne1xuICAgIG92ZXJmbG93LXk6IGluaXRpYWwgIWltcG9ydGFudFxufVxuLm1vZGFsLWJvZHl7XG4gICAgb3ZlcmZsb3cteTogYXV0bztcbn0gXG5cbi5tb2RhbCB7XG4gICAgYmFja2dyb3VuZDogcmdiYSgwLDAsMCwwLjYpO1xuICB9IiwiLy8gQ29sb3JlcyAtLS0tLS0tLS0tLS0tXG4gICAgJGNvbG9yMDE6ICMyODM1OTM7XG4gICAgJGNvbG9yMDI6ICMxQTIzN0U7XG4gICAgJGNvbG9yMDM6ICNDNUNBRTk7XG4gICAgJGNvbG9yMDQ6ICM2QzVCN0I7XG4gICAgJGNvbG9yMDU6ICMzNTVDN0Q7XG4gICAgJGNvbG9yMDY6IGJsYWNrO1xuICAgICRjb2xvcjA3OiAjMDEzOTY0O1xuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gXG4kZm9udC1mYW1pbHk6ICdaQ09PTCBYaWFvV2VpJywgc2VyaWY7XG5cbkBtaXhpbiBBcGxpY2FyRm9uZG9BenVsKCl7ICAgICBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwNTtcbiAgICAvL2JhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL3NvZnQtd2FsbHBhcGVyLnBuZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDEzOTY0O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL2N1YmVzLnBuZ1wiKTtcbi8qIFRoaXMgaXMgbW9zdGx5IGludGVuZGVkIGZvciBwcm90b3R5cGluZzsgcGxlYXNlIGRvd25sb2FkIHRoZSBwYXR0ZXJuIGFuZCByZS1ob3N0IGZvciBwcm9kdWN0aW9uIGVudmlyb25tZW50cy4gVGhhbmsgeW91ISAqLyAgXG59XG4iLCJoMSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6IFwiWkNPT0wgWGlhb1dlaVwiLCBzZXJpZjtcbiAgZm9udC1zaXplOiA2MHB4O1xuICBjb2xvcjogYmxhY2s7XG59XG5cbi5yb3dMb2dpbiB7XG4gIC8qYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL0ltYWdlbmVzL0luc2lkZS1SZXN0YXVyYW50LmpwZ1wiKTsqL1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XG4gIC8qIENlbnRlciB0aGUgaW1hZ2UgKi9cbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgLyogRG8gbm90IHJlcGVhdCB0aGUgaW1hZ2UgKi9cbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgLyogUmVzaXplIHRoZSBiYWNrZ3JvdW5kIGltYWdlIHRvIGNvdmVyIHRoZSBlbnRpcmUgY29udGFpbmVyICovXG4gIGJvcmRlcjogMnB4IHNvbGlkICMxQTIzN0U7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzYjU5OTg7XG59XG5cbi5jYXJkIHtcbiAgYm9yZGVyLWNvbG9yOiAjMUEyMzdFO1xuICAvKmJhY2tncm91bmQtY29sb3I6ICRjb2xvcjA0OyovXG4gIGJhY2tncm91bmQtY29sb3I6ICMzYjU5OTg7XG59XG5cbi5idG4tcHJpbWFyeSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMxQTIzN0U7XG4gIGJvcmRlci1jb2xvcjogIzFBMjM3RTtcbn1cblxuLmJ0bi1wcmltYXJ5OmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0M1Q0FFOTtcbiAgYm9yZGVyLWNvbG9yOiAjQzVDQUU5O1xufVxuXG5ociB7XG4gIGhlaWdodDogM3B4O1xuICBib3JkZXI6IG5vbmU7XG4gIGNvbG9yOiAjMUEyMzdFO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMUEyMzdFO1xufVxuXG4uYnV0dG9uRGVmYXVsdCB7XG4gIG1hcmdpbjogNXB4O1xuICBtYXJnaW4tYm90dG9tOiAxMHB4O1xufVxuXG4uYXIge1xuICBtYXJnaW46IDAgMTBweDtcbn1cblxuLm1vZGFsLWRpYWxvZyB7XG4gIG92ZXJmbG93LXk6IGluaXRpYWwgIWltcG9ydGFudDtcbn1cblxuLm1vZGFsLWJvZHkge1xuICBvdmVyZmxvdy15OiBhdXRvO1xufVxuXG4ubW9kYWwge1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNik7XG59Il19 */");
             /***/ 
         }),
         /***/ "./src/app/componentes/empleados-board/empleados-registro/empleados-registro.component.ts": 
@@ -2101,95 +2161,100 @@ var __extends = (this && this.__extends) || (function () {
             __webpack_require__.r(__webpack_exports__);
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmpleadosRegistroComponent", function () { return EmpleadosRegistroComponent; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            /* harmony import */ var _Common_Registro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../Common/Registro */ "./src/app/componentes/Common/Registro.ts");
-            /* harmony import */ var _servicios_empleado_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../../servicios/empleado.service */ "./src/app/servicios/empleado.service.ts");
-            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-            /* harmony import */ var _servicios_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../servicios/auth.service */ "./src/app/servicios/auth.service.ts");
-            /* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/storage/es2015/index.js");
-            /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+            /* harmony import */ var _servicios_empleado_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../servicios/empleado.service */ "./src/app/servicios/empleado.service.ts");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var _servicios_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../servicios/auth.service */ "./src/app/servicios/auth.service.ts");
+            /* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/storage/es2015/index.js");
+            /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
             //import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
-            var EmpleadosRegistroComponent = /** @class */ (function (_super) {
-                __extends(EmpleadosRegistroComponent, _super);
+            var EmpleadosRegistroComponent = /** @class */ (function () {
                 function EmpleadosRegistroComponent(fb, empleadoService, afAuth, router, fireStore) {
-                    var _this = _super.call(this) || this;
-                    _this.fb = fb;
-                    _this.empleadoService = empleadoService;
-                    _this.afAuth = afAuth;
-                    _this.router = router;
-                    _this.fireStore = fireStore;
-                    _this.form = _this.fb.group({
-                        usuario: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        tipo: ['Socio'],
-                        recaptcha: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+                    this.fb = fb;
+                    this.empleadoService = empleadoService;
+                    this.afAuth = afAuth;
+                    this.router = router;
+                    this.fireStore = fireStore;
+                    this.empleado = {};
+                    this.submitted = false;
+                    this.registradoCorrectamente = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]();
+                    this.closeModal = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]();
+                    this.key = '6Le-Z78UAAAAABcjicZLxcZMuebY_chP-kDOHlWj';
+                    this.form = this.fb.group({
+                        usuario: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required),
+                        password: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required),
+                        nombre: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required),
+                        tipo: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required),
+                        recaptcha: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required)
                     });
-                    return _this;
                 }
+                Object.defineProperty(EmpleadosRegistroComponent.prototype, "f", {
+                    get: function () { return this.form.controls; },
+                    enumerable: true,
+                    configurable: true
+                });
                 EmpleadosRegistroComponent.prototype.ngOnInit = function () {
                 };
-                EmpleadosRegistroComponent.prototype.Submit = function () {
+                EmpleadosRegistroComponent.prototype.registrarEmpleado = function (emp) {
                     var _this = this;
-                    this.errorMessage = '';
-                    this.error = false;
-                    this.success = false;
-                    if (this.form.valid) {
-                        var usuario = this.form.get('usuario').value;
-                        var password = this.form.get('password').value;
-                        var nombre = this.form.get('name').value;
-                        var tipo = this.form.get('tipo').value;
-                        this.empleadoService.Registrar(usuario, password, nombre, tipo)
-                            .then(function (response) {
-                            console.log(response);
-                            if (response['Estado'] === 'OK') {
-                                _this.success = true;
-                                _this.form.reset();
-                                _this.form.get('tipo').setValue('Socio');
-                                _this.captcha.reloadCaptcha();
-                                _this.captcha.resetCaptcha();
-                                _this.registradoCorrectamente.emit();
-                            }
-                            else {
-                                _this.error = true;
-                                _this.errorMessage = response['Mensaje'];
-                            }
-                        })
-                            .catch(function (error) {
+                    this.empleadoService.Registrar(emp)
+                        .then(function (response) {
+                        console.log(response);
+                        if (response) {
+                            //this.success = true;
+                            _this.form.reset();
+                            _this.form.get('tipo').setValue('Socio');
+                            _this.captcha.reloadCaptcha();
+                            _this.captcha.resetCaptcha();
+                            _this.inputImage.nativeElement.value = null;
+                            _this.inputImageUser.nativeElement.value = null;
+                            _this.registradoCorrectamente.emit();
+                        }
+                        else {
                             _this.error = true;
-                            _this.errorMessage = error['Mensaje'];
-                            console.error(error);
-                        });
-                    }
-                    else {
-                        this.errorMessage = 'Debe completar los campos correctamente.';
-                        this.error = true;
-                    }
+                            _this.errorMessage = 'error al insertar un empleado';
+                        }
+                    })
+                        .catch(function (error) {
+                        _this.error = true;
+                        _this.errorMessage = 'error al insertar empleado';
+                        console.log(error);
+                    });
                 };
                 EmpleadosRegistroComponent.prototype.onAddUser = function () {
                     var _this = this;
                     this.errorMessage = '';
                     this.error = false;
-                    this.success = false;
+                    this.submitted = true;
+                    // this.success = false;
                     if (this.form.valid) {
-                        var usuario = this.form.get('usuario').value;
-                        var password = this.form.get('password').value;
-                        var nombre_1 = this.form.get('name').value;
-                        var tipo = this.form.get('tipo').value;
-                        this.afAuth.registerUser(usuario, password, tipo) //falta el nombre y el tipo
+                        this.empleado.usuario = this.usuario;
+                        this.empleado.password = this.password;
+                        this.empleado.nombre = this.nombre;
+                        this.empleado.tipo = this.tipo;
+                        //registro el usuario   
+                        this.afAuth.registerUser(this.empleado.usuario, this.empleado.password) //falta el nombre y el tipo
                             .then(function (res) {
                             _this.afAuth.isAuth().subscribe(function (user) {
                                 if (user) {
                                     user.updateProfile({
-                                        displayName: nombre_1,
+                                        displayName: _this.empleado.nombre,
                                         photoURL: _this.inputImageUser.nativeElement.value
                                     }).then(function () {
-                                        _this.router.navigate(['admin/list-books']);
+                                        //actualizamos el empleado
+                                        _this.empleado.id = user.uid;
+                                        _this.empleado.cantidad_operaciones = 0;
+                                        _this.empleado.estado = "A";
+                                        _this.registrarEmpleado(_this.empleado);
+                                        _this.cerrar();
                                     }).catch(function (error) { return console.log('error', error); });
                                 }
                             });
                         }).catch(function (err) { return console.log('err', err.message); });
+                    }
+                    else {
+                        return;
                     }
                 };
                 EmpleadosRegistroComponent.prototype.onUpload = function (e) {
@@ -2201,19 +2266,13 @@ var __extends = (this && this.__extends) || (function () {
                     var ref = this.fireStore.ref(filePath);
                     var task = this.fireStore.upload(filePath, file);
                     this.uploadPercent = task.percentageChanges(); //recuperamos el porcentaje de carga del archivo
-                    task.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["finalize"])(function () { return _this.urlImage = ref.getDownloadURL(); })).subscribe();
+                    task.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["finalize"])(function () { return _this.urlImage = ref.getDownloadURL(); })).subscribe();
                 };
-                EmpleadosRegistroComponent.prototype.onLoginGoogle = function () {
-                    var _this = this;
-                    this.afAuth.loginGoogleUser().then(function (res) {
-                        _this.onLoginRedirect();
-                    }).catch(function (err) { return console.log('err', err.Message); });
+                EmpleadosRegistroComponent.prototype.cargarModal = function () {
+                    this.cargarForm();
                 };
-                EmpleadosRegistroComponent.prototype.onLoginFacebook = function () {
-                    var _this = this;
-                    this.afAuth.loginFacebookUser().then(function (res) {
-                        _this.onLoginRedirect();
-                    }).catch(function (err) { return console.log('err', err.Message); });
+                EmpleadosRegistroComponent.prototype.cargarForm = function () {
+                    this.form = this.fb.group({});
                 };
                 EmpleadosRegistroComponent.prototype.onLogout = function () {
                     this.afAuth.logoutUser();
@@ -2221,20 +2280,39 @@ var __extends = (this && this.__extends) || (function () {
                 EmpleadosRegistroComponent.prototype.onLoginRedirect = function () {
                     this.router.navigate(['admin/list-books']);
                 };
+                EmpleadosRegistroComponent.prototype.cerrar = function () {
+                    this.closeModal.emit();
+                    this.form = this.fb.group({});
+                };
                 return EmpleadosRegistroComponent;
-            }(_Common_Registro__WEBPACK_IMPORTED_MODULE_1__["Registro"]));
+            }());
             EmpleadosRegistroComponent.ctorParameters = function () { return [
-                { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
-                { type: _servicios_empleado_service__WEBPACK_IMPORTED_MODULE_2__["EmpleadoService"] },
-                { type: _servicios_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] },
-                { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
-                { type: _angular_fire_storage__WEBPACK_IMPORTED_MODULE_7__["AngularFireStorage"] }
+                { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"] },
+                { type: _servicios_empleado_service__WEBPACK_IMPORTED_MODULE_1__["EmpleadoService"] },
+                { type: _servicios_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+                { type: _angular_fire_storage__WEBPACK_IMPORTED_MODULE_6__["AngularFireStorage"] }
             ]; };
             tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"])('imageUser', { static: true })
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('imageUser', { static: true })
             ], EmpleadosRegistroComponent.prototype, "inputImageUser", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('imageInput', { static: true })
+            ], EmpleadosRegistroComponent.prototype, "inputImage", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('captchaElem', { static: true })
+            ], EmpleadosRegistroComponent.prototype, "captcha", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()
+            ], EmpleadosRegistroComponent.prototype, "showModalRegistro", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"])()
+            ], EmpleadosRegistroComponent.prototype, "closeModal", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"])()
+            ], EmpleadosRegistroComponent.prototype, "registradoCorrectamente", void 0);
             EmpleadosRegistroComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
                     selector: 'app-empleados-registro',
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./empleados-registro.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados-board/empleados-registro/empleados-registro.component.html")).default,
                     styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./empleados-registro.component.scss */ "./src/app/componentes/empleados-board/empleados-registro/empleados-registro.component.scss")).default]
@@ -2250,7 +2328,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("h1 {\n  text-align: center;\n  font-family: \"ZCOOL XiaoWei\", serif;\n  font-size: 90px;\n  color: black;\n}\n\n.rowLogin {\n  background-image: url('Inside-Restaurant.jpg');\n  background-position: center;\n  /* Center the image */\n  background-repeat: no-repeat;\n  /* Do not repeat the image */\n  background-size: cover;\n  /* Resize the background image to cover the entire container */\n  border: 2px solid #1A237E;\n}\n\n.card {\n  border-color: #1A237E;\n  background-color: #6C5B7B;\n}\n\n.btn-primary {\n  background-color: #1A237E;\n  border-color: #1A237E;\n}\n\n.btn-primary:hover {\n  background-color: #C5CAE9;\n  border-color: #C5CAE9;\n}\n\nhr {\n  height: 3px;\n  border: none;\n  color: #1A237E;\n  background-color: #1A237E;\n}\n\n.buttonDefault {\n  margin: 5px;\n  margin-bottom: 15px;\n}\n\n.ar {\n  margin: 0 10px;\n}\n\n/* .form-control.login-user {\n    border: 0px solid #fff !important;\n  }\n  .form-control.login-user {\n    border: 0 solid #fff !important;\n  } */\n\n.btn-social {\n  position: relative;\n  text-align: center;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  color: #fff;\n  border-color: rgba(0, 0, 0, 0.2);\n}\n\n.btn-facebook {\n  background: #3b5998;\n}\n\n.btn-google {\n  background: #dd4b39;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWxvZ2luL2VtcGxlYWRvcy1sb2dpbi5jb21wb25lbnQuc2NzcyIsIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRlcy9lbXBsZWFkb3MtbG9naW4vZW1wbGVhZG9zLWxvZ2luLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBO0VBQ0ksa0JBQUE7RUFDQSxtQ0NNVTtFRExWLGVBQUE7RUFDQSxZQUFBO0FFREo7O0FGSUE7RUFDSSw4Q0FBQTtFQUNBLDJCQUFBO0VBQTZCLHFCQUFBO0VBQzdCLDRCQUFBO0VBQThCLDRCQUFBO0VBQzlCLHNCQUFBO0VBQXdCLDhEQUFBO0VBQ3hCLHlCQUFBO0FFRUo7O0FGQ0E7RUFDSSxxQkNoQlU7RURpQlYseUJDZlU7QUNpQmQ7O0FGQ0E7RUFDSSx5QkNyQlU7RURzQlYscUJDdEJVO0FDd0JkOztBRkNBO0VBQ0kseUJDekJVO0VEMEJWLHFCQzFCVTtBQzRCZDs7QUZDQTtFQUFLLFdBQUE7RUFBWSxZQUFBO0VBQWEsY0M5QmhCO0VEOEJnQyx5QkM5QmhDO0FDb0NkOztBRkpBO0VBQ0ksV0FBQTtFQUNBLG1CQUFBO0FFT0o7O0FGSkE7RUFDSSxjQUFBO0FFT0o7O0FGSkE7Ozs7O0tBQUE7O0FBT0U7RUFDRSxrQkFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7RUFDQSxnQkFBQTtFQUNBLHVCQUFBO0VBQ0EsV0FBQTtFQUNBLGdDQUFBO0FFTUo7O0FGSkc7RUFDRyxtQkFBQTtBRU9OOztBRkxHO0VBQ0UsbUJBQUE7QUVRTCIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2VtcGxlYWRvcy1sb2dpbi9lbXBsZWFkb3MtbG9naW4uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi4vLi4vLi4vYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2Nzc1wiO1xuXG5oMXtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgZm9udC1mYW1pbHk6ICRmb250LWZhbWlseTtcbiAgICBmb250LXNpemU6IDkwcHg7XG4gICAgY29sb3I6ICRjb2xvcjA2O1xufVxuXG4ucm93TG9naW57XG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL0ltYWdlbmVzL0luc2lkZS1SZXN0YXVyYW50LmpwZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7IC8qIENlbnRlciB0aGUgaW1hZ2UgKi9cbiAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0OyAvKiBEbyBub3QgcmVwZWF0IHRoZSBpbWFnZSAqL1xuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7IC8qIFJlc2l6ZSB0aGUgYmFja2dyb3VuZCBpbWFnZSB0byBjb3ZlciB0aGUgZW50aXJlIGNvbnRhaW5lciAqL1xuICAgIGJvcmRlcjogMnB4IHNvbGlkICRjb2xvcjAyO1xufVxuXG4uY2FyZHtcbiAgICBib3JkZXItY29sb3I6ICRjb2xvcjAyO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjA0O1xufVxuXG4uYnRuLXByaW1hcnl7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMDI7XG4gICAgYm9yZGVyLWNvbG9yOiAkY29sb3IwMjtcbn1cblxuLmJ0bi1wcmltYXJ5OmhvdmVye1xuICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjAzO1xuICAgIGJvcmRlci1jb2xvcjogJGNvbG9yMDM7XG59XG5cbmhyIHsgaGVpZ2h0OjNweDsgYm9yZGVyOm5vbmU7IGNvbG9yOiRjb2xvcjAyOyBiYWNrZ3JvdW5kLWNvbG9yOiRjb2xvcjAyOyB9XG5cbi5idXR0b25EZWZhdWx0e1xuICAgIG1hcmdpbjogNXB4O1xuICAgIG1hcmdpbi1ib3R0b206IDE1cHg7XG59XG5cbi5hcntcbiAgICBtYXJnaW46IDAgMTBweDtcbn1cblxuLyogLmZvcm0tY29udHJvbC5sb2dpbi11c2VyIHtcbiAgICBib3JkZXI6IDBweCBzb2xpZCAjZmZmICFpbXBvcnRhbnQ7XG4gIH1cbiAgLmZvcm0tY29udHJvbC5sb2dpbi11c2VyIHtcbiAgICBib3JkZXI6IDAgc29saWQgI2ZmZiAhaW1wb3J0YW50O1xuICB9ICovXG5cbiAgLmJ0bi1zb2NpYWx7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIHRleHQtYWxpZ246Y2VudGVyO1xuICAgIHdoaXRlLXNwYWNlOm5vd3JhcDtcbiAgICBvdmVyZmxvdzpoaWRkZW47XG4gICAgdGV4dC1vdmVyZmxvdzplbGxpcHNpczsgXG4gICAgY29sb3I6I2ZmZjtcbiAgICBib3JkZXItY29sb3I6IHJnYmEoMCwwLDAsMC4yKTtcbiAgIH1cbiAgIC5idG4tZmFjZWJvb2t7XG4gICAgICBiYWNrZ3JvdW5kOiAjM2I1OTk4O1xuICAgfVxuICAgLmJ0bi1nb29nbGV7XG4gICAgIGJhY2tncm91bmQ6ICNkZDRiMzk7XG4gICB9IiwiLy8gQ29sb3JlcyAtLS0tLS0tLS0tLS0tXG4gICAgJGNvbG9yMDE6ICMyODM1OTM7XG4gICAgJGNvbG9yMDI6ICMxQTIzN0U7XG4gICAgJGNvbG9yMDM6ICNDNUNBRTk7XG4gICAgJGNvbG9yMDQ6ICM2QzVCN0I7XG4gICAgJGNvbG9yMDU6ICMzNTVDN0Q7XG4gICAgJGNvbG9yMDY6IGJsYWNrO1xuICAgICRjb2xvcjA3OiAjMDEzOTY0O1xuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gXG4kZm9udC1mYW1pbHk6ICdaQ09PTCBYaWFvV2VpJywgc2VyaWY7XG5cbkBtaXhpbiBBcGxpY2FyRm9uZG9BenVsKCl7ICAgICBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwNTtcbiAgICAvL2JhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL3NvZnQtd2FsbHBhcGVyLnBuZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDEzOTY0O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL2N1YmVzLnBuZ1wiKTtcbi8qIFRoaXMgaXMgbW9zdGx5IGludGVuZGVkIGZvciBwcm90b3R5cGluZzsgcGxlYXNlIGRvd25sb2FkIHRoZSBwYXR0ZXJuIGFuZCByZS1ob3N0IGZvciBwcm9kdWN0aW9uIGVudmlyb25tZW50cy4gVGhhbmsgeW91ISAqLyAgXG59XG4gICIsImgxIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LWZhbWlseTogXCJaQ09PTCBYaWFvV2VpXCIsIHNlcmlmO1xuICBmb250LXNpemU6IDkwcHg7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuLnJvd0xvZ2luIHtcbiAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL0ltYWdlbmVzL0luc2lkZS1SZXN0YXVyYW50LmpwZ1wiKTtcbiAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyO1xuICAvKiBDZW50ZXIgdGhlIGltYWdlICovXG4gIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gIC8qIERvIG5vdCByZXBlYXQgdGhlIGltYWdlICovXG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gIC8qIFJlc2l6ZSB0aGUgYmFja2dyb3VuZCBpbWFnZSB0byBjb3ZlciB0aGUgZW50aXJlIGNvbnRhaW5lciAqL1xuICBib3JkZXI6IDJweCBzb2xpZCAjMUEyMzdFO1xufVxuXG4uY2FyZCB7XG4gIGJvcmRlci1jb2xvcjogIzFBMjM3RTtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzZDNUI3Qjtcbn1cblxuLmJ0bi1wcmltYXJ5IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzFBMjM3RTtcbiAgYm9yZGVyLWNvbG9yOiAjMUEyMzdFO1xufVxuXG4uYnRuLXByaW1hcnk6aG92ZXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjQzVDQUU5O1xuICBib3JkZXItY29sb3I6ICNDNUNBRTk7XG59XG5cbmhyIHtcbiAgaGVpZ2h0OiAzcHg7XG4gIGJvcmRlcjogbm9uZTtcbiAgY29sb3I6ICMxQTIzN0U7XG4gIGJhY2tncm91bmQtY29sb3I6ICMxQTIzN0U7XG59XG5cbi5idXR0b25EZWZhdWx0IHtcbiAgbWFyZ2luOiA1cHg7XG4gIG1hcmdpbi1ib3R0b206IDE1cHg7XG59XG5cbi5hciB7XG4gIG1hcmdpbjogMCAxMHB4O1xufVxuXG4vKiAuZm9ybS1jb250cm9sLmxvZ2luLXVzZXIge1xuICAgIGJvcmRlcjogMHB4IHNvbGlkICNmZmYgIWltcG9ydGFudDtcbiAgfVxuICAuZm9ybS1jb250cm9sLmxvZ2luLXVzZXIge1xuICAgIGJvcmRlcjogMCBzb2xpZCAjZmZmICFpbXBvcnRhbnQ7XG4gIH0gKi9cbi5idG4tc29jaWFsIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICBjb2xvcjogI2ZmZjtcbiAgYm9yZGVyLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuMik7XG59XG5cbi5idG4tZmFjZWJvb2sge1xuICBiYWNrZ3JvdW5kOiAjM2I1OTk4O1xufVxuXG4uYnRuLWdvb2dsZSB7XG4gIGJhY2tncm91bmQ6ICNkZDRiMzk7XG59Il19 */");
+            /* harmony default export */ __webpack_exports__["default"] = ("h1 {\n  text-align: center;\n  font-family: \"ZCOOL XiaoWei\", serif;\n  font-size: 90px;\n  color: black;\n}\n\n.rowLogin {\n  background-image: url('Inside-Restaurant.jpg');\n  background-position: center;\n  /* Center the image */\n  background-repeat: no-repeat;\n  /* Do not repeat the image */\n  background-size: cover;\n  /* Resize the background image to cover the entire container */\n  border: 2px solid #1A237E;\n}\n\n.card {\n  border-color: #1A237E;\n  background-color: #6C5B7B;\n}\n\n.btn-primary {\n  background-color: #1A237E;\n  border-color: #1A237E;\n}\n\n.btn-primary:hover {\n  background-color: #C5CAE9;\n  border-color: #C5CAE9;\n}\n\nhr {\n  height: 3px;\n  border: none;\n  color: #1A237E;\n  background-color: #1A237E;\n}\n\n.buttonDefault {\n  margin: 5px;\n  margin-bottom: 15px;\n}\n\n.ar {\n  margin: 0 10px;\n}\n\n/* .form-control.login-user {\n    border: 0px solid #fff !important;\n  }\n  .form-control.login-user {\n    border: 0 solid #fff !important;\n  } */\n\n.btn-social {\n  position: relative;\n  text-align: center;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  color: #fff;\n  border-color: rgba(0, 0, 0, 0.2);\n}\n\n.btn-facebook {\n  background: #3b5998;\n}\n\n.btn-google {\n  background: #dd4b39;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvZW1wbGVhZG9zLWxvZ2luL2VtcGxlYWRvcy1sb2dpbi5jb21wb25lbnQuc2NzcyIsIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hc3NldHMvRXN0aWxvcy9lc3RpbG9zLWdlbmVyYWxlcy5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRlcy9lbXBsZWFkb3MtbG9naW4vZW1wbGVhZG9zLWxvZ2luLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBO0VBQ0ksa0JBQUE7RUFDQSxtQ0NNVTtFRExWLGVBQUE7RUFDQSxZQUFBO0FFREo7O0FGSUE7RUFDSSw4Q0FBQTtFQUNBLDJCQUFBO0VBQTZCLHFCQUFBO0VBQzdCLDRCQUFBO0VBQThCLDRCQUFBO0VBQzlCLHNCQUFBO0VBQXdCLDhEQUFBO0VBQ3hCLHlCQUFBO0FFRUo7O0FGQ0E7RUFDSSxxQkNoQlU7RURpQlYseUJDZlU7QUNpQmQ7O0FGQ0E7RUFDSSx5QkNyQlU7RURzQlYscUJDdEJVO0FDd0JkOztBRkNBO0VBQ0kseUJDekJVO0VEMEJWLHFCQzFCVTtBQzRCZDs7QUZDQTtFQUFLLFdBQUE7RUFBWSxZQUFBO0VBQWEsY0M5QmhCO0VEOEJnQyx5QkM5QmhDO0FDb0NkOztBRkpBO0VBQ0ksV0FBQTtFQUNBLG1CQUFBO0FFT0o7O0FGSkE7RUFDSSxjQUFBO0FFT0o7O0FGSkE7Ozs7O0tBQUE7O0FBT0U7RUFDRSxrQkFBQTtFQUNBLGtCQUFBO0VBQ0EsbUJBQUE7RUFDQSxnQkFBQTtFQUNBLHVCQUFBO0VBQ0EsV0FBQTtFQUNBLGdDQUFBO0FFTUo7O0FGSkc7RUFDRyxtQkFBQTtBRU9OOztBRkxHO0VBQ0UsbUJBQUE7QUVRTCIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudGVzL2VtcGxlYWRvcy1sb2dpbi9lbXBsZWFkb3MtbG9naW4uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi4vLi4vLi4vYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2Nzc1wiO1xuXG5oMXtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgZm9udC1mYW1pbHk6ICRmb250LWZhbWlseTtcbiAgICBmb250LXNpemU6IDkwcHg7XG4gICAgY29sb3I6ICRjb2xvcjA2O1xufVxuXG4ucm93TG9naW57XG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL0ltYWdlbmVzL0luc2lkZS1SZXN0YXVyYW50LmpwZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7IC8qIENlbnRlciB0aGUgaW1hZ2UgKi9cbiAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0OyAvKiBEbyBub3QgcmVwZWF0IHRoZSBpbWFnZSAqL1xuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7IC8qIFJlc2l6ZSB0aGUgYmFja2dyb3VuZCBpbWFnZSB0byBjb3ZlciB0aGUgZW50aXJlIGNvbnRhaW5lciAqL1xuICAgIGJvcmRlcjogMnB4IHNvbGlkICRjb2xvcjAyO1xufVxuXG4uY2FyZHtcbiAgICBib3JkZXItY29sb3I6ICRjb2xvcjAyO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjA0O1xufVxuXG4uYnRuLXByaW1hcnl7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMDI7XG4gICAgYm9yZGVyLWNvbG9yOiAkY29sb3IwMjtcbn1cblxuLmJ0bi1wcmltYXJ5OmhvdmVye1xuICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjAzO1xuICAgIGJvcmRlci1jb2xvcjogJGNvbG9yMDM7XG59XG5cbmhyIHsgaGVpZ2h0OjNweDsgYm9yZGVyOm5vbmU7IGNvbG9yOiRjb2xvcjAyOyBiYWNrZ3JvdW5kLWNvbG9yOiRjb2xvcjAyOyB9XG5cbi5idXR0b25EZWZhdWx0e1xuICAgIG1hcmdpbjogNXB4O1xuICAgIG1hcmdpbi1ib3R0b206IDE1cHg7XG59XG5cbi5hcntcbiAgICBtYXJnaW46IDAgMTBweDtcbn1cblxuLyogLmZvcm0tY29udHJvbC5sb2dpbi11c2VyIHtcbiAgICBib3JkZXI6IDBweCBzb2xpZCAjZmZmICFpbXBvcnRhbnQ7XG4gIH1cbiAgLmZvcm0tY29udHJvbC5sb2dpbi11c2VyIHtcbiAgICBib3JkZXI6IDAgc29saWQgI2ZmZiAhaW1wb3J0YW50O1xuICB9ICovXG5cbiAgLmJ0bi1zb2NpYWx7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIHRleHQtYWxpZ246Y2VudGVyO1xuICAgIHdoaXRlLXNwYWNlOm5vd3JhcDtcbiAgICBvdmVyZmxvdzpoaWRkZW47XG4gICAgdGV4dC1vdmVyZmxvdzplbGxpcHNpczsgXG4gICAgY29sb3I6I2ZmZjtcbiAgICBib3JkZXItY29sb3I6IHJnYmEoMCwwLDAsMC4yKTtcbiAgIH1cbiAgIC5idG4tZmFjZWJvb2t7XG4gICAgICBiYWNrZ3JvdW5kOiAjM2I1OTk4O1xuICAgfVxuICAgLmJ0bi1nb29nbGV7XG4gICAgIGJhY2tncm91bmQ6ICNkZDRiMzk7XG4gICB9IiwiLy8gQ29sb3JlcyAtLS0tLS0tLS0tLS0tXG4gICAgJGNvbG9yMDE6ICMyODM1OTM7XG4gICAgJGNvbG9yMDI6ICMxQTIzN0U7XG4gICAgJGNvbG9yMDM6ICNDNUNBRTk7XG4gICAgJGNvbG9yMDQ6ICM2QzVCN0I7XG4gICAgJGNvbG9yMDU6ICMzNTVDN0Q7XG4gICAgJGNvbG9yMDY6IGJsYWNrO1xuICAgICRjb2xvcjA3OiAjMDEzOTY0O1xuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gXG4kZm9udC1mYW1pbHk6ICdaQ09PTCBYaWFvV2VpJywgc2VyaWY7XG5cbkBtaXhpbiBBcGxpY2FyRm9uZG9BenVsKCl7ICAgICBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwNTtcbiAgICAvL2JhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL3NvZnQtd2FsbHBhcGVyLnBuZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDEzOTY0O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL2N1YmVzLnBuZ1wiKTtcbi8qIFRoaXMgaXMgbW9zdGx5IGludGVuZGVkIGZvciBwcm90b3R5cGluZzsgcGxlYXNlIGRvd25sb2FkIHRoZSBwYXR0ZXJuIGFuZCByZS1ob3N0IGZvciBwcm9kdWN0aW9uIGVudmlyb25tZW50cy4gVGhhbmsgeW91ISAqLyAgXG59XG4iLCJoMSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6IFwiWkNPT0wgWGlhb1dlaVwiLCBzZXJpZjtcbiAgZm9udC1zaXplOiA5MHB4O1xuICBjb2xvcjogYmxhY2s7XG59XG5cbi5yb3dMb2dpbiB7XG4gIGJhY2tncm91bmQtaW1hZ2U6IHVybChcIi4uLy4uLy4uL2Fzc2V0cy9JbWFnZW5lcy9JbnNpZGUtUmVzdGF1cmFudC5qcGdcIik7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcbiAgLyogQ2VudGVyIHRoZSBpbWFnZSAqL1xuICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xuICAvKiBEbyBub3QgcmVwZWF0IHRoZSBpbWFnZSAqL1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuICAvKiBSZXNpemUgdGhlIGJhY2tncm91bmQgaW1hZ2UgdG8gY292ZXIgdGhlIGVudGlyZSBjb250YWluZXIgKi9cbiAgYm9yZGVyOiAycHggc29saWQgIzFBMjM3RTtcbn1cblxuLmNhcmQge1xuICBib3JkZXItY29sb3I6ICMxQTIzN0U7XG4gIGJhY2tncm91bmQtY29sb3I6ICM2QzVCN0I7XG59XG5cbi5idG4tcHJpbWFyeSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMxQTIzN0U7XG4gIGJvcmRlci1jb2xvcjogIzFBMjM3RTtcbn1cblxuLmJ0bi1wcmltYXJ5OmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0M1Q0FFOTtcbiAgYm9yZGVyLWNvbG9yOiAjQzVDQUU5O1xufVxuXG5ociB7XG4gIGhlaWdodDogM3B4O1xuICBib3JkZXI6IG5vbmU7XG4gIGNvbG9yOiAjMUEyMzdFO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMUEyMzdFO1xufVxuXG4uYnV0dG9uRGVmYXVsdCB7XG4gIG1hcmdpbjogNXB4O1xuICBtYXJnaW4tYm90dG9tOiAxNXB4O1xufVxuXG4uYXIge1xuICBtYXJnaW46IDAgMTBweDtcbn1cblxuLyogLmZvcm0tY29udHJvbC5sb2dpbi11c2VyIHtcbiAgICBib3JkZXI6IDBweCBzb2xpZCAjZmZmICFpbXBvcnRhbnQ7XG4gIH1cbiAgLmZvcm0tY29udHJvbC5sb2dpbi11c2VyIHtcbiAgICBib3JkZXI6IDAgc29saWQgI2ZmZiAhaW1wb3J0YW50O1xuICB9ICovXG4uYnRuLXNvY2lhbCB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgY29sb3I6ICNmZmY7XG4gIGJvcmRlci1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjIpO1xufVxuXG4uYnRuLWZhY2Vib29rIHtcbiAgYmFja2dyb3VuZDogIzNiNTk5ODtcbn1cblxuLmJ0bi1nb29nbGUge1xuICBiYWNrZ3JvdW5kOiAjZGQ0YjM5O1xufSJdfQ== */");
             /***/ 
         }),
         /***/ "./src/app/componentes/empleados-login/empleados-login.component.ts": 
@@ -2287,8 +2365,8 @@ var __extends = (this && this.__extends) || (function () {
                             { type: 'required', message: 'Debe ingresar una contraseña.' }
                         ]
                     };
-                    _this.email = '';
-                    _this.password = '';
+                    _this.user = '';
+                    _this.pass = '';
                     /*  this.form = this.fb.group({
                        user: new FormControl('', Validators.compose([
                          Validators.required,
@@ -2312,29 +2390,24 @@ var __extends = (this && this.__extends) || (function () {
                     var dataLogin = null;
                     switch (tipo) {
                         case 'S':
-                            dataLogin = new src_app_clases_Login__WEBPACK_IMPORTED_MODULE_4__["Login"]('admin@admin.com', '123456');
-                            this.form.setValue(dataLogin);
-                            this.Submit();
+                            this.user = 'admin@admin.com';
+                            this.pass = '123456';
                             break;
                         case 'B':
-                            dataLogin = new src_app_clases_Login__WEBPACK_IMPORTED_MODULE_4__["Login"]('Marcos@comanda.com', '123456');
-                            this.form.setValue(dataLogin);
-                            this.Submit();
+                            this.user = 'bartender@comanda.com';
+                            this.pass = '123456';
                             break;
                         case 'CE':
-                            dataLogin = new src_app_clases_Login__WEBPACK_IMPORTED_MODULE_4__["Login"]('cervecero@comanda.com', '123456');
-                            this.form.setValue(dataLogin);
-                            this.Submit();
+                            this.user = 'cervecero@comanda.com';
+                            this.pass = '123456';
                             break;
                         case 'CO':
-                            dataLogin = new src_app_clases_Login__WEBPACK_IMPORTED_MODULE_4__["Login"]('cocinero@comanda.com', '123456');
-                            this.form.setValue(dataLogin);
-                            this.Submit();
+                            this.user = 'cocinero@comanda.com';
+                            this.pass = '123456';
                             break;
                         case 'M':
-                            dataLogin = new src_app_clases_Login__WEBPACK_IMPORTED_MODULE_4__["Login"]('mozo@comanda.com', '123456');
-                            this.form.setValue(dataLogin);
-                            this.Submit();
+                            this.user = 'mozo@comanda.com';
+                            this.pass = '123456';
                             break;
                     }
                 };
@@ -2406,8 +2479,14 @@ var __extends = (this && this.__extends) || (function () {
                 { type: _angular_fire_storage__WEBPACK_IMPORTED_MODULE_7__["AngularFireStorage"] }
             ]; };
             tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('imageUser', { static: true })
-            ], EmpleadosLoginComponent.prototype, "inputImageUser", void 0);
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('captchaElem', { static: true })
+            ], EmpleadosLoginComponent.prototype, "captcha", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('inputEmail', { static: true })
+            ], EmpleadosLoginComponent.prototype, "inputEmail", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('inputPassword', { static: true })
+            ], EmpleadosLoginComponent.prototype, "inputPasword", void 0);
             EmpleadosLoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-empleados-login',
@@ -2528,7 +2607,7 @@ var __extends = (this && this.__extends) || (function () {
                 function MesaListComponent(mesasService, domSanitizer) {
                     this.mesasService = mesasService;
                     this.domSanitizer = domSanitizer;
-                    //this.cargarLista();
+                    this.cargarLista();
                 }
                 MesaListComponent.prototype.ngOnInit = function () {
                 };
@@ -2538,42 +2617,46 @@ var __extends = (this && this.__extends) || (function () {
                         _this.mesasList = response;
                     });
                 };
-                MesaListComponent.prototype.cambiarEstado = function (estado, codigo) {
+                MesaListComponent.prototype.showRegistroMesa = function () {
+                    //this.modalRegistro.cargarModal();
+                    this.showModalRegistro = true;
+                };
+                MesaListComponent.prototype.cambiarEstado = function (estado, mesa) {
                     var _this = this;
                     switch (estado) {
                         case 1:
-                            this.mesasService.CambiarEstadoEsperando(codigo).then(function () {
+                            this.mesasService.CambiarEstadoEsperando(mesa).then(function () {
                                 _this.cargarLista();
                             });
                             break;
                         case 2:
-                            this.mesasService.CambiarEstadoComiendo(codigo).then(function () {
+                            this.mesasService.CambiarEstadoComiendo(mesa).then(function () {
                                 _this.cargarLista();
                             });
                             break;
                         case 3:
-                            this.mesasService.CambiarEstadoPagando(codigo).then(function () {
+                            this.mesasService.CambiarEstadoPagando(mesa).then(function () {
                                 _this.cargarLista();
                             });
                             break;
                         case 4:
-                            this.mesasService.CambiarEstadoCerrada(codigo).then(function () {
+                            this.mesasService.CambiarEstadoCerrada(mesa).then(function () {
                                 _this.cargarLista();
                             });
                             break;
                     }
                     this.cargarLista();
                 };
-                MesaListComponent.prototype.eliminar = function (codigo) {
+                MesaListComponent.prototype.eliminar = function (mesa) {
                     var _this = this;
-                    this.mesasService.Eliminar(codigo).then(function () {
+                    this.mesasService.Eliminar(mesa).then(function () {
                         _this.cargarLista();
                     });
                 };
-                MesaListComponent.prototype.cobrar = function (codigo) {
+                MesaListComponent.prototype.cobrar = function (mesa) {
                     var _this = this;
-                    this.mesasService.Cobrar(codigo).then(function () {
-                        _this.mesasService.CambiarEstadoCerrada(codigo).then(function () {
+                    this.mesasService.Cobrar(mesa).then(function () {
+                        _this.mesasService.CambiarEstadoCerrada(mesa).then(function () {
                             _this.cargarLista();
                         });
                     });
@@ -2584,6 +2667,9 @@ var __extends = (this && this.__extends) || (function () {
                 { type: src_app_servicios_mesas_service__WEBPACK_IMPORTED_MODULE_1__["MesasService"] },
                 { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"] }
             ]; };
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('modalRegistro', { static: false })
+            ], MesaListComponent.prototype, "modalRegistro", void 0);
             MesaListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
                     selector: 'app-mesa-list',
@@ -2624,12 +2710,13 @@ var __extends = (this && this.__extends) || (function () {
                     var _this = _super.call(this) || this;
                     _this.fb = fb;
                     _this.mesasService = mesasService;
+                    _this.registradoCorrectamente = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+                    _this.closeModal = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+                    _this.form = _this.fb.group({
+                        codigo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+                        foto: ['']
+                    });
                     return _this;
-                    /*  this.form = this.fb.group({
-                       codigo: ['', Validators.required],
-                       foto: [''],
-                       recaptcha: ['', Validators.required]
-                     }); */
                 }
                 MesaRegistroComponent.prototype.ngOnInit = function () {
                 };
@@ -2665,11 +2752,15 @@ var __extends = (this && this.__extends) || (function () {
                     this.success = false;
                     var fotoValida = this.ValidarFoto(this.file);
                     if (this.form.valid && fotoValida) {
-                        var codigo = this.form.get('codigo').value;
-                        this.mesasService.Registrar(codigo, this.file)
+                        this.mesa.codigo = this.form.get('codigo').value;
+                        this.mesa.estado = 'Cerrada';
+                        this.mesa.tipoFoto = this.file.filename;
+                        this.mesa.nombreFoto = this.file.filetype;
+                        this.mesa.foto = this.file.value;
+                        this.mesasService.Registrar(this.mesa)
                             .then(function (response) {
                             console.log(response);
-                            if (response['Estado'] === 'OK') {
+                            if (response) {
                                 _this.success = true;
                                 _this.form.reset();
                                 _this.captcha.reloadCaptcha();
@@ -2678,12 +2769,12 @@ var __extends = (this && this.__extends) || (function () {
                             }
                             else {
                                 _this.error = true;
-                                _this.errorMessage = response['Mensaje'];
+                                _this.errorMessage = "error al registrar mesa";
                             }
                         })
                             .catch(function (error) {
                             _this.error = true;
-                            _this.errorMessage = error['Mensaje'];
+                            _this.errorMessage = "error al registrar mesa";
                             console.error(error);
                         });
                     }
@@ -2696,12 +2787,31 @@ var __extends = (this && this.__extends) || (function () {
                         this.error = true;
                     }
                 };
+                MesaRegistroComponent.prototype.cargarModal = function () {
+                    this.cargarForm();
+                };
+                MesaRegistroComponent.prototype.cargarForm = function () {
+                    this.form = this.fb.group({});
+                };
+                MesaRegistroComponent.prototype.cerrar = function () {
+                    this.closeModal.emit();
+                    this.form = this.fb.group({});
+                };
                 return MesaRegistroComponent;
             }(_Common_Registro__WEBPACK_IMPORTED_MODULE_3__["Registro"]));
             MesaRegistroComponent.ctorParameters = function () { return [
                 { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
                 { type: src_app_servicios_mesas_service__WEBPACK_IMPORTED_MODULE_4__["MesasService"] }
             ]; };
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], MesaRegistroComponent.prototype, "showModalRegistro", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+            ], MesaRegistroComponent.prototype, "closeModal", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+            ], MesaRegistroComponent.prototype, "registradoCorrectamente", void 0);
             MesaRegistroComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-mesa-registro',
@@ -2719,7 +2829,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = (".navbar-brand {\n  font-family: \"ZCOOL XiaoWei\", serif;\n}\n\na {\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvbmF2ZWdhY2lvbi9uYXZlZ2FjaW9uLmNvbXBvbmVudC5zY3NzIiwiL2hvbWUvYXJpZWwvTGFib3JhdG9yaW8gNC9Db21hbmRhV2ViLWxhYjQvc3JjL2Fzc2V0cy9Fc3RpbG9zL2VzdGlsb3MtZ2VuZXJhbGVzLnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudGVzL25hdmVnYWNpb24vbmF2ZWdhY2lvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNJLG1DQ09VO0FDUmQ7O0FGR0M7RUFDRSxlQUFBO0FFQUgiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRlcy9uYXZlZ2FjaW9uL25hdmVnYWNpb24uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi4vLi4vLi4vYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2Nzc1wiO1xuXG4ubmF2YmFyLWJyYW5ke1xuICAgIGZvbnQtZmFtaWx5OiAkZm9udC1mYW1pbHk7XG59XG4gYXtcbiAgIGN1cnNvcjogcG9pbnRlcjtcbiB9IiwiLy8gQ29sb3JlcyAtLS0tLS0tLS0tLS0tXG4gICAgJGNvbG9yMDE6ICMyODM1OTM7XG4gICAgJGNvbG9yMDI6ICMxQTIzN0U7XG4gICAgJGNvbG9yMDM6ICNDNUNBRTk7XG4gICAgJGNvbG9yMDQ6ICM2QzVCN0I7XG4gICAgJGNvbG9yMDU6ICMzNTVDN0Q7XG4gICAgJGNvbG9yMDY6IGJsYWNrO1xuICAgICRjb2xvcjA3OiAjMDEzOTY0O1xuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gXG4kZm9udC1mYW1pbHk6ICdaQ09PTCBYaWFvV2VpJywgc2VyaWY7XG5cbkBtaXhpbiBBcGxpY2FyRm9uZG9BenVsKCl7ICAgICBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwNTtcbiAgICAvL2JhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL3NvZnQtd2FsbHBhcGVyLnBuZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDEzOTY0O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL2N1YmVzLnBuZ1wiKTtcbi8qIFRoaXMgaXMgbW9zdGx5IGludGVuZGVkIGZvciBwcm90b3R5cGluZzsgcGxlYXNlIGRvd25sb2FkIHRoZSBwYXR0ZXJuIGFuZCByZS1ob3N0IGZvciBwcm9kdWN0aW9uIGVudmlyb25tZW50cy4gVGhhbmsgeW91ISAqLyAgXG59XG4gICIsIi5uYXZiYXItYnJhbmQge1xuICBmb250LWZhbWlseTogXCJaQ09PTCBYaWFvV2VpXCIsIHNlcmlmO1xufVxuXG5hIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xufSJdfQ== */");
+            /* harmony default export */ __webpack_exports__["default"] = (".navbar-brand {\n  font-family: \"ZCOOL XiaoWei\", serif;\n}\n\na {\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FyaWVsL0xhYm9yYXRvcmlvIDQvQ29tYW5kYVdlYi1sYWI0L3NyYy9hcHAvY29tcG9uZW50ZXMvbmF2ZWdhY2lvbi9uYXZlZ2FjaW9uLmNvbXBvbmVudC5zY3NzIiwiL2hvbWUvYXJpZWwvTGFib3JhdG9yaW8gNC9Db21hbmRhV2ViLWxhYjQvc3JjL2Fzc2V0cy9Fc3RpbG9zL2VzdGlsb3MtZ2VuZXJhbGVzLnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudGVzL25hdmVnYWNpb24vbmF2ZWdhY2lvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNJLG1DQ09VO0FDUmQ7O0FGR0M7RUFDRSxlQUFBO0FFQUgiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRlcy9uYXZlZ2FjaW9uL25hdmVnYWNpb24uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi4vLi4vLi4vYXNzZXRzL0VzdGlsb3MvZXN0aWxvcy1nZW5lcmFsZXMuc2Nzc1wiO1xuXG4ubmF2YmFyLWJyYW5ke1xuICAgIGZvbnQtZmFtaWx5OiAkZm9udC1mYW1pbHk7XG59XG4gYXtcbiAgIGN1cnNvcjogcG9pbnRlcjtcbiB9IiwiLy8gQ29sb3JlcyAtLS0tLS0tLS0tLS0tXG4gICAgJGNvbG9yMDE6ICMyODM1OTM7XG4gICAgJGNvbG9yMDI6ICMxQTIzN0U7XG4gICAgJGNvbG9yMDM6ICNDNUNBRTk7XG4gICAgJGNvbG9yMDQ6ICM2QzVCN0I7XG4gICAgJGNvbG9yMDU6ICMzNTVDN0Q7XG4gICAgJGNvbG9yMDY6IGJsYWNrO1xuICAgICRjb2xvcjA3OiAjMDEzOTY0O1xuLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gXG4kZm9udC1mYW1pbHk6ICdaQ09PTCBYaWFvV2VpJywgc2VyaWY7XG5cbkBtaXhpbiBBcGxpY2FyRm9uZG9BenVsKCl7ICAgICBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkY29sb3IwNTtcbiAgICAvL2JhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL3NvZnQtd2FsbHBhcGVyLnBuZ1wiKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDEzOTY0O1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybChcImh0dHBzOi8vd3d3LnRyYW5zcGFyZW50dGV4dHVyZXMuY29tL3BhdHRlcm5zL2N1YmVzLnBuZ1wiKTtcbi8qIFRoaXMgaXMgbW9zdGx5IGludGVuZGVkIGZvciBwcm90b3R5cGluZzsgcGxlYXNlIGRvd25sb2FkIHRoZSBwYXR0ZXJuIGFuZCByZS1ob3N0IGZvciBwcm9kdWN0aW9uIGVudmlyb25tZW50cy4gVGhhbmsgeW91ISAqLyAgXG59XG4iLCIubmF2YmFyLWJyYW5kIHtcbiAgZm9udC1mYW1pbHk6IFwiWkNPT0wgWGlhb1dlaVwiLCBzZXJpZjtcbn1cblxuYSB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn0iXX0= */");
             /***/ 
         }),
         /***/ "./src/app/componentes/navegacion/navegacion.component.ts": 
@@ -2742,10 +2852,11 @@ var __extends = (this && this.__extends) || (function () {
                     this.authService = authService;
                     this.router = router;
                     this.jwt = jwt;
-                    //const token = localStorage.getItem('token');
+                    var data = localStorage.getItem('Empleado');
+                    this.empleado = JSON.parse(data);
                     //const tokenInfo = this.jwt.decodeToken(token);
                     //this.user = new User(tokenInfo['usuario'], tokenInfo['tipo'], tokenInfo['id'], tokenInfo['nombre']);
-                    this.user = new src_app_clases_User__WEBPACK_IMPORTED_MODULE_3__["User"]('admin', 'Socio', '1', 'ariel');
+                    this.user = new src_app_clases_User__WEBPACK_IMPORTED_MODULE_3__["User"](this.empleado[0].usuario, this.empleado[0].tipo, this.empleado[0].id, this.empleado[0].nombre);
                 }
                 NavegacionComponent.prototype.ngOnInit = function () {
                 };
@@ -3176,15 +3287,17 @@ var __extends = (this && this.__extends) || (function () {
                         }).catch(function (err) { return rejected(err); });
                     });
                 };
-                //desde aca mi codigo 
-                AuthService.prototype.registerUser = function (email, pass, role) {
+                //desde aca mi codigo 4
+                AuthService.prototype.registerUser = function (email, pass) {
                     var _this = this;
                     return new Promise(function (resolve, reject) {
                         _this.AFauth.auth.createUserWithEmailAndPassword(email, pass)
                             .then(function (userData) {
-                            resolve(userData),
-                                _this.updateUserDataEmpleado(userData.user, role); //tenemos que enviarle el rol que se selecciona 
-                        }).catch(function (err) { return console.log(reject(err)); });
+                            resolve(userData);
+                            // this.updateUserDataEmpleado(userData.user,role) //tenemos que enviarle el rol que se selecciona 
+                        }).catch(function (err) {
+                            reject(err);
+                        });
                     });
                 };
                 AuthService.prototype.loginEmailUser = function (email, pass) {
@@ -3196,18 +3309,16 @@ var __extends = (this && this.__extends) || (function () {
                 };
                 //si se registra por facebook ,le asignamos el rol de cliente 
                 AuthService.prototype.loginFacebookUser = function () {
-                    var _this = this;
                     return this.AFauth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].FacebookAuthProvider())
                         .then(function (credential) {
-                        _this.updateUserDataCliente(credential.user);
+                        // this.updateUserDataCliente(credential.user);
                     });
                 };
                 //si se registra por google ,le asignamos el rol de cliente
                 AuthService.prototype.loginGoogleUser = function () {
-                    var _this = this;
                     return this.AFauth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].GoogleAuthProvider())
                         .then(function (credential) {
-                        _this.updateUserDataCliente(credential.user);
+                        //this.updateUserDataCliente(credential.user);
                     });
                 };
                 AuthService.prototype.logoutUser = function () {
@@ -3216,30 +3327,10 @@ var __extends = (this && this.__extends) || (function () {
                 AuthService.prototype.isAuth = function () {
                     return this.AFauth.authState.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (auth) { return auth; }));
                 };
-                AuthService.prototype.updateUserDataCliente = function (user) {
-                    var userRef = this.afs.doc('users/' + user.uid);
-                    var data = {
-                        id: user.uid,
-                        email: user.email,
-                        roles: {
-                            cliente: true
-                        }
-                    };
-                    return userRef.set(data, { merge: true });
-                };
-                AuthService.prototype.updateUserDataEmpleado = function (user, rolEmpleado) {
-                    var userRef = this.afs.doc('users/' + user.uid);
-                    var data = {
-                        id: user.uid,
-                        email: user.email,
-                        roles: {
-                            cliente: true //rolEmpleado
-                        }
-                    };
-                    return userRef.set(data, { merge: true });
-                };
-                AuthService.prototype.isUserRole = function (userUid) {
-                    return this.afs.doc('users/' + userUid).valueChanges();
+                AuthService.prototype.isUserComanda = function (userUid) {
+                    /*  const userRef:AngularFirestoreDocument<Empleado>= this.afs.doc('Empleado/'+userUid);
+                     return userRef.valueChanges();
+                  */
                 };
                 return AuthService;
             }());
@@ -3302,63 +3393,243 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmpleadoService", function () { return EmpleadoService; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/es2015/index.js");
+            /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+            /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
+            /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_4__);
             var EmpleadoService = /** @class */ (function () {
-                function EmpleadoService() {
+                //private empleado:Observable<Empleado>;
+                function EmpleadoService(afs) {
+                    this.afs = afs;
+                    this.empleadoColeccion = afs.collection('Empleado');
+                    this.empleados = this.empleadoColeccion.valueChanges();
                 }
                 EmpleadoService.prototype.Listar = function () {
-                    //return this.miHttp.httpGetO<Empleado[]>('empleados/listar/');
-                    return this.retorno;
+                    this.empleadoColeccion = this.afs.collection('Empleado');
+                    return this.empleados = this.empleadoColeccion.snapshotChanges()
+                        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (changes) {
+                        return changes.map(function (action) {
+                            var data = action.payload.doc.data();
+                            //data.id = action.payload.doc.id; me pisa el id del user con el del documento
+                            return data;
+                        });
+                    }));
                 };
-                EmpleadoService.prototype.Registrar = function (usuario, password, nombre, tipo) {
-                    var request = {
-                        usuario: usuario,
-                        clave: password,
-                        nombre: nombre,
-                        tipo: tipo
-                    };
-                    //return this.miHttp.httpPostP('empleados/registrarEmpleado/', request);
-                    return this.retornoPromesa;
+                //tengo que dar de alta el usuario y el rol 
+                EmpleadoService.prototype.Registrar = function (empleado) {
+                    var _this = this;
+                    this.empleadoColeccion = this.afs.collection('Empleado');
+                    return new Promise(function (resolve, reject) {
+                        //REGISTRO USUARIO CORREO IMAGEN Y EMPLEADO
+                        empleado.fechaRegistro = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
+                        empleado.ultimoLogin = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
+                        _this.empleadoColeccion.add(empleado).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
-                EmpleadoService.prototype.Modificar = function (usuario, id, nombre, tipo) {
-                    var request = {
-                        id: id,
-                        usuario: usuario,
-                        nombre: nombre,
-                        tipo: tipo
-                    };
-                    //return this.miHttp.httpPostP('empleados/modificar/', request);
-                    return this.retornoPromesa;
+                EmpleadoService.prototype.obtenerEmpleado = function (idEmpleado) {
+                    this.empleadoColeccion = this.afs.collection('Empleado', function (x) { return x.where("id", "==", idEmpleado); });
+                    return this.empleados = this.empleadoColeccion.snapshotChanges()
+                        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (changes) {
+                        return changes.map(function (action) {
+                            var data = action.payload.doc.data();
+                            //data.id = action.payload.doc.id; me pisa el id del user con el del documento
+                            return data;
+                        });
+                    }));
                 };
-                EmpleadoService.prototype.Baja = function (id) {
-                    //return this.miHttp.httpDeleteP('empleados/' + id);
-                    return this.retornoPromesa;
+                EmpleadoService.prototype.Modificar = function (empleado) {
+                    var _this = this;
+                    //MODIFICO EMPLEADO       
+                    var idEmpleado = empleado.id;
+                    empleado.fechaRegistro = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.empleadoDoc = _this.afs.doc('Empleado/' + idEmpleado);
+                        _this.empleadoDoc.update(empleado).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
-                EmpleadoService.prototype.Activar = function (id) {
+                EmpleadoService.prototype.Baja = function (empleado) {
+                    var _this = this;
+                    var idEmpleado = empleado.id;
+                    empleado.estado = "B";
+                    empleado.fechaRegistro = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.empleadoDoc = _this.afs.doc('Empleado/' + idEmpleado);
+                        _this.empleadoDoc.update(empleado).then(function (resolved) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
+                };
+                EmpleadoService.prototype.Activar = function (empleado) {
+                    var _this = this;
                     //return this.miHttp.httpGetP('empleados/activar/' + id);
-                    return this.retornoPromesa;
+                    var idEmpleado = empleado.id;
+                    empleado.estado = "A";
+                    empleado.fechaRegistro = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.empleadoDoc = _this.afs.doc('Empleado/' + idEmpleado);
+                        _this.empleadoDoc.update(empleado).then(function (resolved) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
-                EmpleadoService.prototype.Suspender = function (id) {
+                EmpleadoService.prototype.Suspender = function (empleado) {
+                    var _this = this;
                     //return this.miHttp.httpDeleteP('empleados/suspender/' + id);
-                    return this.retornoPromesa;
+                    var idEmpleado = empleado.id;
+                    empleado.estado = "S";
+                    empleado.fechaRegistro = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.empleadoDoc = _this.afs.doc('Empleado/' + idEmpleado);
+                        _this.empleadoDoc.update(empleado).then(function (resolved) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
-                EmpleadoService.prototype.CambiarClave = function (newPassword) {
-                    var request = {
-                        clave: newPassword
-                    };
-                    //return this.miHttp.httpPostP('empleados/cambiarClave/', request);
-                    return this.retornoPromesa;
+                EmpleadoService.prototype.CambiarClave = function (empleado) {
+                    var _this = this;
+                    var idEmpleado = empleado.id;
+                    empleado.fechaRegistro = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.empleadoDoc = _this.afs.doc('Empleado/' + idEmpleado);
+                        _this.empleadoDoc.update(empleado).then(function (resolved) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
                 EmpleadoService.prototype.CantidadOperacionesPorSector = function () {
                     //return this.miHttp.httpGetO<OperacionesPorSector[]>('empleados/cantidadOperacionesPorSector');
+                    // let idBook=book.id;
+                    // this.bookDoc=this.afs.doc<BookInterface>('books/'+idBook);
+                    // this.bookDoc.update(book);
                     return this.retornoOperaciones;
                 };
                 return EmpleadoService;
             }());
+            EmpleadoService.ctorParameters = function () { return [
+                { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
+            ]; };
             EmpleadoService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
                     providedIn: 'root'
                 })
             ], EmpleadoService);
+            /* public static function SumarOperacion($id_empleado)
+            {
+                try {
+                    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE empleado
+                                                                    SET cantidad_operaciones = cantidad_operaciones + 1
+                                                                    WHERE id_empleado = :id_empleado");
+                    $consulta->bindValue(':id_empleado', $id_empleado, PDO::PARAM_INT);
+                    $consulta->execute();
+                    $respuesta = array("Estado" => "OK", "Mensaje" => "Operación sumada correctamente.");
+                } catch (Exception $e) {
+                    $mensaje = $e->getMessage();
+                    $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                }
+                finally {
+                    return $respuesta;
+                }
+            }
+            ///Cantidad de operaciones de todos por sector
+            public static function CantidadOperacionesPorSector()
+            {
+                try {
+                    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT te.descripcion as sector, SUM(em.cantidad_operaciones) as cantidad_operaciones FROM empleado em
+                                                                    INNER JOIN tipoempleado te on em.id_tipo_empleado = te.id_tipo_empleado
+                                                                    GROUP BY(te.descripcion)");
+                    $consulta->execute();
+                    $respuesta = $consulta->fetchAll();
+                } catch (Exception $e) {
+                    $mensaje = $e->getMessage();
+                    $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                }
+                finally {
+                    return $respuesta;
+                }
+            }
+            ///Cantidad de operaciones de todos por sector
+            public static function CantidadOperacionesEmpleadosPorSector($sector)
+            {
+                try {
+                    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT te.descripcion as sector, em.nombre_empleado, em.id_empleado,
+                                                                    em.cantidad_operaciones as cantidad_operaciones FROM empleado em
+                                                                    INNER JOIN tipoempleado te on em.id_tipo_empleado = te.id_tipo_empleado WHERE te.descripcion = :sector");
+                    $consulta->bindValue(':sector', $sector, PDO::PARAM_STR);
+                    $consulta->execute();
+                    $respuesta = $consulta->fetchAll();
+                } catch (Exception $e) {
+                    $mensaje = $e->getMessage();
+                    $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                }
+                finally {
+                    return $respuesta;
+                }
+            }
+            ///Listado completo de empleados entre fechas de login
+            public static function ListarEntreFechasLogin($fecha1,$fecha2)
+            {
+                try {
+                    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT em.ID_empleado as id, te.Descripcion as tipo, em.nombre_empleado as nombre,
+                                                                em.usuario, em.fecha_registro as fechaRegistro, em.fecha_ultimo_login as ultimoLogin, em.estado,
+                                                                em.cantidad_operaciones
+                                                                FROM empleado em INNER JOIN tipoempleado te on em.id_tipo_empleado = te.id_tipo_empleado
+                                                                WHERE fecha_ultimo_login BETWEEN :fecha1 AND :fecha2");
+                    $consulta->bindValue(':fecha1', $fecha1, PDO::PARAM_STR);
+                    $consulta->bindValue(':fecha2', $fecha2, PDO::PARAM_STR);
+                    $consulta->execute();
+                    $respuesta = $consulta->fetchAll(PDO::FETCH_CLASS, "Empleado");
+                } catch (Exception $e) {
+                    $mensaje = $e->getMessage();
+                    $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                }
+                finally {
+                    return $respuesta;
+                }
+            }
+            ///Listado completo de empleados entre fechas de registro
+            public static function ListarEntreFechasRegistro($fecha1,$fecha2)
+            {
+                try {
+                    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT em.ID_empleado as id, te.Descripcion as tipo, em.nombre_empleado as nombre,
+                                                                em.usuario, em.fecha_registro as fechaRegistro, em.fecha_ultimo_login as ultimoLogin, em.estado,
+                                                                em.cantidad_operaciones
+                                                                FROM empleado em INNER JOIN tipoempleado te on em.id_tipo_empleado = te.id_tipo_empleado
+                                                                WHERE fecha_registro BETWEEN :fecha1 AND :fecha2");
+                    $consulta->bindValue(':fecha1', $fecha1, PDO::PARAM_STR);
+                    $consulta->bindValue(':fecha2', $fecha2, PDO::PARAM_STR);
+                    $consulta->execute();
+                    $respuesta = $consulta->fetchAll(PDO::FETCH_CLASS, "Empleado");
+                } catch (Exception $e) {
+                    $mensaje = $e->getMessage();
+                    $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                }
+                finally {
+                    return $respuesta;
+                }
+            }
+            }
+             */
             /***/ 
         }),
         /***/ "./src/app/servicios/http-base.service.ts": 
@@ -3453,31 +3724,63 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MesasService", function () { return MesasService; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+            /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/es2015/index.js");
             //import { HttpBase } from './http-base.service';
             var MesasService = /** @class */ (function () {
-                function MesasService() {
+                function MesasService(afs) {
+                    this.afs = afs;
+                    this.mesaColeccion = afs.collection('Mesa');
+                    this.mesas = this.mesaColeccion.valueChanges();
                 }
                 MesasService.prototype.Listar = function () {
-                    //return this.miHttp.httpGetO<Mesa[]>('mesas/listar/');
-                    return this.retorno;
+                    this.mesaColeccion = this.afs.collection('Mesa');
+                    return this.mesas = this.mesaColeccion.snapshotChanges()
+                        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (changes) {
+                        return changes.map(function (action) {
+                            var data = action.payload.doc.data();
+                            //data.id = action.payload.doc.id; me pisa el id del user con el del documento
+                            return data;
+                        });
+                    }));
                 };
-                MesasService.prototype.Registrar = function (codigo, foto) {
-                    var request = {
-                        codigo: codigo
-                    };
-                    /*  return this.miHttp.httpPostP('mesas/registrar/', request).then( response => {
-                       if (foto) {
-                         return this.ActualizarFoto(codigo, foto).catch( error => {
-                           console.log(error);
-                           this.Eliminar(codigo);
-                         });
-                       }
-                     }); */
-                    return this.returnPromesa;
+                MesasService.prototype.ObtenerMesa = function (codigo) {
+                    this.mesaColeccion = this.afs.collection('Mesa', function (x) { return x.where("codigo", "==", codigo); });
+                    return this.mesas = this.mesaColeccion.snapshotChanges()
+                        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (changes) {
+                        return changes.map(function (action) {
+                            var data = action.payload.doc.data();
+                            //data.id = action.payload.doc.id; me pisa el id del user con el del documento
+                            return data;
+                        });
+                    }));
                 };
-                MesasService.prototype.Eliminar = function (codigo) {
-                    //return this.miHttp.httpDeleteP('mesas/' + codigo);
-                    return this.returnPromesa;
+                MesasService.prototype.Registrar = function (mesa) {
+                    var _this = this;
+                    this.mesaColeccion = this.afs.collection('Mesa');
+                    return new Promise(function (resolve, reject) {
+                        //REGISTRO USUARIO CORREO IMAGEN Y EMPLEADO
+                        // empleado.fechaRegistro= firestore.Timestamp.now();
+                        // empleado.ultimoLogin=firestore.Timestamp.now();
+                        _this.mesaColeccion.add(mesa).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
+                };
+                MesasService.prototype.Eliminar = function (mesa) {
+                    var _this = this;
+                    //MODIFICO EMPLEADO       
+                    //empleado.fechaRegistro= firestore.Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.mesaDoc = _this.afs.doc('Mesa/' + mesa.codigo);
+                        _this.mesaDoc.update(mesa).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
                 MesasService.prototype.ActualizarFoto = function (codigo, foto) {
                     var request = {
@@ -3488,33 +3791,444 @@ var __extends = (this && this.__extends) || (function () {
                     //return this.miHttp.httpPostP('mesas/foto/', request);
                     return this.returnPromesa;
                 };
-                MesasService.prototype.CambiarEstadoEsperando = function (codigo) {
-                    //return this.miHttp.httpGetP('mesas/estadoEsperando/' + codigo);
-                    return this.returnPromesa;
+                MesasService.prototype.CambiarEstadoEsperando = function (mesa) {
+                    var _this = this;
+                    //MODIFICO EMPLEADO       
+                    //empleado.fechaRegistro= firestore.Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.mesaDoc = _this.afs.doc('Mesa/' + mesa.codigo);
+                        _this.mesaDoc.update(mesa).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
-                MesasService.prototype.CambiarEstadoComiendo = function (codigo) {
-                    //return this.miHttp.httpGetP('mesas/estadoComiendo/' + codigo);
-                    return this.returnPromesa;
+                MesasService.prototype.CambiarEstadoComiendo = function (mesa) {
+                    var _this = this;
+                    //MODIFICO EMPLEADO       
+                    //empleado.fechaRegistro= firestore.Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.mesaDoc = _this.afs.doc('Mesa/' + mesa.codigo);
+                        _this.mesaDoc.update(mesa).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
-                MesasService.prototype.CambiarEstadoPagando = function (codigo) {
-                    // return this.miHttp.httpGetP('mesas/estadoPagando/' + codigo);
-                    return this.returnPromesa;
+                MesasService.prototype.CambiarEstadoPagando = function (mesa) {
+                    var _this = this;
+                    //MODIFICO EMPLEADO       
+                    // empleado.fechaRegistro= firestore.Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.mesaDoc = _this.afs.doc('Empleado/' + mesa.codigo);
+                        _this.mesaDoc.update(mesa).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
-                MesasService.prototype.CambiarEstadoCerrada = function (codigo) {
-                    //return this.miHttp.httpGetP('mesas/estadoCerrada/' + codigo);
-                    return this.returnPromesa;
+                MesasService.prototype.CambiarEstadoCerrada = function (mesa) {
+                    var _this = this;
+                    //MODIFICO EMPLEADO       
+                    //empleado.fechaRegistro= firestore.Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.mesaDoc = _this.afs.doc('Mesa/' + mesa.codigo);
+                        _this.mesaDoc.update(mesa).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
-                MesasService.prototype.Cobrar = function (codigo) {
-                    //return this.miHttp.httpGetP('mesas/cobrar/' + codigo);
-                    return this.returnPromesa;
+                MesasService.prototype.Cobrar = function (mesa) {
+                    var _this = this;
+                    //MODIFICO EMPLEADO       
+                    //empleado.fechaRegistro= firestore.Timestamp.now();
+                    return new Promise(function (resolve, reject) {
+                        _this.mesaDoc = _this.afs.doc('Mesa/' + mesa.codigo);
+                        _this.mesaDoc.update(mesa).then(function (result) {
+                            resolve(true);
+                        }).catch(function (err) {
+                            reject(false);
+                        });
+                    });
                 };
                 return MesasService;
             }());
+            MesasService.ctorParameters = function () { return [
+                { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__["AngularFirestore"] }
+            ]; };
             MesasService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
                     providedIn: 'root'
                 })
             ], MesasService);
+            /* include_once("DB/AccesoDatos.php");
+            class Mesa
+            {
+                public $codigo;
+                public $estado;
+                public $nombreFoto;
+                public $tipoFoto;
+                public $foto;
+                ///Registra una nueva mesa
+                public static function Registrar($codigo)
+                {
+                    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                    $respuesta = "";
+                    try {
+                        $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO mesa (codigo_mesa, estado)
+                                                                        VALUES (:codigo, 'Cerrada');");
+                        $consulta->bindValue(':codigo', $codigo, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $respuesta = array("Estado" => "OK", "Mensaje" => "Mesa registrada correctamente.");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $respuesta;
+                    }
+                }
+                
+                ///Listado completo de mesas
+                public static function Listar()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT codigo_mesa as codigo, estado, nombreFoto, tipoFoto, foto FROM mesa");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll(PDO::FETCH_CLASS, "Mesa");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Obtiene la mesa correspondiente al código
+                public static function ObtenerPorCodigo($codigoMesa)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT codigo_mesa as codigo, estado, foto FROM mesa
+                                                                        WHERE codigo_mesa = :codigo");
+                        $consulta->bindValue(':codigo', $codigoMesa, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll(PDO::FETCH_CLASS, "Mesa");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Baja de mesas.
+                public static function Baja($codigo)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM mesa WHERE codigo_mesa = :codigo");
+                        $consulta->bindValue(':codigo', $codigo, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $respuesta = array("Estado" => "OK", "Mensaje" => "Mesa eliminada correctamente.");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $respuesta = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $respuesta;
+                    }
+                }
+                ///Actualizar la foto de la mesa.
+                public static function ActualizarFoto($nombreFoto, $tipoFoto, $foto, $codigoMesa)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE mesa SET foto = :foto, tipoFoto = :tipoFoto, nombreFoto = :nombreFoto
+                                                                         WHERE codigo_mesa = :codigo");
+                        $consulta->bindValue(':codigo', $codigoMesa, PDO::PARAM_STR);
+                        $consulta->bindValue(':nombreFoto', $nombreFoto, PDO::PARAM_STR);
+                        $consulta->bindValue(':tipoFoto', $tipoFoto, PDO::PARAM_STR);
+                        $consulta->bindValue(':foto', $foto, PDO::PARAM_LOB);
+                        $consulta->execute();
+                        $resultado = array("Estado" => "OK", "Mensaje" => "Foto actualizada correctamente.");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Cambio de estado: Con cliente esperando pedido
+                public static function EstadoEsperandoPedido($codigoMesa)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE mesa SET estado = 'Con cliente esperando pedido' WHERE codigo_mesa = :codigo");
+                        $consulta->bindValue(':codigo', $codigoMesa, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $resultado = array("Estado" => "OK", "Mensaje" => "Cambio de estado exitoso.");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Cambio de estado: Con clientes comiendo
+                public static function EstadoComiendo($codigoMesa)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE mesa SET estado = 'Con clientes comiendo' WHERE codigo_mesa = :codigo");
+                        $consulta->bindValue(':codigo', $codigoMesa, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $resultado = array("Estado" => "OK", "Mensaje" => "Cambio de estado exitoso.");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Cambio de estado: Con clientes pagando
+                public static function EstadoPagando($codigoMesa)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE mesa SET estado = 'Con clientes pagando' WHERE codigo_mesa = :codigo");
+                        $consulta->bindValue(':codigo', $codigoMesa, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $resultado = array("Estado" => "OK", "Mensaje" => "Cambio de estado exitoso.");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Cambio de estado: Cerrada
+                public static function EstadoCerrada($codigoMesa)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE mesa SET estado = 'Cerrada' WHERE codigo_mesa = :codigo");
+                        $consulta->bindValue(':codigo', $codigoMesa, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $resultado = array("Estado" => "OK", "Mensaje" => "Cambio de estado exitoso.");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Calcula el importe final y genera la factura. Finaliza todos los pedidos de la mesa.
+                public static function Cobrar($codigoMesa)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $pedidos = Pedido::ListarPorMesa($codigoMesa);
+                        $importeFinal = 0;
+                        foreach($pedidos as $pedido){
+                            if($pedido->estado == "Entregado"){
+                                $importeFinal += $pedido->importe;
+                            }
+                        }
+                        Factura::Generar($importeFinal,$codigoMesa);
+                        Pedido::Finalizar($codigoMesa);
+                        $resultado = array("Estado" => "OK", "Mensaje" => "Se ha cobrado a la mesa con exito.");
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Mesa más usada
+                public static function MasUsada()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, count(f.codigoMesa) as cantidad_usos FROM factura f
+                                                                        GROUP BY(f.codigoMesa) HAVING count(f.codigoMesa) =
+                                                                        (SELECT MAX(sel.cantidad_usos) FROM
+                                                                        (SELECT count(f2.codigoMesa) as cantidad_usos FROM factura f2 GROUP BY(f2.codigoMesa)) sel);");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                
+                ///Mesa más usada
+                public static function MenosUsada()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, count(f.codigoMesa) as cantidad_usos FROM factura f
+                                                                        GROUP BY(f.codigoMesa) HAVING count(f.codigoMesa) =
+                                                                        (SELECT MIN(sel.cantidad_usos) FROM
+                                                                        (SELECT count(f2.codigoMesa) as cantidad_usos FROM factura f2 GROUP BY(f2.codigoMesa)) sel);");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Mesa que más facturó
+                public static function MasFacturacion()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, SUM(f.importe) as facturacion_total FROM factura f
+                                                                        GROUP BY(f.codigoMesa) HAVING SUM(f.importe) =
+                                                                        (SELECT MAX(sel.facturacion_total) FROM
+                                                                        (SELECT SUM(f2.importe) as facturacion_total FROM factura f2 GROUP BY(f2.codigoMesa)) sel);");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Mesa que menos facturó
+                public static function MenosFacturacion()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, SUM(f.importe) as facturacion_total FROM factura f
+                                                                        GROUP BY(f.codigoMesa) HAVING SUM(f.importe) =
+                                                                        (SELECT MIN(sel.facturacion_total) FROM
+                                                                        (SELECT SUM(f2.importe) as facturacion_total FROM factura f2 GROUP BY(f2.codigoMesa)) sel);");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Mesa que tiene la factura con más importe
+                public static function ConFacturaConMasImporte()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, f.importe as importe FROM factura f WHERE f.importe =
+                                                                        (SELECT MAX(f2.importe) as importe FROM factura f2 ) GROUP BY (f.codigoMesa);");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Mesa que tiene la factura con menos importe
+                public static function ConFacturaConMenosImporte()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, f.importe as importe FROM factura f WHERE f.importe =
+                                                                        (SELECT MIN(f2.importe) as importe FROM factura f2 ) GROUP BY (f.codigoMesa);");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Mesa que tiene la mejor puntuacion
+                public static function ConMejorPuntuacion()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, AVG(f.puntuacion_mesa) as puntuacion_promedio FROM encuesta f
+                                                                        GROUP BY(f.codigoMesa) HAVING AVG(f.puntuacion_mesa) =
+                                                                        (SELECT MAX(sel.puntuacion_promedio) FROM
+                                                                        (SELECT AVG(f2.puntuacion_mesa) as puntuacion_promedio FROM encuesta f2 GROUP BY(f2.codigoMesa)) sel);");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Mesa que tiene la peor puntuacion
+                public static function ConPeorPuntuacion()
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, AVG(f.puntuacion_mesa) as puntuacion_promedio FROM encuesta f
+                                                                        GROUP BY(f.codigoMesa) HAVING AVG(f.puntuacion_mesa) =
+                                                                        (SELECT MIN(sel.puntuacion_promedio) FROM
+                                                                        (SELECT AVG(f2.puntuacion_mesa) as puntuacion_promedio FROM encuesta f2 GROUP BY(f2.codigoMesa)) sel);");
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+                ///Facturacion entre 2 fechas para una mesa
+                public static function FacturacionEntreFechas($codigoMesa,$fecha1,$fecha2)
+                {
+                    try {
+                        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+                        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT f.codigoMesa, f.fecha, f.importe FROM factura f
+                                                                        WHERE f.codigoMesa = :codigoMesa AND f.fecha BETWEEN :fecha1 AND :fecha2;");
+                        $consulta->bindValue(':codigoMesa', $codigoMesa, PDO::PARAM_STR);
+                        $consulta->bindValue(':fecha1', $fecha1, PDO::PARAM_STR);
+                        $consulta->bindValue(':fecha2', $fecha2, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll();
+                    } catch (Exception $e) {
+                        $mensaje = $e->getMessage();
+                        $resultado = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
+                    }
+                    finally {
+                        return $resultado;
+                    }
+                }
+            }
+            
+             */
             /***/ 
         }),
         /***/ "./src/app/servicios/pedido.service.ts": 
