@@ -47,7 +47,7 @@ El primer paso del circuito de nuestro sistema será la toma de pedidos. La mism
 El resto de los perfiles sólo verá la lista de pedidos que correspondan a su sector (ejemplo, los cerveceros sólo verán los pedidos de cerveza) y que hayan sido tomados por ellos o no tomados por nadie. Podrán realizar 2 acciones: Tomar el pedido indicando un tiempo apróximado de preparación en minutos y marcar el pedido como listo para servir. 
 
 
-![alt text](https://arielzamora.github.io/LaComanda/assets/Otros/empleadosLista.png)
+![alt text](https://arielzamora.github.io/LaComanda/assets/Otros/empleadoslista.png)
 
 ![alt text](https://arielzamora.github.io/LaComanda/assets/Otros/empleadosregistro.png)
 
