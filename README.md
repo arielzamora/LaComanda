@@ -6,7 +6,7 @@ Login:
 
 El usuario del sistema ingresara mediante usuario contraseña ,previamente registrado por un administrador ,mientras que el cliente solo podrá hacer por redes sociales 
 
-![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/login.PNG)
+![alt text](https://arielzamora.github.io/LaComanda/assets/Otros/login.png)
 
 
 
