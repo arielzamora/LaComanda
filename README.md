@@ -6,7 +6,7 @@ Login:
 
 El usuario del sistema ingresara mediante usuario contraseña ,previamente registrado por un administrador ,mientras que el cliente solo podrá hacer por redes sociales 
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/login.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/login.PNG)
 
 
 
@@ -22,12 +22,12 @@ El Mozo dará al cliente un código alfanumérico para poder observar el estado 
 
 ![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/ingresoMesa.PNG)
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/clientesPedido.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/clientesPedido.PNG)
 
 
 ##Una vez dentro de la aplicación se podrá visualizar los pedidos y completar la encuesta 
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/clientesEncuesta.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/clientesEncuesta.PNG)
 
 ##EMPLEADOS
 
@@ -37,9 +37,9 @@ acá se ve la pantallas de pedido una vez que estos fueron cargados por el mozo
 ### Mozos
 El primer paso del circuito de nuestro sistema será la toma de pedidos. La misma será llevada a cabo por los mozos. Para esto deberán ingresar a la opción de la navegación "Pedidos". A la izquierda verán el formulario de registro de pedidos y a la derecha la lista de pedidos que correspondan a ese mozo. En la lista de pedidos podrá cancelarlos siempre que no hayan sido entregados y servirlos cuando estén listos. 
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/empleadosPedido.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/empleadosPedido.PNG)
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/empleadosPedidoAlta.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/empleadosPedidoAlta.PNG)
 
 
 ##Solo los administradores tienen acceso a la lista de empleados 
@@ -47,13 +47,13 @@ El primer paso del circuito de nuestro sistema será la toma de pedidos. La mism
 El resto de los perfiles sólo verá la lista de pedidos que correspondan a su sector (ejemplo, los cerveceros sólo verán los pedidos de cerveza) y que hayan sido tomados por ellos o no tomados por nadie. Podrán realizar 2 acciones: Tomar el pedido indicando un tiempo apróximado de preparación en minutos y marcar el pedido como listo para servir. 
 
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/empleadosLista.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/empleadosLista.PNG)
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/empleadosregistro.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/empleadosregistro.PNG)
 
 ##se puede visualizar la foto del empleado 
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/empleadosProfile.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/empleadosProfile.PNG)
 
 
 
@@ -67,6 +67,6 @@ Los socios podrán cobrarle a las mesas desde este sector. Además podrán dar d
 ## Empleados
 Esta sección sólo estará disponible para Socios. Desde aquí podrán dar de alta, modificar y dar de alta empleados, ver la lista de empleados y estadísticas.
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/empleadosMesa.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/empleadosMesa.PNG)
 
-![alt text](https://raw.githubusercontent.com/arielzamora/TP_LAB4_2C_2018/gh-pages/assets/Otros/empleadosMesaAlta.PNG)
+![alt text](https://raw.githubusercontent.com/arielzamora/LaComanda/gh-pages/assets/Otros/empleadosMesaAlta.PNG)
