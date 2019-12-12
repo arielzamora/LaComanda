@@ -107,7 +107,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n<table class=\"table table-sm table-hover table-light table-striped\">\n  <thead class=\"thead-dark\">\n    <tr>\n      <th class=\"text-center\" colspan=\"12\"><b>{{title}}</b>\n        <button *ngIf=\"!esCliente\" class=\"float-right  btn btn-outline-primary btn-sm\" type=\"button\" (click)=\"showRegistroModal()\"><i class=\"fas fa-user-plus\"></i>Nuevo</button>\n        <app-csv *ngIf=\"!esCliente\" class=\"float-right csv\" [data]=\"data\" [filename]=\"generarNombreCsv()\" [options]=\"options\"></app-csv>\n        <button *ngIf=\"!esCliente\" class=\"float-right  btn btn-outline-primary btn-sm\" type=\"button\" (click)=\"generarNombreExcell()\"><i class=\"fad fa-file-excel\"></i>Exportar Excell</button>\n        <button *ngIf=\"!esCliente\" class=\"float-right btn btn-outline-primary btn-sm\" (click)=\"refrescar()\"><i class=\"fas fa-sync-alt\"></i> Refrescar</button>\n      </th>\n    </tr>\n    <tr>\n      <th></th>\n      <th>Pedido</th>\n      <th>Estado</th>\n      <th>Hora Entrega Estimada</th>\n      <th>Precio</th>\n      <th>Cliente</th>\n      <th>Mozo</th>\n      <th>Mesa</th>\n      <th>Sector</th>\n      <th *ngIf=\"!showTotal\" colspan=\"2\">Acciones</th> \n    </tr>\n  </thead>\n  <tbody>\n   <!-- <tr *ngFor=\"let pedido of listaPedidos | Ordenar: 'mesa' : false\">-->\n    <tr *ngFor=\"let pedido of listaPedidos\">\n      <td appEstadoPedido [pedido]=\"pedido\"></td> \n      <td>{{pedido.descripcion}}</td>\n      <td>{{pedido.estado}}</td>\n      <td>{{ pedido.horaEstimada.toDate() | DateFireFormat | estadoPedidos : pedido }}</td>\n      <td>$ {{pedido.importe}}</td>\n      <td>{{pedido.cliente}}</td>\n      <td>{{pedido.nombreMozo}}</td>\n      <td>{{pedido.idMesa}}</td>\n      <td>{{pedido.sector | Sector}}</td>\n      <td *appAccionPedido=\"pedido, boton: 0\"><a style=\"cursor: pointer;\" (click)=\"cancelarPedido(pedido)\" data-toggle=\"tooltip\" title=\"Cancelar Pedido\"><i class=\"fas fa-ban\"></i></a></td>\n      <td *appAccionPedido=\"pedido, boton: 2\"><a style=\"cursor: pointer;\" (click)=\"servirPedido(pedido)\" data-toggle=\"tooltip\" title=\"Servir Pedido\"><i class=\"fas fa-concierge-bell\"></i></a></td>\n      <td *appAccionPedido=\"pedido, boton: 1\"><a style=\"cursor: pointer;\" (click)=\"marcarParaServir(pedido)\" data-toggle=\"tooltip\" title=\"Marcar como Listo para Servir\"><i class=\"far fa-check-circle\"></i></a></td>\n      <td *appAccionPedido=\"pedido, boton: 3\"><a style=\"cursor: pointer;\" (click)=\"ClickTomarPedido(pedido)\" data-toggle=\"tooltip\" title=\"Tomar Pedido\"><i class=\"fas fa-clipboard-list\"></i></a></td>\n      \n    </tr>\n  </tbody>\n  <tfoot *ngIf=\"showTotal\">\n    <tr>\n      <td colspan=\"10\"><b>Total: </b>$ {{calcularTotal()}}</td>\n    </tr>\n  </tfoot>\n</table>\n\n<div class=\"modal\" [ngStyle]=\"{'display': showModal ? 'block' : 'none'}\">\n    <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n          <form [formGroup]=\"form\" (keyup.enter)=\"tomarPedido()\">\n            <div class=\"form-group\">\n              <label for=\"tiempoEstimado\">Tiempo de Preparación Estimado (Minutos): </label>\n              <input type=\"number\" id=\"tiempoEstimado\" formControlName=\"tiempoEstimado\" class=\"form-control\" placeholder=\"Tiempo estimado de preparación\" [ngClass]=\"{ 'is-invalid': form.controls['tiempoEstimado'].touched && form.controls['tiempoEstimado'].invalid }\">\n              <div *ngIf=\"form.controls['tiempoEstimado'].touched && form.controls['tiempoEstimado'].invalid\" class=\"invalid-feedback\" autocomplete=\"username\"> \n                <div *ngIf=\"form.controls['tiempoEstimado'].errors.required\">Debe ingresar un tiempo estimado de preparación.</div>\n              </div>\n            </div>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"showModal=false\">Cerrar</button>\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"tomarPedido()\">Tomar Pedido</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n <!-- <div *appValidarRoles=\"['Mozo','Socio']\" class=\"contenedor col-3\">-->\n   \n    <app-pedidos-registro [showModalRegistro]=\"showModalRegistro\" (closeModal)=\"showModalRegistro = false\" (registradoCorrectamente)=\"cargarLista()\"></app-pedidos-registro>\n <!--  </div> -->\n\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("\n<table class=\"table table-sm table-hover table-light table-striped\">\n  <thead class=\"thead-dark\">\n    <tr>\n      <th class=\"text-center\" colspan=\"12\"><b>{{title}}</b>\n        <button *ngIf=\"!esCliente\" class=\"float-right  btn btn-outline-primary btn-sm\" type=\"button\" (click)=\"showRegistroModal()\"><i class=\"fas fa-user-plus\"></i>Nuevo</button>\n        <app-csv *ngIf=\"!esCliente\" class=\"float-right csv\" [data]=\"data\" [filename]=\"generarNombreCsv()\" [options]=\"options\"></app-csv>\n        <button *ngIf=\"!esCliente\" class=\"float-right  btn btn-outline-primary btn-sm\" type=\"button\" (click)=\"generarPDF()\"><i class=\"fas fa-file-excel\"></i>Exportar Pdf</button>\n      </th>\n    </tr>\n    <tr>\n      <th></th>\n      <th>Pedido</th>\n      <th>Estado</th>\n      <th>Hora Entrega Estimada</th>\n      <th>Precio</th>\n      <th>Cliente</th>\n      <th>Mozo</th>\n      <th>Mesa</th>\n      <th>Sector</th>\n      <th *ngIf=\"!showTotal\" colspan=\"2\">Acciones</th> \n    </tr>\n  </thead>\n  <tbody id=\"tablaPDF\">\n   <!-- <tr *ngFor=\"let pedido of listaPedidos | Ordenar: 'mesa' : false\">-->\n    <tr *ngFor=\"let pedido of listaPedidos\">\n      <td appEstadoPedido [pedido]=\"pedido\"></td> \n      <td>{{pedido.descripcion}}</td>\n      <td>{{pedido.estado}}</td>\n      <td>{{ pedido.horaEstimada.toDate() | DateFireFormat | estadoPedidos : pedido }}</td>\n      <td>$ {{pedido.importe}}</td>\n      <td>{{pedido.cliente}}</td>\n      <td>{{pedido.nombreMozo}}</td>\n      <td>{{pedido.idMesa}}</td>\n      <td>{{pedido.sector | Sector}}</td>\n      <td *appAccionPedido=\"pedido, boton: 0\"><a style=\"cursor: pointer;\" (click)=\"cancelarPedido(pedido)\" data-toggle=\"tooltip\" title=\"Cancelar Pedido\"><i class=\"fas fa-ban\"></i></a></td>\n      <td *appAccionPedido=\"pedido, boton: 2\"><a style=\"cursor: pointer;\" (click)=\"servirPedido(pedido)\" data-toggle=\"tooltip\" title=\"Servir Pedido\"><i class=\"fas fa-concierge-bell\"></i></a></td>\n      <td *appAccionPedido=\"pedido, boton: 1\"><a style=\"cursor: pointer;\" (click)=\"marcarParaServir(pedido)\" data-toggle=\"tooltip\" title=\"Marcar como Listo para Servir\"><i class=\"far fa-check-circle\"></i></a></td>\n      <td *appAccionPedido=\"pedido, boton: 3\"><a style=\"cursor: pointer;\" (click)=\"ClickTomarPedido(pedido)\" data-toggle=\"tooltip\" title=\"Tomar Pedido\"><i class=\"fas fa-clipboard-list\"></i></a></td>\n      \n    </tr>\n  </tbody>\n  <tfoot *ngIf=\"showTotal\">\n    <tr>\n      <td colspan=\"10\"><b>Total: </b>$ {{calcularTotal()}}</td>\n    </tr>\n  </tfoot>\n</table>\n\n<div class=\"modal\" [ngStyle]=\"{'display': showModal ? 'block' : 'none'}\">\n    <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n          <form [formGroup]=\"form\" (keyup.enter)=\"tomarPedido()\">\n            <div class=\"form-group\">\n              <label for=\"tiempoEstimado\">Tiempo de Preparación Estimado (Minutos): </label>\n              <input type=\"number\" id=\"tiempoEstimado\" formControlName=\"tiempoEstimado\" class=\"form-control\" placeholder=\"Tiempo estimado de preparación\" [ngClass]=\"{ 'is-invalid': form.controls['tiempoEstimado'].touched && form.controls['tiempoEstimado'].invalid }\">\n              <div *ngIf=\"form.controls['tiempoEstimado'].touched && form.controls['tiempoEstimado'].invalid\" class=\"invalid-feedback\" autocomplete=\"username\"> \n                <div *ngIf=\"form.controls['tiempoEstimado'].errors.required\">Debe ingresar un tiempo estimado de preparación.</div>\n              </div>\n            </div>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"showModal=false\">Cerrar</button>\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"tomarPedido()\">Tomar Pedido</button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n <!-- <div *appValidarRoles=\"['Mozo','Socio']\" class=\"contenedor col-3\">-->\n   \n    <app-pedidos-registro [showModalRegistro]=\"showModalRegistro\" (closeModal)=\"showModalRegistro = false\" (registradoCorrectamente)=\"cargarLista()\"></app-pedidos-registro>\n <!--  </div> -->\n\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados-board/empleados-board.component.html": 
@@ -140,7 +140,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<section class=\"row mt-5\">\n  <div class=\"col-12\">\n<table class=\"table table-hover table-light\">\n  <thead class=\"thead-dark\">\n    <tr>\n      <th class=\"text-center\" colspan=\"8\"><b>Lista de Empleados</b>\n        <button class=\"float-right  btn btn-outline-primary btn-sm\" type=\"button\" (click)=\"showRegistroModal()\"><i class=\"fas fa-user-plus\"></i>Nuevo</button>\n        <app-csv class=\"float-right csv\" [data]=\"data\" [filename]=\"generarNombreCsv()\" [options]=\"options\"></app-csv>\n      </th>\n    </tr>\n    <tr>      \n      <th>Nombre</th>\n      <th>Tipo</th>\n      <th>Usuario</th>\n      <th>Fecha de Registro</th>\n      <th>Último Login</th>\n      <th>Estado</th>\n      <th>Movimientos</th>\n      <th>Acciones</th> \n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let empleado of listaEmpleados | Ordenar: 'nombre' : false\">\n      <td>{{empleado.nombre}}</td>\n      <td>{{empleado.tipo}}</td>\n      <td>{{empleado.usuario}}</td>\n      <td>{{empleado.fechaRegistro.toDate() | DateFireFormat }}</td>\n      <td>{{empleado.ultimoLogin.toDate() | DateFireFormat }}</td> \n      <td>{{empleado.estado | Estado}}</td> \n      <td>{{empleado.cantidad_operaciones}}</td>\n      <td>\n        <a data-toggle=\"tooltip\" title=\"Editar\" (click)=\"showModifyModal(empleado)\">| <i class=\"fas fa-user-edit\"></i> | </a>\n        <a *ngIf=\"empleado.estado === 'S' || empleado.estado === 'B'\" (click)=\"activar(empleado)\" data-toggle=\"tooltip\" title=\"Activar\"><i class=\"fas fa-user-plus\"></i> | </a>\n        <a *ngIf=\"empleado.estado === 'A'\" (click)=\"suspender(empleado)\" data-toggle=\"tooltip\" title=\"Suspender\"><i class=\"fas fa-user-minus\"></i> | </a> \n        <a *ngIf=\"empleado.estado === 'A' || empleado.estado === 'S'\" (click)=\"darDeBaja(empleado)\" data-toggle=\"tooltip\" title=\"Baja\"><i class=\"fas fa-user-times\"></i> |</a>  \n        <!--<app-captcha #captcha (success)=\"darDeBaja(empleado)\"></app-captcha>-->\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n<app-empleados-modify #modalModify [showModal]=\"showModal\" (closeModal)=\"showModal = false\" (modificadoCorrectamente)=\"cargarLista()\"></app-empleados-modify>\n<app-empleados-registro #modalRegistro [showModalRegistro]=\"showModalRegistro\" (closeModal)=\"showModalRegistro = false\" (registradoCorrectamente)=\"cargarLista()\"></app-empleados-registro>\n\n\n</div>\n</section>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<section class=\"row mt-5\">\n  <div class=\"col-12\">\n<table class=\"table table-hover table-light\">\n  <thead class=\"thead-dark\">\n    <tr>\n      <th class=\"text-center\" colspan=\"8\"><b>Lista de Empleados</b>\n        <button class=\"float-right  btn btn-outline-primary btn-sm\" type=\"button\" (click)=\"showRegistroModal()\"><i class=\"fas fa-user-plus\"></i>Nuevo</button>\n        <app-csv class=\"float-right csv\" [data]=\"data\" [filename]=\"generarNombreCsv()\" [options]=\"options\"></app-csv>\n        <button  class=\"float-right  btn btn-outline-primary btn-sm  mx-auto mb-4\" type=\"button\" (click)=\"generarPDF()\" ><i class=\"fas fa-file\"></i>Generar PDF</button>\n      </th>\n    </tr>\n    <tr>      \n      <th>Nombre</th>\n      <th>Tipo</th>\n      <th>Usuario</th>\n      <th>Fecha de Registro</th>\n      <th>Último Login</th>\n      <th>Estado</th>\n      <th>Movimientos</th>\n      <th>Acciones</th> \n    </tr>\n  </thead>\n  <tbody id=\"tablaPDF\">\n    <tr *ngFor=\"let empleado of listaEmpleados | Ordenar: 'nombre' : false\">\n      <td>{{empleado.nombre}}</td>\n      <td>{{empleado.tipo}}</td>\n      <td>{{empleado.usuario}}</td>\n      <td>{{empleado.fechaRegistro.toDate() | DateFireFormat }}</td>\n      <td>{{empleado.ultimoLogin.toDate() | DateFireFormat }}</td> \n      <td>{{empleado.estado | Estado}}</td> \n      <td>{{empleado.cantidad_operaciones}}</td>\n      <td>\n        <a data-toggle=\"tooltip\" title=\"Editar\" (click)=\"showModifyModal(empleado)\">| <i class=\"fas fa-user-edit\"></i> | </a>\n        <a *ngIf=\"empleado.estado === 'S' || empleado.estado === 'B'\" (click)=\"activar(empleado)\" data-toggle=\"tooltip\" title=\"Activar\"><i class=\"fas fa-user-plus\"></i> | </a>\n        <a *ngIf=\"empleado.estado === 'A'\" (click)=\"suspender(empleado)\" data-toggle=\"tooltip\" title=\"Suspender\"><i class=\"fas fa-user-minus\"></i> | </a> \n        <a *ngIf=\"empleado.estado === 'A' || empleado.estado === 'S'\" (click)=\"darDeBaja(empleado)\" data-toggle=\"tooltip\" title=\"Baja\"><i class=\"fas fa-user-times\"></i> |</a>  \n        <!--<app-captcha #captcha (success)=\"darDeBaja(empleado)\"></app-captcha>-->\n      </td>\n    </tr>\n  </tbody>\n</table>\n\n<app-empleados-modify #modalModify [showModal]=\"showModal\" (closeModal)=\"showModal = false\" (modificadoCorrectamente)=\"cargarLista()\"></app-empleados-modify>\n<app-empleados-registro #modalRegistro [showModalRegistro]=\"showModalRegistro\" (closeModal)=\"showModalRegistro = false\" (registradoCorrectamente)=\"cargarLista()\"></app-empleados-registro>\n\n\n</div>\n</section>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados-board/empleados-modify/empleados-modify.component.html": 
@@ -162,7 +162,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"modal\" [ngStyle]=\"{'display': showModalRegistro ? 'block' : 'none'} \" >\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <p class=\"modal-title\" id=\"exampleModalAlta\">Alta de Empleado</p>\n        <button type=\"button\" class=\"close\" (click)=\"cerrar()\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n              <form [formGroup]=\"form\">\n                <div class=\"form-group\">\n                    <input type=\"text\" id=\"usuario\"  formControlName=\"usuario\" class=\"form-control\" placeholder=\"usuario\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.codigo.usuario?.required }\">\n                  <div *ngIf=\"submitted && f.usuario.errors?.required\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.usuario.errors?.required\">Debe ingresar un usuario.</div>\n                  </div>                \n              </div>\n                <div class=\"form-group\">\n                    <input type=\"text\" id=\"password\" formControlName=\"password\" class=\"form-control\" placeholder=\"password\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.password.errors?.required}\">\n                  <div *ngIf=\"submitted && f.password.errors?.required\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.password.errors?.required\">Debe ingresar un password.</div>\n                  </div>                \n                </div>\n                <div class=\"form-group\">\n                    <input type=\"text\" id=\"nombre\"  formControlName=\"nombre\" class=\"form-control\" placeholder=\"nombre\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.nombre.errors?.required }\">\n                  <div *ngIf=\"submitted && f.nombre.errors?.required\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.nombre.errors?.required\">Debe ingresar un nombre.</div>\n                  </div>             \n              </div>\n                <div class=\"form-group\">\n                  <label for=\"tipo\">Tipo de Empleado: </label>\n                  <select id=\"tipo\" formControlName=\"tipo\" class=\"form-control\"\n                  [ngClass]=\"{ 'is-invalid':submitted && f.tipo.errors?.required}\">\n                    <option value=\"Socio\">Socio</option>\n                    <option value=\"Cocinero\">Cocinero</option>\n                    <option value=\"Mozo\">Mozo</option>\n                    <option value=\"Bartender\">Bartender</option>\n                    <option value=\"Cervecero\">Cervecero</option>\n                  </select>\n                  <div *ngIf=\"submitted && f.tipo.errors?.required\" class=\"invalid-feedback\">\n                    <div *ngIf=\"f.tipo.errors?.required\">Debe ingresar un Tipo.</div>\n                  </div>   \n                </div>\n                <div class=\"form-group\">\n                  <input #imageInput type=\"file\" accept=\".png, .jpg\" (change)=\"onUpload($event)\">\n                </div>\n                <div class=\"form-group\">\n                  <div class=\"progress\">\n                    <div class=\"progress-bar progress-bar-striped bg-sucess\" role=\"progressbar\" [style.width]=\"(uploadPercent | async) +'%'\" >\n                    </div>\n                  </div>\n               </div>\n                <input #imageUser type=\"hidden\" [value]=\"urlImage | async\">                   \n                <div class=\"form-group\">\n                  <ngx-recaptcha2 #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\" formControlName=\"recaptcha\">\n                  </ngx-recaptcha2>   \n                  </div>                            \n              <div class=\"form-group\">\n              <button *ngIf=\"urlImage | async; else btnDisabled\" type=\"submit\" class=\"col-6 btn btn-lg btn-success\" (click)=\"Submit()\">Registrar</button>\n              <ng-template #btnDisabled>\n                <button type=\"submit\" disabled=true class=\"col-6 btn btn-lg btn-success \" >Registrar</button>                                    \n              </ng-template>                                   \n              <button type=\"button\" class=\"col-6 btn btn-lg btn-secondary \" (click)=\"cerrar()\">Cerrar</button>             \n            </div>\n          </form>\n            </div>\n    </div>\n  </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"modal\" [ngStyle]=\"{'display': showModalRegistro ? 'block' : 'none'} \" >\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <p class=\"modal-title\" id=\"exampleModalAlta\">Alta de Empleado</p>\n        <button type=\"button\" class=\"close\" (click)=\"cerrar()\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n              <form [formGroup]=\"form\">\n                <div class=\"form-group\">                  \n                  <input type=\"text\" id=\"usuario\" formControlName=\"usuario\" placeholder=\"usuario\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': form.controls['usuario'].touched && form.controls['usuario'].invalid }\">\n                  <div *ngIf=\"form.controls['usuario'].touched && form.controls['usuario'].invalid\" class=\"invalid-feedback\">\n                    <div *ngIf=\"form.controls['usuario'].errors.required\">Debe ingresar un usuario.</div>\n                  </div>\n              </div>\n                <div class=\"form-group\">                \n                  <input type=\"text\" id=\"password\" formControlName=\"password\" placeholder=\"password\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': form.controls['password'].touched && form.controls['password'].invalid }\">\n                  <div *ngIf=\"form.controls['password'].touched && form.controls['password'].invalid\" class=\"invalid-feedback\">\n                    <div *ngIf=\"form.controls['password'].errors.required\">Debe ingresar un usuario.</div>\n                  </div>\n                </div>\n                <div class=\"form-group\">                 \n                  <input type=\"text\" id=\"nombre\" formControlName=\"nombre\" placeholder=\"nombre\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': form.controls['nombre'].touched && form.controls['nombre'].invalid }\">\n                  <div *ngIf=\"form.controls['nombre'].touched && form.controls['nombre'].invalid\" class=\"invalid-feedback\">\n                    <div *ngIf=\"form.controls['nombre'].errors.required\">Debe ingresar un nombre.</div>\n                  </div>                                    \n              </div>\n                <div class=\"form-group\">\n                  <label for=\"tipo\">Tipo de Empleado: </label>\n                  <select id=\"tipo\" formControlName=\"tipo\" class=\"form-control\">\n                    <option value=\"Socio\">Socio</option>\n                    <option value=\"Cocinero\">Cocinero</option>\n                    <option value=\"Mozo\">Mozo</option>\n                    <option value=\"Bartender\">Bartender</option>\n                    <option value=\"Cervecero\">Cervecero</option>\n                  </select>\n                  <div *ngIf=\"form.controls['tipo'].touched && form.controls['tipo'].invalid\" class=\"invalid-feedback\">\n                    <div *ngIf=\"form.controls['tipo'].errors.required\">Debe ingresar un tipo.</div>\n                  </div>     \n                </div>\n                <div class=\"form-group\">\n                  <input #imageInput type=\"file\" accept=\".png, .jpg\" (change)=\"onUpload($event)\">\n                </div>\n                <div class=\"form-group\">\n                  <div class=\"progress\">\n                    <div class=\"progress-bar progress-bar-striped bg-sucess\" role=\"progressbar\" [style.width]=\"(uploadPercent | async) +'%'\" >\n                    </div>\n                  </div>\n               </div>\n                <input #imageUser type=\"hidden\" [value]=\"urlImage | async\">                   \n                <div class=\"form-group\">\n                  <ngx-recaptcha2 #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\" formControlName=\"recaptcha\">\n                  </ngx-recaptcha2>   \n                  </div>                            \n              <div class=\"form-group\">\n              <button *ngIf=\"urlImage | async; else btnDisabled\" type=\"submit\" class=\"col-6 btn btn-lg btn-success\" (click)=\"Submit()\">Registrar</button>\n              <ng-template #btnDisabled>\n                <button type=\"submit\" disabled=true class=\"col-6 btn btn-lg btn-success \" >Registrar</button>                                    \n              </ng-template>                                   \n              <button type=\"button\" class=\"col-6 btn btn-lg btn-secondary \" (click)=\"cerrar()\">Cerrar</button>             \n            </div>\n          </form>\n            </div>\n    </div>\n  </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados-login/empleados-login.component.html": 
@@ -173,7 +173,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container h-100\">\n  <div appPanel class=\"row justify-content-center align-items-center\">\n    <div class=\"col-6\">\n      <div class=\"card\" [ngClass]=\"{'border-danger': error}\">\n        <div class=\"card-body\">\n            <span><i class=\"fas fa-fast-forward\"></i><b class=\"ar\">Acceso Rápido:</b></span>       \n            <button type=\"button\" class=\"btn btn-outline-info btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Socio\" (click)=\"CargarDefault('S')\"><i class=\"far fa-handshake\"></i></button>          \n            <button type=\"button\" class=\"btn btn-outline-success btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Bartender\" (click)=\"CargarDefault('B')\"><i class=\"fas fa-cocktail\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-warning btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cervecero\" (click)=\"CargarDefault('CE')\"><i class=\"fas fa-beer\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-danger btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cocinero\" (click)=\"CargarDefault('CO')\"><i class=\"fas fa-utensils\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-primary btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Mozo\" (click)=\"CargarDefault('M')\"><i class=\"fas fa-user-tie\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-primary btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cliente\" (click)=\"CargarDefault('CLI')\"><i class=\"fas fa-user-tie\"></i></button>\n          <h5 class=\"card-title\">Ingreso Empleados</h5>\n          <form [formGroup]=\"form\" (keyup.enter)=\"Submit()\">\n            <div class=\"form-group\">\n              <label for=\"user\">Usuario: </label>\n              <input type=\"text\" id=\"user\" formControlName=\"user\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': form.controls['user'].touched && form.controls['user'].invalid }\">\n              <div *ngIf=\"form.controls['user'].touched && form.controls['user'].invalid\" class=\"invalid-feedback\">\n                <div *ngIf=\"form.controls['user'].errors.required\">Debe ingresar un usuario.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label for=\"pass\">Contraseña: </label>\n              <input type=\"password\" id=\"pass\" class=\"form-control\" formControlName=\"pass\" [ngClass]=\"{ 'is-invalid': form.controls['pass'].touched && form.controls['pass'].invalid }\">\n              <div *ngIf=\"form.controls['pass'].touched && form.controls['pass'].invalid\" class=\"invalid-feedback\">\n                <div *ngIf=\"form.controls['pass'].errors.required\">Debe ingresar la contraseña.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n            <ngx-recaptcha2 (resolved)=\"resolved($event)\" #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\" formControlName=\"recaptcha\">\n            </ngx-recaptcha2>  \n          </div>   \n          <button type=\"submit\" class=\"btn btn-lg btn-block btn-success\" (click)=\"Submit()\">Ingresar</button>       \n          <button class=\"btn btn-lg btn-block btn-social btn-danger\" (click)=\"onLoginGoogle()\">\n            <i class=\"fa fa-google\" aria-hidden=\"true\"></i>\n            Google\n          </button>\n          <button class=\"btn btn-lg btn-block btn-social btn-facebook btn-primary\" (click)=\"onLoginFacebook()\">\n            <span class=\"fa fa-facebook\"></span>\n            Facebook\n          </button>    \n          </form>\n        </div>\n        <div *ngIf=\"error\" class=\"card-footer\">\n          <small class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}} </small>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container h-100\">\n  <div appPanel class=\"row justify-content-center align-items-center\">\n    <div class=\"col-6\">\n      <div class=\"card\" [ngClass]=\"{'border-danger': error}\">\n        <div class=\"card-body\">\n            <span><i class=\"fas fa-fast-forward\"></i><b class=\"ar\">Acceso Rápido:</b></span>       \n            <button type=\"button\" class=\"btn btn-outline-info btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Socio\" (click)=\"CargarDefault('S')\"><i class=\"far fa-handshake\"></i></button>          \n            <button type=\"button\" class=\"btn btn-outline-success btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Bartender\" (click)=\"CargarDefault('B')\"><i class=\"fas fa-cocktail\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-warning btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cervecero\" (click)=\"CargarDefault('CE')\"><i class=\"fas fa-beer\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-danger btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cocinero\" (click)=\"CargarDefault('CO')\"><i class=\"fas fa-utensils\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-primary btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Mozo\" (click)=\"CargarDefault('M')\"><i class=\"fas fa-user-tie\"></i></button>\n            <button type=\"button\" class=\"btn btn-outline-primary btn-sm buttonDefault\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Cliente\" (click)=\"CargarDefault('CLI')\"><i class=\"fas fa-user-tie\"></i></button>\n          <h5 class=\"card-title\">Ingreso Empleados</h5>\n          <form [formGroup]=\"form\" (keyup.enter)=\"Submit()\">\n            <div class=\"form-group\">\n              <label for=\"user\">Usuario: </label>\n              <input type=\"text\" id=\"user\" formControlName=\"user\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': form.controls['user'].touched && form.controls['user'].invalid }\">\n              <div *ngIf=\"form.controls['user'].touched && form.controls['user'].invalid\" class=\"invalid-feedback\">\n                <div *ngIf=\"form.controls['user'].errors.required\">Debe ingresar un usuario.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <label for=\"pass\">Contraseña: </label>\n              <input type=\"password\" id=\"pass\" class=\"form-control\" formControlName=\"pass\" [ngClass]=\"{ 'is-invalid': form.controls['pass'].touched && form.controls['pass'].invalid }\">\n              <div *ngIf=\"form.controls['pass'].touched && form.controls['pass'].invalid\" class=\"invalid-feedback\">\n                <div *ngIf=\"form.controls['pass'].errors.required\">Debe ingresar la contraseña.</div>\n              </div>\n            </div>\n            <div class=\"form-group\">\n            <ngx-recaptcha2 (resolved)=\"resolved($event)\" #captchaElem [siteKey]=\"key\" [size]=\"'normal'\" [hl]=\"'es'\" [theme]=\"'light'\" [type]=\"'image'\" formControlName=\"recaptcha\">\n            </ngx-recaptcha2>  \n          </div>   \n          <button type=\"submit\" class=\"btn btn-lg btn-block btn-success\" (click)=\"Submit()\">Ingresar</button>       \n          <!--<button type=\"submit\" class=\"btn btn-lg btn-block btn-primary\" routerLink=\"Registrarse\">Registrarse</button>-->      \n          <button class=\"btn btn-lg btn-block btn-social btn-danger\" (click)=\"onLoginGoogle()\">\n            <i class=\"fa fa-google\" aria-hidden=\"true\"></i>\n            Google\n          </button>\n          <button class=\"btn btn-lg btn-block btn-social btn-facebook btn-primary\" (click)=\"onLoginFacebook()\">\n            <span class=\"fa fa-facebook\"></span>\n            Facebook\n          </button>    \n          </form>\n        </div>\n        <div *ngIf=\"error\" class=\"card-footer\">\n          <small class=\"text-danger font-weight-bold\"><i class=\"fa fa-times\"></i> {{errorMessage}} </small>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/empleados-login/perfil/perfil.component.html": 
@@ -217,7 +217,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid\">\n    <div class=\"col-12 principal justify-content-center align-items-center\">\n      <div class=\"col-12 col-md-12\"> \n          <div class=\"row justify-content-center align-items-center\">\n              <div class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n                <span class=\"mas\">Nueva Mesa</span>\n                <button *appValidarRoles=\"['Socio']\" name=\"Hover\"  type=\"button\" (click)=\"showRegistroMesa()\">Nueva Mesa</button>\n              </div>\n              <div class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n                  <span class=\"mas\">Estadisticas</span>\n                  <button type=\"button\" name=\"Hover\" data-toggle=\"collapse\" data-target=\"#collapseExample\" aria-expanded=\"false\" aria-controls=\"collapseExample\">Estadisticas</button>              \n                </div>                                   \n            </div>         \n      </div>\n      <div class=\"collapse col-12 justify-content-center align-items-center\" id=\"collapseExample\">\n          <div class=\"card card-body\">\n           LA LA LA Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.\n          </div>\n        </div>\n    </div>\n</div>\n<div class=\"card-deck justify-content-center align-content-center\"> \n  <div *ngFor=\"let mesa of mesasList\" class=\"card\" appPanel>\n    <img class=\"card-img-top\" [src]=\"domSanitizer.bypassSecurityTrustUrl('data:'+mesa.tipoFoto+';base64,' + mesa.foto)\"\n      alt=\"Card image cap\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{mesa.codigo}}</h5>\n      <p class=\"card-text\">{{mesa.estado}}</p>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button id=\"btnEstado\" \n      class=\"btn btn-info btn-sm btn-block dropdown-toggle\" \n      data-toggle=\"dropdown\" \n      aria-haspopup=\"true\"\n      aria-expanded=\"false\">Estado</button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"btnEstado\">\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(1,mesa)\">Esperando Pedido</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(2,mesa)\">Comiendo</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(3,mesa)\">Pagando</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(4,mesa)\">Cerrada</a>\n      </div>\n      <button *appValidarRoles=\"['Socio']\" class=\"btn btn-warning btn-sm\" (click)=\"cobrar(mesa)\">Cobrar</button>\n      <button *appValidarRoles=\"['Socio']\" class=\"btn btn-danger btn-sm\" (click)=\"eliminar(mesa)\">Eliminar</button>\n    </div>\n  </div>\n</div>\n<app-mesa-registro #modalRegistro [showModalRegistro]=\"showModalRegistro\" (closeModal)=\"showModalRegistro = false\" (registradoCorrectamente)=\"cargarLista()\"></app-mesa-registro>\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid\">\n    <div class=\"col-12 principal justify-content-center align-items-center\">\n      <div class=\"col-12 col-md-12\"> \n          <div class=\"row justify-content-center align-items-center\">\n              <div class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n                <span class=\"mas\">Nueva Mesa</span>\n                <button *appValidarRoles=\"['Socio']\" name=\"Hover\"  type=\"button\" (click)=\"showRegistroMesa()\">Nueva Mesa</button>\n              </div>\n              <div class=\"col-5 col-md-4 contenedor-boton align-self-center\">\n                  <span class=\"mas\">Estadisticas</span>\n                  <button type=\"button\" name=\"Hover\" data-toggle=\"collapse\" data-target=\"#collapseExample\" aria-expanded=\"false\" aria-controls=\"collapseExample\">Estadisticas</button>              \n                </div>                                   \n            </div>         \n      </div>\n      <div class=\"collapse col-12 justify-content-center align-items-center\" id=\"collapseExample\">\n        <app-empleados-charts></app-empleados-charts>\n      </div>\n    </div>\n</div>\n<div class=\"card-deck justify-content-center align-content-center\"> \n  <div *ngFor=\"let mesa of mesasList\" class=\"card\" appPanel>\n    <img class=\"card-img-top\" [src]=\"domSanitizer.bypassSecurityTrustUrl('data:'+mesa.tipoFoto+';base64,' + mesa.foto)\"\n      alt=\"Card image cap\">\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">{{mesa.codigo}}</h5>\n      <p class=\"card-text\">{{mesa.estado}}</p>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button id=\"btnEstado\" \n      class=\"btn btn-info btn-sm btn-block dropdown-toggle\" \n      data-toggle=\"dropdown\" \n      aria-haspopup=\"true\"\n      aria-expanded=\"false\">Estado</button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"btnEstado\">\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(1,mesa)\">Esperando Pedido</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(2,mesa)\">Comiendo</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(3,mesa)\">Pagando</a>\n        <a class=\"dropdown-item\" (click)=\"cambiarEstado(4,mesa)\">Cerrada</a>\n      </div>\n      <button *appValidarRoles=\"['Socio']\" class=\"btn btn-warning btn-sm\" (click)=\"cobrar(mesa)\">Cobrar</button>\n      <button *appValidarRoles=\"['Socio']\" class=\"btn btn-danger btn-sm\" (click)=\"eliminar(mesa)\">Eliminar</button>\n    </div>\n  </div>\n</div>\n<app-mesa-registro #modalRegistro [showModalRegistro]=\"showModalRegistro\" (closeModal)=\"showModalRegistro = false\" (registradoCorrectamente)=\"cargarLista()\"></app-mesa-registro>\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/mesa-board/mesa-registro/mesa-registro.component.html": 
@@ -239,7 +239,7 @@ var __extends = (this && this.__extends) || (function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n    <a class=\"navbar-brand\" href=\"#\">La Comanda</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\"\n        aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Cervecero','Bartender','Cocinero','Mozo','Socio']\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n            </li>\n            <li class=\"nav-item\">\n                    <a class=\"nav-link\" *appValidarRoles=\"['Cliente']\" routerLinkActive=\"active\" routerLink=\"Encuestas\">Encuesta</a>\n               </li>\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Cervecero','Bartender','Cocinero','Mozo','Socio']\" routerLinkActive=\"active\" routerLink=\"Pedidos\">Pedidos</a>\n            </li>\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Socio']\" routerLinkActive=\"active\" routerLink=\"Empleados\">Empleados</a>\n            </li>\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Mozo','Socio']\" routerLinkActive=\"active\" routerLink=\"Mesas\">Mesas</a>\n            </li>\n        </ul>\n        <ul class=\"nav navbar-nav navbar-right\">\n            <span class=\"navbar-text\"> \n                <a routerLink=\"Perfil\"><i class=\"far fa-id-card\"></i> {{user.nombre}} </a> ||\n                <i *ngIf=\"user.tipo === 'Cocinero'\" class=\"fas fa-utensils\"></i>\n                <i *ngIf=\"user.tipo === 'Socio'\" class=\"far fa-handshake\"></i>\n                <i *ngIf=\"user.tipo === 'Cliente'\" class=\"far fa-handshake\"></i>\n                <i *ngIf=\"user.tipo === 'Bartender'\" class=\"fas fa-cocktail\"></i>\n                <i *ngIf=\"user.tipo === 'Mozo'\" class=\"fas fa-user-tie\"></i>\n                <i *ngIf=\"user.tipo === 'Cervecero'\" class=\"fas fa-beer\"></i>\n                {{user.tipo}} || </span>\n            <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"logout()\"><i class=\"fa fa-sign-out\"></i>\n                    Desconectarse</a></li>\n        </ul>\n    </div>\n</nav>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n    <a class=\"navbar-brand\" href=\"#\">La Comanda</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\"\n        aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n        <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n        <ul class=\"navbar-nav mr-auto\">\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Cervecero','Bartender','Cocinero','Mozo','Socio']\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n            </li>\n            <li class=\"nav-item\">\n                    <a class=\"nav-link\" *appValidarRoles=\"['Cliente']\" routerLinkActive=\"active\" routerLink=\"Encuestas\">Encuesta</a>\n               </li>\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Cervecero','Bartender','Cocinero','Mozo','Socio']\" routerLinkActive=\"active\" routerLink=\"Pedidos\">Pedidos</a>\n            </li>\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Socio']\" routerLinkActive=\"active\" routerLink=\"Empleados\">Empleados</a>\n            </li>\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Mozo','Socio']\" routerLinkActive=\"active\" routerLink=\"Mesas\">Mesas</a>\n            </li>\n            <li class=\"nav-item\">\n                <a class=\"nav-link\" *appValidarRoles=\"['Socio']\" routerLinkActive=\"active\" routerLink=\"Estadisticas\">Estadisticas</a>\n            </li>\n        </ul>\n        <ul class=\"nav navbar-nav navbar-right\">\n            <span class=\"navbar-text\"> \n                <a routerLink=\"Perfil\"><i class=\"far fa-id-card\"></i> {{user.nombre}} </a> ||\n                <i *ngIf=\"user.tipo === 'Cocinero'\" class=\"fas fa-utensils\"></i>\n                <i *ngIf=\"user.tipo === 'Socio'\" class=\"far fa-handshake\"></i>\n                <i *ngIf=\"user.tipo === 'Cliente'\" class=\"far fa-handshake\"></i>\n                <i *ngIf=\"user.tipo === 'Bartender'\" class=\"fas fa-cocktail\"></i>\n                <i *ngIf=\"user.tipo === 'Mozo'\" class=\"fas fa-user-tie\"></i>\n                <i *ngIf=\"user.tipo === 'Cervecero'\" class=\"fas fa-beer\"></i>\n                {{user.tipo}} || </span>\n            <li class=\"nav-item\"><a class=\"nav-link\" (click)=\"logout()\"><i class=\"fa fa-sign-out\"></i>\n                    Desconectarse</a></li>\n        </ul>\n    </div>\n</nav>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/componentes/pedidos-board/pedidos-board.component.html": 
@@ -1026,6 +1026,7 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var _guards_nologin_guard__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../guards/nologin.guard */ "./src/app/guards/nologin.guard.ts");
             /* harmony import */ var _componentes_empleados_login_perfil_perfil_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../componentes/empleados-login/perfil/perfil.component */ "./src/app/componentes/empleados-login/perfil/perfil.component.ts");
             /* harmony import */ var _componentes_clientes_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../componentes/clientes/encuesta/encuesta.component */ "./src/app/componentes/clientes/encuesta/encuesta.component.ts");
+            /* harmony import */ var _componentes_empleados_board_empleados_charts_empleados_charts_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../componentes/empleados-board/empleados-charts/empleados-charts.component */ "./src/app/componentes/empleados-board/empleados-charts/empleados-charts.component.ts");
             var routes = [
                 { path: '', redirectTo: '/Bienvenida', pathMatch: 'full' },
                 { path: 'Bienvenida', component: _componentes_bienvenida_bienvenida_component__WEBPACK_IMPORTED_MODULE_6__["BienvenidaComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"]] },
@@ -1047,6 +1048,12 @@ var __extends = (this && this.__extends) || (function () {
                         {
                             path: 'Empleados',
                             component: _componentes_empleados_board_empleados_board_component__WEBPACK_IMPORTED_MODULE_3__["EmpleadosBoardComponent"],
+                            canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"]],
+                            data: { roles: ['Socio'] }
+                        },
+                        {
+                            path: 'Estadisticas',
+                            component: _componentes_empleados_board_empleados_charts_empleados_charts_component__WEBPACK_IMPORTED_MODULE_16__["EmpleadosChartsComponent"],
                             canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"]],
                             data: { roles: ['Socio'] }
                         },
@@ -1227,6 +1234,8 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
             /* harmony import */ var _componentes_clientes_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./componentes/clientes/encuesta/encuesta.component */ "./src/app/componentes/clientes/encuesta/encuesta.component.ts");
             /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+            /* harmony import */ var angular_pdf_generator__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! angular-pdf-generator */ "./node_modules/angular-pdf-generator/angular-pdf-generator.umd.js");
+            /* harmony import */ var angular_pdf_generator__WEBPACK_IMPORTED_MODULE_59___default = /*#__PURE__*/ __webpack_require__.n(angular_pdf_generator__WEBPACK_IMPORTED_MODULE_59__);
             //angular fire 
             //import { AngularFireModule } from '@angular/fire';
             //import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -1302,6 +1311,7 @@ var __extends = (this && this.__extends) || (function () {
                         _angular_material__WEBPACK_IMPORTED_MODULE_15__["MatExpansionModule"],
                         _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_58__["NgbModule"],
                         angular2_highcharts__WEBPACK_IMPORTED_MODULE_29__["ChartModule"],
+                        angular_pdf_generator__WEBPACK_IMPORTED_MODULE_59__["SampleModule"],
                         [_auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_25__["JwtModule"].forRoot({
                                 config: {
                                     tokenGetter: (getAccessToken),
@@ -1374,11 +1384,12 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function () { return User; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             var User = /** @class */ (function () {
-                function User(usuario, tipo, id, nombre) {
+                function User(usuario, tipo, id, nombre, foto) {
                     this.usuario = usuario;
                     this.tipo = tipo;
                     this.id = id;
                     this.nombre = nombre;
+                    this.foto = foto;
                 }
                 return User;
             }());
@@ -1682,16 +1693,14 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var src_app_servicios_pedido_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/servicios/pedido.service */ "./src/app/servicios/pedido.service.ts");
             var ClientesComponent = /** @class */ (function () {
                 function ClientesComponent(route, router, pedidosService) {
-                    var _this = this;
                     this.route = route;
                     this.router = router;
                     this.pedidosService = pedidosService;
-                    this.route.paramMap.subscribe(function (x) {
-                        _this.codigoMesa = x.get('codMesa');
-                        _this.cargarLista();
-                    });
+                    this.codigoMesa = this.route.snapshot.paramMap.get("codMesa");
                 }
-                ClientesComponent.prototype.ngOnInit = function () { };
+                ClientesComponent.prototype.ngOnInit = function () {
+                    this.cargarLista();
+                };
                 ClientesComponent.prototype.cargarLista = function () {
                     var _this = this;
                     this.pedidosService.ListarPorMesa(this.codigoMesa).subscribe(function (response) {
@@ -1839,6 +1848,10 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
             /* harmony import */ var _servicios_pedido_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../servicios/pedido.service */ "./src/app/servicios/pedido.service.ts");
+            /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.min.js");
+            /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(jspdf__WEBPACK_IMPORTED_MODULE_4__);
+            /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! html2canvas */ "./node_modules/html2canvas/dist/npm/index.js");
+            /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/ __webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_5__);
             var PedidosMesaComponent = /** @class */ (function () {
                 function PedidosMesaComponent(pedidoService, fb) {
                     this.pedidoService = pedidoService;
@@ -1850,12 +1863,12 @@ var __extends = (this && this.__extends) || (function () {
                         quoteStrings: '"',
                         decimalseparator: '.',
                         showLabels: true,
-                        headers: ['Nombre', 'Tipo', 'Mail', 'Fecha de Registro', 'Último Login', 'Estado', 'N° de Operaciones'],
+                        headers: ['Pedido', 'Estado', 'Precio', 'Cliente', 'Mozo', 'Mesa', 'Sector'],
                         showTitle: true,
-                        title: 'Lista de Empleados',
+                        title: 'Lista de Pedidos',
                         useBom: true,
                         removeNewLines: true,
-                        keys: ['nombre', 'tipo', 'mail', 'fechaRegistro', 'ultimoLogin', 'estado', 'cantidad_operaciones']
+                        keys: ['descripcion', 'estado', 'importe', 'cliente', 'nombreMozo', 'idMesa', 'sector']
                     };
                     this.refrescarEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]();
                     this.form = this.fb.group({
@@ -1867,13 +1880,11 @@ var __extends = (this && this.__extends) || (function () {
                 };
                 PedidosMesaComponent.prototype.cargarLista = function () {
                     var _this = this;
-                    this.pedidoService.ListarTodos().subscribe(function (response) {
-                        console.log(response);
-                        _this.listaPedidos = response;
-                        //guardo datos del cliente y modo en sesion
-                        if (_this.esCliente && _this.listaPedidos.length > 0) {
+                    if (this.esCliente) {
+                        this.data = this.listaPedidos;
+                        if (this.listaPedidos.length > 0) {
                             var i = 0;
-                            _this.listaPedidos.forEach(function (pedido) {
+                            this.listaPedidos.forEach(function (pedido) {
                                 if (i = 1) {
                                     i = i + 1;
                                     _this.encuesta.cliente = pedido.cliente;
@@ -1883,9 +1894,28 @@ var __extends = (this && this.__extends) || (function () {
                                 }
                             });
                         }
-                    }, function (error) {
-                        console.error(error);
-                    });
+                    }
+                    else {
+                        this.pedidoService.ListarTodos().subscribe(function (response) {
+                            _this.listaPedidos = response;
+                            _this.data = _this.listaPedidos;
+                            //guardo datos del cliente y modo en sesion
+                            if (_this.esCliente && _this.listaPedidos.length > 0) {
+                                var i = 0;
+                                _this.listaPedidos.forEach(function (pedido) {
+                                    if (i = 1) {
+                                        i = i + 1;
+                                        _this.encuesta.cliente = pedido.cliente;
+                                        _this.encuesta.mozo = pedido.nombreMozo;
+                                        _this.encuesta.mesa = pedido.idMesa;
+                                        localStorage.setItem("encuestaCli", JSON.stringify(_this.encuesta));
+                                    }
+                                });
+                            }
+                        }, function (error) {
+                            console.error(error);
+                        });
+                    }
                 };
                 PedidosMesaComponent.prototype.showRegistroModal = function () {
                     this.showModalRegistro = true;
@@ -1952,6 +1982,21 @@ var __extends = (this && this.__extends) || (function () {
                 PedidosMesaComponent.prototype.ClickTomarPedido = function (pedido) {
                     this.pedido = pedido;
                     this.showModal = true;
+                };
+                PedidosMesaComponent.prototype.generarPDF = function () {
+                    var data = document.getElementById('tablaPDF');
+                    html2canvas__WEBPACK_IMPORTED_MODULE_5___default()(data).then(function (canvas) {
+                        // Few necessary setting options  
+                        var imgWidth = 208;
+                        var pageHeight = 295;
+                        var imgHeight = canvas.height * imgWidth / canvas.width;
+                        var heightLeft = imgHeight;
+                        var contentDataURL = canvas.toDataURL('image/png');
+                        var pdf = new jspdf__WEBPACK_IMPORTED_MODULE_4__('p', 'mm', 'a4'); // A4 size page of PDF  
+                        var position = 0;
+                        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+                        pdf.save('PDFempleados.pdf'); // Generated PDF   
+                    });
                 };
                 return PedidosMesaComponent;
             }());
@@ -2054,57 +2099,104 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _servicios_empleado_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../servicios/empleado.service */ "./src/app/servicios/empleado.service.ts");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/es2015/index.js");
             var EmpleadosChartsComponent = /** @class */ (function () {
-                function EmpleadosChartsComponent(empleadoService) {
+                function EmpleadosChartsComponent(fireStore, empleadoService) {
+                    this.fireStore = fireStore;
                     this.empleadoService = empleadoService;
-                    /*  empleadoService.CantidadOperacionesPorSector().subscribe(response => {
-                       const datos: { name: String, y: number}[] = new Array();
-                       response.forEach(element => {
-                         datos.push({
-                           name: element.sector,
-                           y: parseInt(element.cantidad_operaciones, 10)
-                         });
-                       });
-                 
-                       this.chartOptions = {
-                         chart: {
-                           plotBackgroundColor: null,
-                           plotBorderWidth: null,
-                           plotShadow: false,
-                           type: 'pie',
-                           style: {
-                             textAlign: 'center'
-                           }
-                         },
-                         title: {
-                           text: 'Porcentaje de Operaciones por Sector'
-                         },
-                         tooltip: {
-                           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                         },
-                         plotOptions: {
-                           pie: {
-                             allowPointSelect: true,
-                             cursor: 'pointer',
-                             dataLabels: {
-                               enabled: true,
-                               format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                               connectorColor: 'silver'
-                             }
-                           }
-                         },
-                         series: [{
-                           name: 'Operaciones por Sector',
-                           data: datos
-                         }]
-                       };
-                     }); */
+                    this.operacionesBar = 0;
+                    this.operacionesCocina = 0;
+                    this.operacionesMozo = 0;
+                    this.operacionesSocio = 0;
+                    this.operacionesCerveza = 0;
+                    this.empleados = new Array();
                 }
                 EmpleadosChartsComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    var empleados = this.fireStore.collection("Empleado").valueChanges();
+                    var datos = new Array();
+                    this.operacionesPorSector;
+                    empleados.forEach(function (emp) {
+                        emp.forEach(function (item) {
+                            _this.empleados.push(item);
+                        });
+                        _this.empleados.forEach(function (element) {
+                            switch (element.tipo) {
+                                case 'Bartender':
+                                    _this.operacionesBar = _this.operacionesBar + element.cantidad_operaciones;
+                                    break;
+                                case 'Cocinero':
+                                    _this.operacionesCocina = _this.operacionesCocina + element.cantidad_operaciones;
+                                    break;
+                                case 'Mozo':
+                                    _this.operacionesMozo = _this.operacionesMozo + element.cantidad_operaciones;
+                                    break;
+                                case 'Cervecero':
+                                    _this.operacionesCerveza = _this.operacionesCerveza + element.cantidad_operaciones;
+                                    break;
+                                case 'Socio':
+                                    _this.operacionesSocio = _this.operacionesSocio + element.cantidad_operaciones;
+                                    break;
+                            }
+                        });
+                        datos.push({
+                            name: "Sector Bar",
+                            y: _this.operacionesBar
+                        });
+                        datos.push({
+                            name: "Sector Cocina",
+                            y: _this.operacionesCocina
+                        });
+                        datos.push({
+                            name: "Sector Mozo",
+                            y: _this.operacionesMozo
+                        });
+                        datos.push({
+                            name: "Cervezas",
+                            y: _this.operacionesCerveza
+                        });
+                        datos.push({
+                            name: "Operaciones Socio",
+                            y: _this.operacionesSocio
+                        });
+                        _this.chartOptions = {
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie',
+                                style: {
+                                    textAlign: 'center'
+                                }
+                            },
+                            title: {
+                                text: 'Porcentaje de Operaciones por Sector'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                        connectorColor: 'silver'
+                                    }
+                                }
+                            },
+                            series: [{
+                                    name: 'Operaciones por Sector',
+                                    data: datos
+                                }]
+                        };
+                    });
                 };
                 return EmpleadosChartsComponent;
             }());
             EmpleadosChartsComponent.ctorParameters = function () { return [
+                { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__["AngularFirestore"] },
                 { type: _servicios_empleado_service__WEBPACK_IMPORTED_MODULE_1__["EmpleadoService"] }
             ]; };
             EmpleadosChartsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -2139,6 +2231,10 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _servicios_empleado_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../servicios/empleado.service */ "./src/app/servicios/empleado.service.ts");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.min.js");
+            /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/ __webpack_require__.n(jspdf__WEBPACK_IMPORTED_MODULE_3__);
+            /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! html2canvas */ "./node_modules/html2canvas/dist/npm/index.js");
+            /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_4__);
             var EmpleadosListComponent = /** @class */ (function () {
                 function EmpleadosListComponent(empleadoService) {
                     this.empleadoService = empleadoService;
@@ -2147,12 +2243,12 @@ var __extends = (this && this.__extends) || (function () {
                         quoteStrings: '"',
                         decimalseparator: '.',
                         showLabels: true,
-                        headers: ['Nombre', 'Tipo', 'Mail', 'Fecha de Registro', 'Último Login', 'Estado', 'N° de Operaciones'],
+                        headers: ['Nombre', 'Tipo', 'Mail', 'Último Login', 'Estado', 'N° de Operaciones'],
                         showTitle: true,
                         title: 'Lista de Empleados',
                         useBom: true,
                         removeNewLines: true,
-                        keys: ['nombre', 'tipo', 'mail', 'fechaRegistro', 'ultimoLogin', 'estado', 'cantidad_operaciones']
+                        keys: ['nombre', 'tipo', 'mail', 'ultimoLogin', 'estado', 'cantidad_operaciones']
                     };
                     this.cargarLista();
                 }
@@ -2205,6 +2301,21 @@ var __extends = (this && this.__extends) || (function () {
                         _this.cargarLista();
                     }, function (error) {
                         console.log(error);
+                    });
+                };
+                EmpleadosListComponent.prototype.generarPDF = function () {
+                    var data = document.getElementById('tablaPDF');
+                    html2canvas__WEBPACK_IMPORTED_MODULE_4___default()(data).then(function (canvas) {
+                        // Few necessary setting options  
+                        var imgWidth = 208;
+                        var pageHeight = 295;
+                        var imgHeight = canvas.height * imgWidth / canvas.width;
+                        var heightLeft = imgHeight;
+                        var contentDataURL = canvas.toDataURL('image/png');
+                        var pdf = new jspdf__WEBPACK_IMPORTED_MODULE_3__('p', 'mm', 'a4'); // A4 size page of PDF  
+                        var position = 0;
+                        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+                        pdf.save('PDFPedidos.pdf'); // Generated PDF   
                     });
                 };
                 return EmpleadosListComponent;
@@ -2454,7 +2565,7 @@ var __extends = (this && this.__extends) || (function () {
                                         _this.empleado.idUser = user.uid;
                                         _this.empleado.cantidad_operaciones = 0;
                                         _this.empleado.estado = "A";
-                                        _this.empleado.foto = user.photoURL;
+                                        _this.empleado.foto = _this.inputImageUser.nativeElement.value;
                                         _this.registrarEmpleado(_this.empleado);
                                         _this.cerrar();
                                     }).catch(function (error) { return console.log('error', error); });
@@ -2751,7 +2862,7 @@ var __extends = (this && this.__extends) || (function () {
                                 _this.user.name = user.displayName;
                                 _this.user.email = user.email;
                                 _this.user.tipo = _this.empleado.tipo;
-                                _this.user.photoUrl = user.photoURL;
+                                _this.user.photoUrl = _this.empleado.foto;
                                 _this.providerId = user.providerData[0].providerId;
                             }
                         });
@@ -2890,6 +3001,10 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var src_app_servicios_mesas_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/servicios/mesas.service */ "./src/app/servicios/mesas.service.ts");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
             /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+            /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.min.js");
+            /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(jspdf__WEBPACK_IMPORTED_MODULE_4__);
+            /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! html2canvas */ "./node_modules/html2canvas/dist/npm/index.js");
+            /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/ __webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_5__);
             var MesaListComponent = /** @class */ (function () {
                 function MesaListComponent(mesasService, domSanitizer) {
                     this.mesasService = mesasService;
@@ -2946,6 +3061,21 @@ var __extends = (this && this.__extends) || (function () {
                         _this.mesasService.CambiarEstadoCerrada(mesa).then(function () {
                             _this.cargarLista();
                         });
+                    });
+                };
+                MesaListComponent.prototype.generarPDF = function () {
+                    var data = document.getElementById('tablaPDF');
+                    html2canvas__WEBPACK_IMPORTED_MODULE_5___default()(data).then(function (canvas) {
+                        // Few necessary setting options  
+                        var imgWidth = 208;
+                        var pageHeight = 295;
+                        var imgHeight = canvas.height * imgWidth / canvas.width;
+                        var heightLeft = imgHeight;
+                        var contentDataURL = canvas.toDataURL('image/png');
+                        var pdf = new jspdf__WEBPACK_IMPORTED_MODULE_4__('p', 'mm', 'a4'); // A4 size page of PDF  
+                        var position = 0;
+                        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+                        pdf.save('PDFpedidos.pdf'); // Generated PDF   
                     });
                 };
                 return MesaListComponent;
@@ -3160,13 +3290,13 @@ var __extends = (this && this.__extends) || (function () {
                     var data = localStorage.getItem('Empleado');
                     if (data) {
                         this.empleado = JSON.parse(data);
-                        this.user = new src_app_clases_User__WEBPACK_IMPORTED_MODULE_2__["User"](this.empleado.usuario, this.empleado.tipo, this.empleado.id, this.empleado.nombre);
+                        this.user = new src_app_clases_User__WEBPACK_IMPORTED_MODULE_2__["User"](this.empleado.usuario, this.empleado.tipo, this.empleado.id, this.empleado.nombre, this.empleado.foto);
                     }
                     else {
                         var data_2 = localStorage.getItem('Cliente');
                         this.cliente = JSON.parse(data_2);
                         this.cliente.tipo = "Cliente";
-                        this.user = new src_app_clases_User__WEBPACK_IMPORTED_MODULE_2__["User"](this.cliente.email, this.cliente.tipo, this.cliente.uid, this.cliente.displayName);
+                        this.user = new src_app_clases_User__WEBPACK_IMPORTED_MODULE_2__["User"](this.cliente.email, this.cliente.tipo, this.cliente.uid, this.cliente.displayName, "data:image/png;base64,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");
                     }
                 };
                 NavegacionComponent.prototype.logout = function () {
@@ -3286,7 +3416,7 @@ var __extends = (this && this.__extends) || (function () {
                     });
                     this.mesasService.Listar().subscribe(function (response) {
                         _this.mesas = response;
-                        if (_this.mesas) {
+                        if (_this.mesas && _this.mesa.estado == "Cerrrada") {
                             _this.form.get('mesa').setValue(_this.mesas[0].codigo);
                         }
                     });
@@ -3304,12 +3434,13 @@ var __extends = (this && this.__extends) || (function () {
                     this.success = false;
                     if (this.form.valid) {
                         this.getCurrentUser();
-                        //const cliente = this.form.get('cliente').value;
-                        //const idMesa = this.form.get('mesa').value;
-                        //const idMenu = this.form.get('menu').value;
                         this.pedido.cliente = this.form.get('cliente').value;
                         this.pedido.idMesa = this.form.get('mesa').value;
-                        //this.pedido.idMenu=idMenu;
+                        this.mesas.forEach(function (mesa) {
+                            if (mesa.id = _this.pedido.idMesa) {
+                                _this.mesa = mesa;
+                            }
+                        });
                         this.pedido.idEmpleado = this.empleado.id;
                         this.pedido.nombreMozo = this.empleado.nombre;
                         //obtengo los datos del menu 
@@ -3325,6 +3456,8 @@ var __extends = (this && this.__extends) || (function () {
                         this.pedidoService.Registrar(this.pedido)
                             .then(function (response) {
                             if (response) {
+                                //actualizo la mesa
+                                _this.mesasService.CambiarEstadoEsperando(_this.mesa);
                                 //actualizo el movimiento del empleado
                                 _this.pedidoService.SumarMovimientoEmpleado(_this.empleado);
                                 _this.success = true;
@@ -3743,9 +3876,9 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
             /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_4__);
             var EmpleadoService = /** @class */ (function () {
-                //private empleado:Observable<Empleado>;
                 function EmpleadoService(afs) {
                     this.afs = afs;
+                    this.operacionesSector = new Array();
                     this.empleadoColeccion = afs.collection('Empleado');
                     this.empleados = this.empleadoColeccion.valueChanges();
                 }
@@ -3860,11 +3993,20 @@ var __extends = (this && this.__extends) || (function () {
                     });
                 };
                 EmpleadoService.prototype.CantidadOperacionesPorSector = function () {
-                    //return this.miHttp.httpGetO<OperacionesPorSector[]>('empleados/cantidadOperacionesPorSector');
-                    // let idBook=book.id;
-                    // this.bookDoc=this.afs.doc<BookInterface>('books/'+idBook);
-                    // this.bookDoc.update(book);
-                    return this.retornoOperaciones;
+                    var _this = this;
+                    var listaEmpleados;
+                    this.empleadoColeccion = this.afs.collection('Empleado');
+                    var empleados = this.empleadoColeccion.snapshotChanges()
+                        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (changes) {
+                        return changes.map(function (action) {
+                            var data = action.payload.doc.data();
+                            data.id = action.payload.doc.id; //me pisa el id del user con el del documento
+                            _this.operaciones.sector = data.tipo;
+                            _this.operaciones.cantidad_operaciones = data.cantidad_operaciones;
+                            _this.operacionesSector.push(_this.operaciones);
+                        });
+                    }));
+                    return this.operacionesSector;
                 };
                 return EmpleadoService;
             }());
@@ -5068,10 +5210,12 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
             /* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_4__);
             /* harmony import */ var _menu_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./menu.service */ "./src/app/servicios/menu.service.ts");
-            /* harmony import */ var _empleado_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./empleado.service */ "./src/app/servicios/empleado.service.ts");
+            /* harmony import */ var _mesas_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mesas.service */ "./src/app/servicios/mesas.service.ts");
+            /* harmony import */ var _empleado_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./empleado.service */ "./src/app/servicios/empleado.service.ts");
             var PedidoService = /** @class */ (function () {
                 //private pedido:Observable<Pedido>;
-                function PedidoService(afs, menuService, empService) {
+                function PedidoService(mesaService, afs, menuService, empService) {
+                    this.mesaService = mesaService;
                     this.afs = afs;
                     this.menuService = menuService;
                     this.empService = empService;
@@ -5126,19 +5270,11 @@ var __extends = (this && this.__extends) || (function () {
                 };
                 PedidoService.prototype.Registrar = function (pedido) {
                     var _this = this;
-                    //pedido.cliente="";
-                    //pedido.descripcion="";
                     pedido.estado = "Pendiente";
                     pedido.fecha = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
                     pedido.horaEstimada = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
                     pedido.horaFinal = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
                     pedido.horaInicial = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
-                    // pedido.idEmpleado="";
-                    // pedido.idMenu="";
-                    // pedido.idMesa="";
-                    // pedido.importe=0;
-                    // pedido.nombreMozo="";
-                    // pedido.sector="";
                     this.pedidoColeccion = this.afs.collection('Pedido');
                     return new Promise(function (resolve, reject) {
                         _this.pedidoColeccion.add(pedido).then(function (result) {
@@ -5157,10 +5293,10 @@ var __extends = (this && this.__extends) || (function () {
                     var request = {
                         minutosEstimados: minutosEstimados
                     };
-                    var time = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now().seconds + minutosEstimados * 60;
                     pedido.estado = "En Preparacion";
                     // pedido.horaEstimada=firestore.Timestamp.now() + minutosEstimados;
                     pedido.horaEstimada = firebase__WEBPACK_IMPORTED_MODULE_4__["firestore"].Timestamp.now();
+                    //actualizamos la mesa 
                     this.pedidoDoc = this.afs.doc('Pedido/' + pedido.id);
                     return new Promise(function (resolve, reject) {
                         _this.pedidoDoc.update(pedido).then(function () {
@@ -5199,9 +5335,10 @@ var __extends = (this && this.__extends) || (function () {
                 return PedidoService;
             }());
             PedidoService.ctorParameters = function () { return [
+                { type: _mesas_service__WEBPACK_IMPORTED_MODULE_6__["MesasService"] },
                 { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_3__["AngularFirestore"] },
                 { type: _menu_service__WEBPACK_IMPORTED_MODULE_5__["MenuService"] },
-                { type: _empleado_service__WEBPACK_IMPORTED_MODULE_6__["EmpleadoService"] }
+                { type: _empleado_service__WEBPACK_IMPORTED_MODULE_7__["EmpleadoService"] }
             ]; };
             PedidoService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
